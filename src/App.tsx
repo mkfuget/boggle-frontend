@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {BogglePuzzle} from './modules/boggle/components/BogglePuzzle'
 import {Module} from './modules/Module'
 import {store} from "./store"

@@ -12,7 +12,6 @@ export const Module = () => {
     return (
         <>
             <BogglePuzzle/>
-            <ConceptsSideBar/>
         </>
     )
 };

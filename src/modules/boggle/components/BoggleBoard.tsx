@@ -3,7 +3,7 @@ import {BoggleCell} from './BoggleCell'
 import {BoggleConnectorsList} from './BoggleConnectorsList'
 import {BoggleDictionary} from './BoggleDictionary'
 import { useAppDispatch } from '../../../hooks'
-
+import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
 
 import {useSelector} from 'react-redux'
@@ -75,7 +75,7 @@ export const BoggleBoard = () => {
             </div>
 
             <div className = "contentsidebar">
-                <button onClick = {handlePuzzleSolve}>Solve</button>
+                <Button variant="outline-primary" onClick = {handlePuzzleSolve}>Solve</Button>
             </div>
         </div>
     )
