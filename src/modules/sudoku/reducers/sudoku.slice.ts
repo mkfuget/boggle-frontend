@@ -1,7 +1,5 @@
-import * as Constants from "../constants"
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
-import { addDictionary } from "../functional/BoggleBoardData";
 interface Dictionary<T> {
     [K: string]: T
 }
@@ -23,7 +21,7 @@ const initialState:BoggleState =
     dictionary: {},
 }
 
-const boggleSlice = createSlice({
+const sudokuSlice = createSlice({
     name: 'sudoku',
     initialState,
     reducers: {
