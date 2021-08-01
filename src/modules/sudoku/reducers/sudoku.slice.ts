@@ -1,24 +1,16 @@
+import * as Constants from "../constants"
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
-interface Dictionary<T> {
-    [K: string]: T
-}
-
-interface BoggleState {
-    board: string[][];
-    selected: boolean[][];
-    indexChain: Constants.Point[],
-    currentWord: string;
-    dictionary: Dictionary<boolean>;
-
-}
-const initialState:BoggleState = 
+import {BoardObject } from '../functional/sudokuBoardData'
+const initialState:BoardObject = 
 {
-    board: Array(Constants.BOARD_WIDTH).fill("0").map((x:string[]) => Array(Constants.BOARD_HEIGHT).fill("0")),
-    selected: Array(Constants.BOARD_WIDTH).fill(false).map((x:string[]) => Array(Constants.BOARD_HEIGHT).fill(false)),
-    indexChain: [],
-    currentWord: "",
-    dictionary: {},
+    boardData: new Array(Constants.BOARD_SQUARES).fill(-1),
+    confirmedSquares: new Array(Constants.BOARD_SQUARES).fill(-1),
+    boardHeapIndex: new Array(4*Constants.BOARD_SQUARES).fill(-1),
+    boardBlocks: number[][];
+    boardNumOptions: number[];
+    solveOrder: HeapEntry[];
+    heapSize: 4*Constants.BOARD_SQUARES;
 }
 
 const sudokuSlice = createSlice({
@@ -77,4 +69,4 @@ export const getBoggleData = (state: RootState) => state.boggle;
 export const getChainData = (state: RootState) => state.boggle.indexChain;
 export const getHeadData = (state: RootState) => (state.boggle.indexChain.length > 0 ? state.boggle.indexChain[state.boggle.indexChain.length - 1] : ({xIndex: -1, yIndex: -1}))
 export const getDictionary = (state: RootState) => state.boggle.dictionary;
-export default boggleSlice.reducer;
+export default sudokuSlice.reducer;

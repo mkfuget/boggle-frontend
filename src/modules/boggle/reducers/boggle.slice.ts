@@ -24,7 +24,7 @@ const initialState:BoggleState =
 }
 
 const boggleSlice = createSlice({
-    name: 'sudoku',
+    name: 'boggle',
     initialState,
     reducers: {
         addIndex: (state, action:  PayloadAction<Constants.Point>)=> {
