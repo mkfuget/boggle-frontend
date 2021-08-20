@@ -40,9 +40,6 @@ export interface BoardObject {
     solveOrder: HeapEntry[];
     heapSize: number;
 }
-export interface puzzleSolution {
-
-}
 export default class BoardData{
     boardData: number[];
     confirmedSquares: boolean[];
@@ -87,6 +84,19 @@ export default class BoardData{
                 }
             }
         }    
+    }
+
+    toDataHash(): BoardObject
+    {
+        return {
+           boardData: this.boardData,
+           confirmedSquares: this.confirmedSquares,
+           boardHeapIndex: this.boardHeapIndex,
+           boardBlocks: this.boardBlocks,
+           boardNumOptions: this.boardNumOptions,
+           solveOrder: this.solveOrder,
+           heapSize: this.heapSize,
+        }
     }
 
     addDataHash(boardObject: BoardObject)
