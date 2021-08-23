@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
 
 import {useSelector} from 'react-redux'
-import {getBoggleData, getDictionary, getHeadData} from '../reducers/boggle.slice'
+import {getBoggleData, getHeadData} from '../reducers/boggle.slice'
 import {generateSolution} from '../functional/BoggleBoardData'
 import * as Constants from '../constants'
 import {addIndex, removeIndex} from '../reducers/boggle.slice'
