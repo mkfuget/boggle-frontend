@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import {Route, Switch, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 import {Module} from './modules/Module'
 import SignUp from './user/SignUp'
 import {store} from "./store"
@@ -11,15 +10,10 @@ function App() {
   return (
     <Provider store = {store}>
       <div className="App">
-          <Switch>
-            <Route path = "/signup">
-              <SignUp/>
-            </Route>
-            <Route path = "/module">
-              <Module/>
-            </Route>
-
-          </Switch>
+      <Router>
+        <Route path = "/signup" component = {SignUp}></Route>
+        <Route path = "/module" component = {Module}></Route>
+      </Router>
       </div>
     </Provider>
   );
