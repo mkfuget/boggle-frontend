@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {Route, Switch, Link} from 'react-router-dom'
 import {Module} from './modules/Module'
-import {SignUp} from './User/SignUp'
+import SignUp from './user/SignUp'
 import {store} from "./store"
 import {Provider} from "react-redux"
 function App() {
