@@ -1,5 +1,14 @@
 import React, {useState} from "react"
 import UserPool from "../UserPool"
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
+import "./signup.css";
+
+library.add(faUser);
+library.add(faLock);
+
 const SignUp = () => 
 {
     const [email, setEmail] = useState("");
@@ -18,18 +27,32 @@ const SignUp = () =>
     };
 
     return (
-        <div>
+        <div className = "signupwrapper">
             <form onSubmit={onSubmit}>
-                <label htmlFor="email">Email</label>
-                <input
-                    value = {email}
-                    onChange = {(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.currentTarget.value)}
-                ></input>
-                <label htmlFor="password">Password</label>
-                <input
-                    value = {password}
-                    onChange = {(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.currentTarget.value)}
-                ></input>
+                <div className = "inputwrapper">
+                    <FontAwesomeIcon icon="user" /> 
+                    <input
+                        className = "userentry email"
+                        type = "text"
+                        placeholder = "email"
+                        value = {email}
+                        onChange = {(event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.currentTarget.value)}
+                    >
+                    </input>
+                </div>
+                <div className = "inputwrapper">
+                    <FontAwesomeIcon icon="lock" /> 
+                    <input
+                        className = "userentry password"
+                        type = "password"
+                        placeholder = "password"
+                        value = {password}
+                        onChange = {(event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.currentTarget.value)}
+                    ></input>
+                </div>
+
+                <br></br>
+                <Button variant="primary" type="submit">Sign Up</Button>
             </form>
         </div>
     )
