@@ -1,8 +1,7 @@
 
 import React from 'react'
-import { useState, memo } from 'react'
+import { useState } from 'react'
 import { useAppDispatch } from '../../../hooks'
-import { useSpring, animated } from 'react-spring'
 import {addIndex, removeIndex} from '../reducers/boggle.slice'
 import { motion } from "framer-motion"
 

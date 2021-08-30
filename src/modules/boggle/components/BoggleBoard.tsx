@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import {BoggleCell} from './BoggleCell'
 import {BoggleConnectorsList} from './BoggleConnectorsList'
 import {BoggleDictionary} from './BoggleDictionary'
 import { useAppDispatch } from '../../../hooks'
-import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
 
 import {useSelector} from 'react-redux'
@@ -51,7 +50,7 @@ export const BoggleBoard = () => {
     }
 
     return (
-        <div className = "content">
+        <div id = "bogglepuzzle">
             <div className = "puzzle">
                 <div className = "board">
                     {board.map((row: string[], i:number) => (<>
@@ -74,9 +73,6 @@ export const BoggleBoard = () => {
                 <BoggleDictionary/>
             </div>
 
-            <div className = "contentsidebar">
-                <Button variant="outline-primary" onClick = {handlePuzzleSolve}>Solve</Button>
-            </div>
         </div>
     )
 };

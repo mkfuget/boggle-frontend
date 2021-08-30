@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import {Button} from 'react-bootstrap'
 import {BoggleBoard} from './BoggleBoard'
+import { BoggleSideBar } from './BoggleSideBar';
 import {useSelector, useDispatch} from 'react-redux'
 import { useAppSelector, useAppDispatch } from '../../../hooks'
 
@@ -21,8 +21,9 @@ export const BogglePuzzle = () => {
     const dispatch = useAppDispatch()
     dispatch(setBoard(boardData));
     return (
-        <div className = "puzzle">
+        <div id = "boggle">
             <BoggleBoard/>
+            <BoggleSideBar/>
         </div>
     )
 };

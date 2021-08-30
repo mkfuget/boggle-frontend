@@ -6,14 +6,18 @@ import {Module} from './modules/Module'
 import SignUp from './user/SignUp'
 import {store} from "./store"
 import {Provider} from "react-redux"
+import { Navbar } from './navbar/Navbar';
 function App() {
   return (
     <Provider store = {store}>
       <div className="App">
-      <Router>
-        <Route path = "/signup" component = {SignUp}></Route>
-        <Route path = "/module" component = {Module}></Route>
-      </Router>
+      <Navbar/>
+        <div id = "contentwrapper">
+        <Router>
+          <Route path = "/signup" component = {SignUp}></Route>
+          <Route path = "/modules" component = {Module}></Route>
+        </Router>
+      </div>
       </div>
     </Provider>
   );

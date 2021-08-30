@@ -1,6 +1,6 @@
 .puzzle
 {
-    margin: 100px;
+    display: inline-block;
     width: 300px;
 }
 .connector {
@@ -12,7 +12,6 @@
     left: 16px;
     top: 18px;
 }
-
 .diagonal {
     transform: rotate(315deg);
     height: 56px;
@@ -50,15 +49,6 @@
     color:white;
 }
 
-.cell:hover{
-    background-color: rgba(81, 146, 219, 1.0);
-    color:white;
-}
-.invalid.unselected.cell:hover{
-    background-color: rgb(255, 123, 123);
-    color:white;
-
-}
 .board {
     position: relative;
     display: grid;
@@ -89,4 +79,31 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
 }
+  
+#bogglepuzzle{
+    float: left;
 
+}
+
+#bogglesidebar {
+    float: left;
+    margin-left: 40px;
+    width: 200px;
+}
+
+.boggle.title {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.boggle.description {
+    text-align: left;
+}
+
+.boggle.sidebar.button {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 4px;
+
+}

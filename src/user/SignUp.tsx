@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import UserPool from "../UserPool"
 import Button from 'react-bootstrap/Button';
+import logo from '../assets/icons/ACCLogoLightBlueTransparent.png'; // Tell webpack this JS file uses this image
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -28,6 +29,17 @@ const SignUp = () =>
 
     return (
         <div className = "signupwrapper">
+            <div className ="logo">
+                <img 
+                    src = {logo} 
+                    alt = "logo"
+                    width = "180px"
+                    height = "180px"
+                ></img>
+            </div>
+            <div className = "companytitle">
+                APPLIED CODING CONCEPTS
+            </div>
             <form onSubmit={onSubmit}>
                 <div className = "inputwrapper">
                     <FontAwesomeIcon icon="user" /> 
