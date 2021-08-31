@@ -4,7 +4,6 @@ import { BoggleSideBar } from './BoggleSideBar';
 import {useSelector, useDispatch} from 'react-redux'
 import { useAppSelector, useAppDispatch } from '../../../hooks'
 
-import {getBoggleData} from '../reducers/boggle.slice'
 import { setBoard } from '../reducers/boggle.slice';
 import {generateFinishedBoard} from '../functional/BoggleBoardData'
 

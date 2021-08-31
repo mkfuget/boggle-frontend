@@ -2,9 +2,14 @@
 import React from 'react'
 import { useAppDispatch } from '../../../hooks'
 import {addIndex, removeIndex} from '../reducers/boggle.slice'
+import {toggle} from '../../conceptsSideBar/concepts.slice'
+
 import {useSelector} from 'react-redux'
 import {getBoggleData} from '../reducers/boggle.slice'
 import {generateSolution} from '../functional/BoggleBoardData'
+import { setBoard } from '../reducers/boggle.slice';
+import {generateFinishedBoard} from '../functional/BoggleBoardData'
+
 import {Button} from 'react-bootstrap'
 
 
@@ -43,8 +48,14 @@ export const BoggleSideBar = () => {
 
     }
 
-    const handleClick = (e: React.FormEvent) => {
+    const handleNewPuzzle = (e: React.FormEvent) => {
+        const boardData = generateFinishedBoard();
+        dispatch(setBoard(boardData));
+    
+    }
 
+    const handleConceptsSidebarToggle = (e: React.FormEvent) => {
+        dispatch(toggle());
     }
     
     return (
@@ -64,7 +75,7 @@ export const BoggleSideBar = () => {
             </Button>
             <Button 
                 variant="outline-primary" 
-                onClick = {handlePuzzleSolve}
+                onClick = {handleNewPuzzle}
                 className = "boggle sidebar button"
             >New Puzzle
             </Button>
@@ -76,7 +87,7 @@ export const BoggleSideBar = () => {
             </Button>
             <Button 
                 variant="outline-primary" 
-                onClick = {handlePuzzleSolve}
+                onClick = {handleConceptsSidebarToggle}
                 className = "boggle sidebar button"
             >Explore Concepts
             </Button>

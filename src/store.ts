@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import boggle from './modules/boggle/reducers/boggle.slice'
 import sudoku from './modules/sudoku/reducers/sudoku.slice'
+import conceptssidebar from './modules/conceptsSideBar/concepts.slice'
 
 export const store = configureStore({
   reducer: {
     boggle,
     sudoku,
+    conceptssidebar,
   }
 })
 
