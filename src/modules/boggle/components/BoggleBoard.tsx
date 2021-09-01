@@ -16,39 +16,9 @@ export const BoggleBoard = () => {
     const dispatch = useAppDispatch();
     const board = useSelector(getBoggleData).board;
     const selected = useSelector(getBoggleData).selected;
-    const dictionary = Object.keys(useSelector(getBoggleData).dictionary);
     const initialCellFlash = Array(Constants.BOARD_HEIGHT).fill(false).map((element:boolean) => Array(Constants.BOARD_WIDTH).fill(""))
     const [cellFlash, setCellFlash] = useState(initialCellFlash);
-
     const head = useSelector(getHeadData);
-    const handlePuzzleSolve = (e: React.FormEvent) => {
-        const solutionSteps = generateSolution({
-            board: board,
-            dictionary: dictionary,
-        })
-
-        let i=0;
-        let timer = setInterval(function(){
-            switch(solutionSteps[i].type)
-            {
-                case "added":
-                    dispatch(addIndex({xIndex: solutionSteps[i].xIndex, yIndex: solutionSteps[i].yIndex}))
-                    break;
-                case "removed":
-                    dispatch(removeIndex({xIndex: solutionSteps[i].xIndex, yIndex: solutionSteps[i].yIndex}))
-                    break;
-            }
-            i++;
-            if(i===solutionSteps.length)
-            {
-                clearInterval(timer);
-            }
-        }, 125);
-
-        
-
-    }
-
     return (
         <div id = "bogglepuzzle">
             <div className = "puzzle">

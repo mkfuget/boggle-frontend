@@ -13,6 +13,7 @@ export const Module = () => {
     return (
         <div id = "module">
             <BogglePuzzle/>
+            <ConceptsSideBar/>
         </div>
     )
 };

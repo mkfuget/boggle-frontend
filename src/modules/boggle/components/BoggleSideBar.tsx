@@ -1,13 +1,12 @@
 
 import React from 'react'
 import { useAppDispatch } from '../../../hooks'
-import {addIndex, removeIndex} from '../reducers/boggle.slice'
+import {addIndex, removeIndex, resetWord, setBoard} from '../reducers/boggle.slice'
 import {toggle} from '../../conceptsSideBar/concepts.slice'
 
 import {useSelector} from 'react-redux'
 import {getBoggleData} from '../reducers/boggle.slice'
 import {generateSolution} from '../functional/BoggleBoardData'
-import { setBoard } from '../reducers/boggle.slice';
 import {generateFinishedBoard} from '../functional/BoggleBoardData'
 
 import {Button} from 'react-bootstrap'
@@ -54,6 +53,10 @@ export const BoggleSideBar = () => {
     
     }
 
+    const handleWordReset = (e: React.FormEvent) => {
+        dispatch(resetWord());
+    }
+
     const handleConceptsSidebarToggle = (e: React.FormEvent) => {
         dispatch(toggle());
     }
@@ -81,7 +84,7 @@ export const BoggleSideBar = () => {
             </Button>
             <Button 
                 variant="outline-primary" 
-                onClick = {handlePuzzleSolve}
+                onClick = {handleWordReset}
                 className = "boggle sidebar button"
             >Reset Word
             </Button>

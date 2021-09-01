@@ -58,8 +58,17 @@ const boggleSlice = createSlice({
                 }
             }
         },
-        reset: state => {
-            state = initialState;
+        resetWord: state => {
+            let headIndex = state.indexChain.pop();
+            while(headIndex !==undefined)
+            {
+                let headXIndex = headIndex.xIndex;
+                let headYIndex = headIndex.yIndex;
+                state.selected[headXIndex][headYIndex] = false;
+                headIndex = state.indexChain.pop();
+
+            }
+            state.currentWord = "";
         },
         setBoard: (state, action: PayloadAction<{board:string[][], dictionary: string[]}>)=>
         {
@@ -73,7 +82,7 @@ const boggleSlice = createSlice({
 
 })
 
-export const {addIndex, removeIndex, reset, setBoard} = boggleSlice.actions;
+export const {addIndex, removeIndex, resetWord, setBoard} = boggleSlice.actions;
 
 export const getBoggleData = (state: RootState) => state.boggle;
 export const getChainData = (state: RootState) => state.boggle.indexChain;

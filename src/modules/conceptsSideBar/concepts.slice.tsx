@@ -46,8 +46,4 @@ const conceptsSideBarSlice = createSlice({
 export const {pageUp, pageDown, toggle} = conceptsSideBarSlice.actions;
 
 export const getToggle = (state: RootState) => state.conceptssidebar.toggled;
-export const getBoggleData = (state: RootState) => state.boggle;
-export const getChainData = (state: RootState) => state.boggle.indexChain;
-export const getHeadData = (state: RootState) => (state.boggle.indexChain.length > 0 ? state.boggle.indexChain[state.boggle.indexChain.length - 1] : ({xIndex: -1, yIndex: -1}))
-export const getDictionary = (state: RootState) => state.boggle.dictionary;
 export default conceptsSideBarSlice.reducer;
