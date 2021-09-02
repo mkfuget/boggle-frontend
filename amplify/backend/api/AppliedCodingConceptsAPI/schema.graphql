@@ -2,5 +2,6 @@ type Module @model {
   id: ID!
   title: String!
   description: String!
-  pictureLocation: string
+  link: String!
+  pictureLocation: String
 }
