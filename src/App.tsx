@@ -7,7 +7,7 @@ import SignUp from './user/SignUp'
 import {store} from "./store"
 import {Provider} from "react-redux"
 import { Navbar } from './navbar/Navbar';
-
+import {ModulesList} from './modules/ModulesList';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports'
 import {AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react'
@@ -19,11 +19,15 @@ function App() {
     <Provider store = {store}>
       <div className="App">
       <Navbar/>
+        <AmplifySignOut/>
         <div id = "contentwrapper">
         <Router>
-          <Route exact path = "/"><AmplifySignOut/></Route>
-          <Route path = "/signup" component = {SignUp}></Route>
-          <Route path = "/modules" component = {Module}></Route>
+          <Switch>
+            <Route exact path = "/"></Route>
+            <Route path = "/signup" component = {SignUp}></Route>
+            <Route path = "/modules" component = {ModulesList}></Route>
+            <Route path = "/modules" component = {Module}></Route>
+          </Switch>
         </Router>
       </div>
       </div>

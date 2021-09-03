@@ -5,3 +5,4 @@ type Module @model {
   link: String!
   pictureLocation: String
 }
+

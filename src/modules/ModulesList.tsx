@@ -3,7 +3,7 @@ import { graphqlOperation, API} from 'aws-amplify'
 import React, { useEffect, useState } from 'react'
 import { listModules } from '../graphql/queries'
 
-const ModulesList = () => {
+export const ModulesList = () => {
 
     const [modules, setModules] = useState([]);
 
@@ -20,8 +20,14 @@ const ModulesList = () => {
             setModules(moduleList);
             
         } catch (error) {
+            console.log(error);
 
         }
     } 
 
+    return (
+        <div>ModuleList</div>
+    )
+
 }
+
