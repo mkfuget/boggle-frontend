@@ -50,3 +50,42 @@ export const deleteModule = /* GraphQL */ `
     }
   }
 `;
+export const createSudokuPuzzle = /* GraphQL */ `
+  mutation CreateSudokuPuzzle(
+    $input: CreateSudokuPuzzleInput!
+    $condition: ModelSudokuPuzzleConditionInput
+  ) {
+    createSudokuPuzzle(input: $input, condition: $condition) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateSudokuPuzzle = /* GraphQL */ `
+  mutation UpdateSudokuPuzzle(
+    $input: UpdateSudokuPuzzleInput!
+    $condition: ModelSudokuPuzzleConditionInput
+  ) {
+    updateSudokuPuzzle(input: $input, condition: $condition) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteSudokuPuzzle = /* GraphQL */ `
+  mutation DeleteSudokuPuzzle(
+    $input: DeleteSudokuPuzzleInput!
+    $condition: ModelSudokuPuzzleConditionInput
+  ) {
+    deleteSudokuPuzzle(input: $input, condition: $condition) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;

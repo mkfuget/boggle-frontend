@@ -41,3 +41,33 @@ export const onDeleteModule = /* GraphQL */ `
     }
   }
 `;
+export const onCreateSudokuPuzzle = /* GraphQL */ `
+  subscription OnCreateSudokuPuzzle {
+    onCreateSudokuPuzzle {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateSudokuPuzzle = /* GraphQL */ `
+  subscription OnUpdateSudokuPuzzle {
+    onUpdateSudokuPuzzle {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteSudokuPuzzle = /* GraphQL */ `
+  subscription OnDeleteSudokuPuzzle {
+    onDeleteSudokuPuzzle {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;

@@ -2,6 +2,20 @@ import { GraphQLResult } from '@aws-amplify/api'
 import { graphqlOperation, API} from 'aws-amplify'
 import React, { useEffect, useState } from 'react'
 import { listModules } from '../graphql/queries'
+interface ModuleEntryProps {
+    title: string
+    description: string
+    link: string
+}
+
+const ModuleEntry = ({title, description, link}:ModuleEntryProps) => {
+    return (
+        <a className = "moduleentry card" href = {`/modules${link}`}>
+            <h2>{title}</h2>
+            <p>{description}</p>
+        </a>
+    )
+}
 
 export const ModulesList = () => {
 
@@ -21,12 +35,26 @@ export const ModulesList = () => {
             
         } catch (error) {
             console.log(error);
-
         }
     } 
+    console.log(modules);
 
     return (
-        <div>ModuleList</div>
+        <div id = "modulelist">
+            <h2>Explore Coding Modules</h2>
+            {modules.map((element:ModuleEntryProps, index:number) => 
+                {
+                    return (
+                        <ModuleEntry
+                            key = {`module${index}`}
+                            title = {element.title}
+                            description = {element.description}
+                            link = {element.link}
+                        />
+                    )
+                })
+            }
+        </div>
     )
 
 }

@@ -29,7 +29,7 @@ const DictionaryEntry = ({value, found}:DictionaryEntryProps) =>
     let textColor = "";
     if(found)
     {
-        backgroundColor = '#0136B7'
+        backgroundColor = 'rgb(48, 83, 177)'
         textColor = 'white'
     }
     else 

@@ -92,6 +92,7 @@ export const BoggleSideBar = () => {
                 variant="outline-primary" 
                 onClick = {handleConceptsSidebarToggle}
                 className = "boggle sidebar button"
+                
             >Explore Concepts
             </Button>
 

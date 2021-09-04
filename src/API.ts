@@ -83,6 +83,47 @@ export type DeleteModuleInput = {
   id: string,
 };
 
+export type CreateSudokuPuzzleInput = {
+  id?: string | null,
+  entries: Array< number | null >,
+};
+
+export type ModelSudokuPuzzleConditionInput = {
+  entries?: ModelIntInput | null,
+  and?: Array< ModelSudokuPuzzleConditionInput | null > | null,
+  or?: Array< ModelSudokuPuzzleConditionInput | null > | null,
+  not?: ModelSudokuPuzzleConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type SudokuPuzzle = {
+  __typename: "SudokuPuzzle",
+  id: string,
+  entries: Array< number | null >,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateSudokuPuzzleInput = {
+  id: string,
+  entries?: Array< number | null > | null,
+};
+
+export type DeleteSudokuPuzzleInput = {
+  id: string,
+};
+
 export type ModelModuleFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
@@ -113,6 +154,20 @@ export type ModelIDInput = {
 export type ModelModuleConnection = {
   __typename: "ModelModuleConnection",
   items?:  Array<Module | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelSudokuPuzzleFilterInput = {
+  id?: ModelIDInput | null,
+  entries?: ModelIntInput | null,
+  and?: Array< ModelSudokuPuzzleFilterInput | null > | null,
+  or?: Array< ModelSudokuPuzzleFilterInput | null > | null,
+  not?: ModelSudokuPuzzleFilterInput | null,
+};
+
+export type ModelSudokuPuzzleConnection = {
+  __typename: "ModelSudokuPuzzleConnection",
+  items?:  Array<SudokuPuzzle | null > | null,
   nextToken?: string | null,
 };
 
@@ -170,6 +225,51 @@ export type DeleteModuleMutation = {
   } | null,
 };
 
+export type CreateSudokuPuzzleMutationVariables = {
+  input: CreateSudokuPuzzleInput,
+  condition?: ModelSudokuPuzzleConditionInput | null,
+};
+
+export type CreateSudokuPuzzleMutation = {
+  createSudokuPuzzle?:  {
+    __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSudokuPuzzleMutationVariables = {
+  input: UpdateSudokuPuzzleInput,
+  condition?: ModelSudokuPuzzleConditionInput | null,
+};
+
+export type UpdateSudokuPuzzleMutation = {
+  updateSudokuPuzzle?:  {
+    __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSudokuPuzzleMutationVariables = {
+  input: DeleteSudokuPuzzleInput,
+  condition?: ModelSudokuPuzzleConditionInput | null,
+};
+
+export type DeleteSudokuPuzzleMutation = {
+  deleteSudokuPuzzle?:  {
+    __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetModuleQueryVariables = {
   id: string,
 };
@@ -203,6 +303,40 @@ export type ListModulesQuery = {
       description: string,
       link: string,
       pictureLocation?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetSudokuPuzzleQueryVariables = {
+  id: string,
+};
+
+export type GetSudokuPuzzleQuery = {
+  getSudokuPuzzle?:  {
+    __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSudokuPuzzlesQueryVariables = {
+  filter?: ModelSudokuPuzzleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSudokuPuzzlesQuery = {
+  listSudokuPuzzles?:  {
+    __typename: "ModelSudokuPuzzleConnection",
+    items?:  Array< {
+      __typename: "SudokuPuzzle",
+      id: string,
+      entries: Array< number | null >,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -244,6 +378,36 @@ export type OnDeleteModuleSubscription = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSudokuPuzzleSubscription = {
+  onCreateSudokuPuzzle?:  {
+    __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSudokuPuzzleSubscription = {
+  onUpdateSudokuPuzzle?:  {
+    __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSudokuPuzzleSubscription = {
+  onDeleteSudokuPuzzle?:  {
+    __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
     createdAt: string,
     updatedAt: string,
   } | null,

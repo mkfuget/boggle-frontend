@@ -35,3 +35,30 @@ export const listModules = /* GraphQL */ `
     }
   }
 `;
+export const getSudokuPuzzle = /* GraphQL */ `
+  query GetSudokuPuzzle($id: ID!) {
+    getSudokuPuzzle(id: $id) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listSudokuPuzzles = /* GraphQL */ `
+  query ListSudokuPuzzles(
+    $filter: ModelSudokuPuzzleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listSudokuPuzzles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        entries
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

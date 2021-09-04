@@ -6,3 +6,7 @@ type Module @model {
   pictureLocation: String
 }
 
+type SudokuPuzzle @model {
+  id: ID!
+  entries: [Int]!
+}

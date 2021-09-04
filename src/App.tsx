@@ -11,26 +11,28 @@ import {ModulesList} from './modules/ModulesList';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports'
 import {AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react'
+import Helmet from 'react-helmet';
 
 Amplify.configure(awsconfig);
 
 function App() {
   return (
     <Provider store = {store}>
+
       <div className="App">
-      <Navbar/>
-        <AmplifySignOut/>
-        <div id = "contentwrapper">
-        <Router>
-          <Switch>
-            <Route exact path = "/"></Route>
-            <Route path = "/signup" component = {SignUp}></Route>
-            <Route path = "/modules" component = {ModulesList}></Route>
-            <Route path = "/modules" component = {Module}></Route>
-          </Switch>
-        </Router>
-      </div>
-      </div>
+          <Navbar/>
+            <div id = "contentwrapper">
+            <Router>
+              <Switch>
+                <Route exact path = "/"></Route>
+                <Route path = "/signup" component = {SignUp}></Route>
+                <Route exact path = "/modules" component = {ModulesList}></Route>
+                <Route path = "/modules" component = {Module}></Route>
+              </Switch>
+            </Router>
+          </div>
+        </div>
+
     </Provider>
   );
 }
