@@ -1,38 +1,49 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks'
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react'
 import {SudokuCell} from './SudokuCell'
 import {useSelector} from 'react-redux'
 import * as Constants from '../constants'
-import {updateBoard} from '../reducers/sudoku.slice'
+import {getFlashColorData, getSudokuSelected, selectCell, updateBoard} from '../reducers/sudoku.slice'
 import {getSudokuBoardData} from '../reducers/sudoku.slice'
+import BoardData from '../functional/sudokuBoardData';
+import './sudoku.css'
 
-import './SudokuBoard.css'
 export const SudokuBoard = () => {
     const dispatch = useAppDispatch();
-
     const board = useSelector(getSudokuBoardData);
-    
-    return (
-        <div className = "content">
-            <div className = "puzzle">
-                <div className = "board">
-                    /*
-                    {board.boardData.map((entry: number, i:number) => (
-                        <SudokuCell 
-                            index = {i}
-                            value = {entry}
-                            selected = {false}
-                        />)
-                    )}
-                    */
-                </div>
-            </div>
+    const currentSelected = useSelector(getSudokuSelected);
+    const flashes = useSelector(getFlashColorData);
+    useEffect(() => {
+        const controlDown = (e: KeyboardEvent) => {
+            const keyPressed:number = parseInt(e.key);
+            if(keyPressed !==NaN && keyPressed!== 0)
+            {
+                let currentBoard = new BoardData();
+                currentBoard.addDataHash(board);
+                currentBoard.addEntry(currentSelected, keyPressed);
+                dispatch(updateBoard(currentBoard.toDataHash()));
+            }
+        };
+        window.addEventListener('keydown', controlDown);
+               
+        return () => {
+          window.removeEventListener('keydown', controlDown);
+        };
+    })
 
-            <div className = "contentsidebar">
-                <Button variant="outline-primary">Solve</Button>
-            </div>
+    return (
+        <div className = "sudoku moduleboard">
+            {board.boardData.map((entry: number, i:number) => (
+                <SudokuCell 
+                    key = {`sudokuecell${i}`}
+                    index = {i}
+                    value = {entry}
+                    selected = {i === currentSelected}
+                    backgroundColor = {flashes.color[i]}
+
+                />)
+            )}
         </div>
     )
 };

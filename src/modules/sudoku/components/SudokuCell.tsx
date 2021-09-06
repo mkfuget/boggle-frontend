@@ -2,62 +2,57 @@
 import React from 'react'
 import { useState, memo } from 'react'
 import { useAppDispatch } from '../../../hooks'
-import {updateBoard} from '../reducers/sudoku.slice'
+import {updateBoard, selectCell, getSudokuSelected} from '../reducers/sudoku.slice'
+import {useSelector} from 'react-redux'
 import { motion } from "framer-motion"
-
+import "./sudoku.css"
 interface CellProps {
     index: number,
     value: number,
-    selected: boolean, 
+    selected: boolean,
+    backgroundColor: string,
 }
 
 
-export const SudokuCell = (({index, value, selected }: CellProps) => {
+export const SudokuCell = (({index, value, selected, backgroundColor}: CellProps) => {
     const dispatch = useAppDispatch();
-
-    let backgroundColor = "";
-    let textColor = "";
+    const animateBackgroundColor = backgroundColor;
     let cellClassName = "";
-    if(selected)
+    if(index%3 === 2)
     {
-        cellClassName = "selected cell";
-        backgroundColor = "#4373e6";
-        textColor = "white"
+        cellClassName += "right "
     }
-    else
+    if(index%9 === 0)
     {
-        cellClassName = "unselected cell";
-        backgroundColor = "white";
-        textColor = "black"
+        cellClassName += "left "
     }
+    if(Math.floor(index/9)%3==2)
+    {
+        cellClassName += "bottom "
+    }
+    if(Math.floor(index/9)%9==0)
+    {
+        cellClassName += "top "
+    }
+
+
+    cellClassName += "sudokucell"
     const handleClick = (e: React.FormEvent) => {
-        //cellFlashOff(xIndex, yIndex);
-        if(selected)
-        {
-            //dispatch(removeIndex({xIndex, yIndex}))
-        }
-        else
-        {
-            //dispatch(addIndex({xIndex, yIndex}))
-        }
+        dispatch(selectCell(index));
     }
     
     return (
-        
         <motion.div 
-            className = "cell"
+            className = {cellClassName}
             onClick = {handleClick}
             animate ={{
                 backgroundColor: backgroundColor,
-                color: textColor,
-              
+            
             }}
-
             transition={{ ease: "easeOut"}}
             initial = {false}
-        >
-            {value}
+            >
+            {value !== -1 ? value : ""}
         </motion.div>
-    )
-})
-
+        )
+    })

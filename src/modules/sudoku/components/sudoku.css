@@ -1,0 +1,30 @@
+
+
+
+.sudoku.moduleboard {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    grid-template-rows: repeat(9, 40px);
+}
+
+.sudokucell {
+    border-radius: 0;
+    border-right: 1px solid rgb(173, 216, 230);
+    border-top: 1px solid lightblue;
+    transition: 0.3s;
+
+}
+
+.top.sudokucell {
+    border-top: 2px solid lightblue;
+}
+.bottom.sudokucell {
+    border-bottom: 3px solid lightblue;
+}
+.right.sudokucell {
+    border-right: 3px solid lightblue;
+}
+.left.sudokucell {
+    border-left: 3px solid lightblue;
+}

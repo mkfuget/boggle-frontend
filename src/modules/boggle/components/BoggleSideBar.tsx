@@ -63,35 +63,35 @@ export const BoggleSideBar = () => {
     
     return (
         
-        <div id = "bogglesidebar">
-            <div className = "boggle title">
+        <div className = "boggle modulesidebar">
+            <div className = "boggle modulesidebartitle">
                 Boggle
             </div>
-            <div className = "boggle description">
+            <div className = "boggle modulesidebardescription">
                 Words can be connected up, down, left, right, or diagonally. Re-click on a letter to return the string to that point. See if you can find all the words. 
             </div>
             <Button 
                 variant="outline-primary" 
                 onClick = {handlePuzzleSolve}
-                className = "boggle sidebar button"
+                className = "boggle module sidebarbutton"
             >Solve Puzzle
             </Button>
             <Button 
                 variant="outline-primary" 
                 onClick = {handleNewPuzzle}
-                className = "boggle sidebar button"
+                className = "boggle module sidebarbutton"
             >New Puzzle
             </Button>
             <Button 
                 variant="outline-primary" 
                 onClick = {handleWordReset}
-                className = "boggle sidebar button"
+                className = "boggle module sidebarbutton"
             >Reset Word
             </Button>
             <Button 
                 variant="outline-primary" 
                 onClick = {handleConceptsSidebarToggle}
-                className = "boggle sidebar button"
+                className = "boggle module sidebarbutton"
                 
             >Explore Concepts
             </Button>

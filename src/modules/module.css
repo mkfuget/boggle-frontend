@@ -1,13 +1,51 @@
+.module { 
+    float:left;
+}
+
 #module {
     margin-left: 32px;
+    float:left;
+
 }
 #modulelist h2 {
     margin-bottom: 40px;
     font-size: 32px;
 }
+.module.entry {
+    float:left;
+
+}
+.moduleboard {
+    float: left;
+}
+.modulesidebar {
+    float: left;
+    margin-left: 32px;
+    width: 200px;
+}
+.modulesidebartitle {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.modulesidebardescription {
+    text-align: left;
+}
+
+.module.sidebarbutton {
+    display: inline-block;
+    width: 100%;
+    margin-top: 4px;
+    background-color: white;
+}
+.module.sidebarbutton:hover {
+    background-color: rgb(48, 83, 177);
+    color: white;
+}
 .moduleentry.card {
     margin: auto;
-    width: 80%;
+    width: 70%;
     margin-bottom: 4px;
     box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.5);
     background-color: rgb(255, 255, 255);

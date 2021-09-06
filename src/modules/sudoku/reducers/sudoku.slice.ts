@@ -4,7 +4,7 @@ import type { RootState } from '../../../store'
 import {BoardObject, HeapEntry } from '../functional/sudokuBoardData'
 
 interface cellColorData{
-    color: String[];
+    color: string[];
     flash: boolean[];
 }
 const initialBoard:BoardObject = 
@@ -23,9 +23,10 @@ const initialCellBackground: cellColorData = {
     flash: Array(Constants.BOARD_SQUARES).fill(false),
 }
 
-const initialState: {board:BoardObject, cellBackground:cellColorData} = {
+const initialState: {board:BoardObject, cellBackground:cellColorData, selected: number} = {
     board: initialBoard,
     cellBackground: initialCellBackground,
+    selected: -1,
 }
 
 
@@ -37,11 +38,21 @@ const sudokuSlice = createSlice({
         {
             state.board = action.payload;
         },      
+        selectCell: (state, action: PayloadAction<number>)=>{
+            const lastIndex = state.selected;
+            state.selected = action.payload;
+            state.cellBackground.color[action.payload] = "green"            
+            state.cellBackground.color[lastIndex] = "white"
+
+        }
     }
 
 })
 
-export const {updateBoard} = sudokuSlice.actions;
+export const {updateBoard, selectCell} = sudokuSlice.actions;
 
 export const getSudokuBoardData = (state: RootState) => state.sudoku.board;
+export const getSudokuSelected = (state: RootState) => state.sudoku.selected;
+export const getFlashColorData = (state: RootState) => state.sudoku.cellBackground;
+
 export default sudokuSlice.reducer;

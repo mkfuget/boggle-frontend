@@ -20,7 +20,7 @@ export const BogglePuzzle = () => {
     const dispatch = useAppDispatch()
     dispatch(setBoard(boardData));
     return (
-        <div id = "boggle">
+        <div className = "module" id = "boggle">
             <BoggleBoard/>
             <BoggleSideBar/>
         </div>

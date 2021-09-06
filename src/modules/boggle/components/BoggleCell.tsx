@@ -49,7 +49,6 @@ export const BoggleCell = (({xIndex, yIndex, value, selected, headXIndex, headYI
         textColor = "black"
     }
     const handleClick = (e: React.FormEvent) => {
-        //cellFlashOff(xIndex, yIndex);
         if(selected)
         {
             dispatch(removeIndex({xIndex, yIndex}))

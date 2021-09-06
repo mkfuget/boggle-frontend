@@ -10,10 +10,8 @@ const ConceptsSideBar = () => {
       id = "conceptssidebar"
       animate ={{
         width: sidebarToggle ? "360px" : "0px"
-      
     }}
->
-
+  >
     </motion.div>
   )
 }

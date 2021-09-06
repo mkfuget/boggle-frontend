@@ -22,7 +22,7 @@ export const BoggleBoard = () => {
     return (
         <div id = "bogglepuzzle">
             <div className = "puzzle">
-                <div className = "board">
+                <div className = "bogglepuzzle">
                     {board.map((row: string[], i:number) => (<>
                         {row.map((cell: string, j:number) => (
                             <BoggleCell 

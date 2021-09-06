@@ -101,13 +101,25 @@ export default class BoardData{
 
     addDataHash(boardObject: BoardObject)
     {
-        this.boardData = boardObject.boardData
-        this.confirmedSquares = boardObject.confirmedSquares
-        this.boardHeapIndex  = boardObject.boardHeapIndex
-        this.boardBlocks = boardObject.boardBlocks
-        this.boardNumOptions = boardObject.boardNumOptions
-        this.solveOrder = boardObject.solveOrder
-        this.heapSize = boardObject.heapSize
+        this.boardData = [...boardObject.boardData];
+        this.confirmedSquares = [...boardObject.confirmedSquares];
+        this.boardHeapIndex  = [...boardObject.boardHeapIndex];
+        this.boardNumOptions = Array(4*BOARD_SQUARES).fill(9);
+        this.boardNumOptions = [...boardObject.boardNumOptions];
+        for(let i=0; i<BOARD_SQUARES; i++)
+        {
+            this.boardBlocks[i] = [...boardObject.boardBlocks[i]];
+        }
+        for(let i=0; i<this.boardNumOptions.length; i++)
+        {
+            this.solveOrder[i] = {
+                numOptions: boardObject.solveOrder[i].numOptions,
+                index: boardObject.solveOrder[i].index,
+            }
+            this.boardHeapIndex[i] = i;
+        }    
+
+        this.heapSize = boardObject.heapSize;
     }
     
     //getters

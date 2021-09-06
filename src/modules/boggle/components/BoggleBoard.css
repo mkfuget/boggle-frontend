@@ -1,7 +1,6 @@
 .puzzle
 {
     display: inline-block;
-    width: 300px;
 }
 .connector {
     width:4px;
@@ -39,17 +38,15 @@
 }
 
 .selected {
-    background-color: rgba(81, 146, 219, 1.0);
     color:white;
 
 }
 .head
 {
-    background-color: rgba(44, 113, 192, 1.0);
     color:white;
 }
 
-.board {
+.bogglepuzzle {
     position: relative;
     display: grid;
     grid-template-columns: repeat(8, 36px);
@@ -66,11 +63,9 @@
 
 .dictionary {
     display: grid;
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(4, 76px);
     column-gap: 4px;
     row-gap: 4px;
-
-
 }
 
 .dictionaryentry {
@@ -85,25 +80,3 @@
 
 }
 
-#bogglesidebar {
-    float: left;
-    margin-left: 40px;
-    width: 200px;
-}
-
-.boggle.title {
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: underline;
-}
-
-.boggle.description {
-    text-align: left;
-}
-
-.boggle.sidebar.button {
-    box-sizing: border-box;
-    width: 100%;
-    margin-top: 4px;
-
-}
