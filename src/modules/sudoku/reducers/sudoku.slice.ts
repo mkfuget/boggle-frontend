@@ -41,15 +41,25 @@ const sudokuSlice = createSlice({
         selectCell: (state, action: PayloadAction<number>)=>{
             const lastIndex = state.selected;
             state.selected = action.payload;
-            state.cellBackground.color[action.payload] = "green"            
-            state.cellBackground.color[lastIndex] = "white"
+            state.cellBackground.color[action.payload] = "rgba(142, 190, 218, 0.5)";            
+            state.cellBackground.color[lastIndex] = "white";
 
+        },
+        confirmSquares: (state)=>
+        {
+            for(let i=0; i<state.board.confirmedSquares.length; i++)
+            {
+                if(state.board.boardData[i]!==-1)
+                {
+                    state.board.confirmedSquares[i] = true;
+                }
+            }
         }
     }
 
 })
 
-export const {updateBoard, selectCell} = sudokuSlice.actions;
+export const {updateBoard, selectCell, confirmSquares} = sudokuSlice.actions;
 
 export const getSudokuBoardData = (state: RootState) => state.sudoku.board;
 export const getSudokuSelected = (state: RootState) => state.sudoku.selected;

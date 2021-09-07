@@ -15,20 +15,21 @@ export const SudokuBoard = () => {
     const currentSelected = useSelector(getSudokuSelected);
     const flashes = useSelector(getFlashColorData);
     useEffect(() => {
-        const controlDown = (e: KeyboardEvent) => {
-            const keyPressed:number = parseInt(e.key);
-            if(keyPressed !==NaN && keyPressed!== 0)
+        const handleKeyPress = (e: KeyboardEvent) => {
+            const keyCode = parseInt(e.code); 
+            if((keyCode >= 49 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 105))
             {
+                const keyPressed = parseInt(e.key); 
                 let currentBoard = new BoardData();
                 currentBoard.addDataHash(board);
-                currentBoard.addEntry(currentSelected, keyPressed);
+                currentBoard.addEntry(currentSelected, keyPressed - 1);
                 dispatch(updateBoard(currentBoard.toDataHash()));
             }
         };
-        window.addEventListener('keydown', controlDown);
+        window.addEventListener('keydown', handleKeyPress);
                
         return () => {
-          window.removeEventListener('keydown', controlDown);
+          window.removeEventListener('keydown', handleKeyPress);
         };
     })
 
@@ -41,6 +42,7 @@ export const SudokuBoard = () => {
                     value = {entry}
                     selected = {i === currentSelected}
                     backgroundColor = {flashes.color[i]}
+                    confirmed = {board.confirmedSquares[i]}
 
                 />)
             )}

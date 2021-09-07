@@ -43,3 +43,8 @@
   position: relative;
   top: 50px;
 }
+
+:root {
+  --main-blue-color: rgb(48, 83, 177);
+  --soft-blue-color: rgb(142, 190, 218);
+}

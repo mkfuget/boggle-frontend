@@ -40,7 +40,7 @@
     background-color: white;
 }
 .module.sidebarbutton:hover {
-    background-color: rgb(48, 83, 177);
+    background-color: var(--main-blue-color);
     color: white;
 }
 .moduleentry.card {

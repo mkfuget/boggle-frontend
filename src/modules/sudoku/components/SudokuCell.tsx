@@ -11,13 +11,18 @@ interface CellProps {
     value: number,
     selected: boolean,
     backgroundColor: string,
+    confirmed: boolean,
 }
 
 
-export const SudokuCell = (({index, value, selected, backgroundColor}: CellProps) => {
+export const SudokuCell = (({index, value, selected, backgroundColor, confirmed}: CellProps) => {
     const dispatch = useAppDispatch();
     const animateBackgroundColor = backgroundColor;
     let cellClassName = "";
+    if(confirmed)
+    {
+        cellClassName+="confirmed "
+    }
     if(index%3 === 2)
     {
         cellClassName += "right "

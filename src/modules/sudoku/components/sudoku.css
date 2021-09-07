@@ -7,24 +7,31 @@
     grid-template-columns: repeat(9, 40px);
     grid-template-rows: repeat(9, 40px);
 }
+:root {
+    --sudoku-border-color: var(--soft-blue-color);
+}
 
 .sudokucell {
     border-radius: 0;
-    border-right: 1px solid rgb(173, 216, 230);
-    border-top: 1px solid lightblue;
+    border-right: 1px solid var(--sudoku-border-color);
+    border-top: 1px solid var(--sudoku-border-color);
     transition: 0.3s;
-
+    text-align: center;
+    font-size: 24px;
+    color:rgb(99, 99, 99);
 }
-
+.confirmed.sudokucell {
+    text-decoration: underline;
+}
 .top.sudokucell {
-    border-top: 2px solid lightblue;
+    border-top: 3px solid var(--sudoku-border-color);
 }
 .bottom.sudokucell {
-    border-bottom: 3px solid lightblue;
+    border-bottom: 3px solid var(--sudoku-border-color);
 }
 .right.sudokucell {
-    border-right: 3px solid lightblue;
+    border-right: 3px solid var(--sudoku-border-color);
 }
 .left.sudokucell {
-    border-left: 3px solid lightblue;
+    border-left: 3px solid var(--sudoku-border-color);
 }
