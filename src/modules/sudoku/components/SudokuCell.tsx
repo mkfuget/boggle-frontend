@@ -9,15 +9,13 @@ import "./sudoku.css"
 interface CellProps {
     index: number,
     value: number,
-    selected: boolean,
     backgroundColor: string,
     confirmed: boolean,
 }
 
 
-export const SudokuCell = (({index, value, selected, backgroundColor, confirmed}: CellProps) => {
+export const SudokuCell = (({index, value, backgroundColor, confirmed}: CellProps) => {
     const dispatch = useAppDispatch();
-    const animateBackgroundColor = backgroundColor;
     let cellClassName = "";
     if(confirmed)
     {
@@ -52,12 +50,11 @@ export const SudokuCell = (({index, value, selected, backgroundColor, confirmed}
             onClick = {handleClick}
             animate ={{
                 backgroundColor: backgroundColor,
-            
             }}
-            transition={{ ease: "easeOut"}}
+            transition={{ ease: "easeOut", duration: 2}}
             initial = {false}
             >
-            {value !== -1 ? value : ""}
+            {value !== -1 ? value + 1 : ""}
         </motion.div>
         )
     })

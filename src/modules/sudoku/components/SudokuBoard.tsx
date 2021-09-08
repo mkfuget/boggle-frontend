@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import {SudokuCell} from './SudokuCell'
 import {useSelector} from 'react-redux'
 import * as Constants from '../constants'
-import {getFlashColorData, getSudokuSelected, selectCell, updateBoard} from '../reducers/sudoku.slice'
+import {flashSquares, getFlashColorData, getSudokuSelected, selectCell, updateBoard} from '../reducers/sudoku.slice'
 import {getSudokuBoardData} from '../reducers/sudoku.slice'
 import BoardData from '../functional/sudokuBoardData';
 import './sudoku.css'
@@ -13,17 +13,27 @@ export const SudokuBoard = () => {
     const dispatch = useAppDispatch();
     const board = useSelector(getSudokuBoardData);
     const currentSelected = useSelector(getSudokuSelected);
-    const flashes = useSelector(getFlashColorData);
+    const backgroundColor = useSelector(getFlashColorData);
     useEffect(() => {
         const handleKeyPress = (e: KeyboardEvent) => {
             const keyCode = parseInt(e.code); 
-            if((keyCode >= 49 && keyCode <= 57) || (keyCode >= 97 && keyCode <= 105))
+            const keyPressed = parseInt(e.key); 
+            if(keyPressed === 1 || keyPressed === 2 ||keyPressed === 3 ||keyPressed === 4 ||keyPressed === 5 ||keyPressed === 6 ||keyPressed === 7 ||keyPressed === 8 ||keyPressed === 9)
             {
                 const keyPressed = parseInt(e.key); 
                 let currentBoard = new BoardData();
                 currentBoard.addDataHash(board);
-                currentBoard.addEntry(currentSelected, keyPressed - 1);
-                dispatch(updateBoard(currentBoard.toDataHash()));
+                const addToBoard = currentBoard.addEntry(currentSelected, keyPressed - 1);
+                if(addToBoard.type === "Success")
+                {
+                    currentBoard.addEntry(currentSelected, keyPressed - 1);
+                    dispatch(updateBoard(currentBoard.toDataHash()));    
+                }
+                else if(addToBoard.type === "Failure")
+                {
+                    dispatch(flashSquares({indices: addToBoard.blockers, color: "orange"}));
+                    setTimeout(()=> {dispatch(flashSquares({indices: addToBoard.blockers, color: "white"}))}, 150)
+                }
             }
         };
         window.addEventListener('keydown', handleKeyPress);
@@ -40,8 +50,7 @@ export const SudokuBoard = () => {
                     key = {`sudokuecell${i}`}
                     index = {i}
                     value = {entry}
-                    selected = {i === currentSelected}
-                    backgroundColor = {flashes.color[i]}
+                    backgroundColor = {backgroundColor[i]}
                     confirmed = {board.confirmedSquares[i]}
 
                 />)

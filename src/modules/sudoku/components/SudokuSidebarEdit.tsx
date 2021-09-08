@@ -6,23 +6,26 @@ import {toggle} from '../../conceptsSideBar/concepts.slice'
 import {useSelector} from 'react-redux'
 
 import {Button} from 'react-bootstrap'
-import { confirmSquares } from '../reducers/sudoku.slice'
+import { confirmSquares, flashSquares } from '../reducers/sudoku.slice'
 
 
 
 export const SudokuSidebarEdit = () => {
     const dispatch = useAppDispatch();
+    const board = useSelector(getSudokuBoardData);
 
     
     const handlePuzzleSolve = (e: React.FormEvent) => {
         let i=0;
         let timer = setInterval(function(){
             i++;
-            if(i===100)
+            dispatch(flashSquares({indices: [i],color: 'orange'}));
+            setTimeout(() => {dispatch(flashSquares({indices: [i],color: 'white'}))}, 250);
+            if(i===80)
             {
                 clearInterval(timer);
             }
-        }, 125);
+        }, 500);
 
         
 
@@ -33,7 +36,7 @@ export const SudokuSidebarEdit = () => {
     }
 
     const handleConfirmSquares = (e: React.FormEvent) => {
-        dispatch(confirmSquares);
+        dispatch(confirmSquares());
     }
     
     const handleExport = (e: React.FormEvent) => {

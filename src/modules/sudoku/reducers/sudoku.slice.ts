@@ -3,9 +3,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
 import {BoardObject, HeapEntry } from '../functional/sudokuBoardData'
 
-interface cellColorData{
-    color: string[];
-    flash: boolean[];
+interface flashInterface{
+    indices: number[],
+    color: string,
 }
 const initialBoard:BoardObject = 
 {
@@ -18,14 +18,11 @@ const initialBoard:BoardObject =
     heapSize: 4*Constants.BOARD_SQUARES,
 }
 
-const initialCellBackground: cellColorData = {
-    color: Array(Constants.BOARD_SQUARES).fill("white"),
-    flash: Array(Constants.BOARD_SQUARES).fill(false),
-}
+const initialcolor =Array(Constants.BOARD_SQUARES).fill("white");
 
-const initialState: {board:BoardObject, cellBackground:cellColorData, selected: number} = {
+const initialState: {board:BoardObject, color:string[], selected: number} = {
     board: initialBoard,
-    cellBackground: initialCellBackground,
+    color: initialcolor,
     selected: -1,
 }
 
@@ -41,8 +38,8 @@ const sudokuSlice = createSlice({
         selectCell: (state, action: PayloadAction<number>)=>{
             const lastIndex = state.selected;
             state.selected = action.payload;
-            state.cellBackground.color[action.payload] = "rgba(142, 190, 218, 0.5)";            
-            state.cellBackground.color[lastIndex] = "white";
+            state.color[action.payload] = "rgba(142, 190, 218, 0.5)";            
+            state.color[lastIndex] = "white";
 
         },
         confirmSquares: (state)=>
@@ -54,15 +51,24 @@ const sudokuSlice = createSlice({
                     state.board.confirmedSquares[i] = true;
                 }
             }
-        }
+        },
+        flashSquares: (state, action: PayloadAction<flashInterface>)=>{
+            for(let i=0; i<action.payload.indices.length; i++)
+            {
+                state.color[action.payload.indices[i]] = action.payload.color;
+            }
+        },
+        flashOff: (state, action: PayloadAction<number>)=>{
+            state.color[action.payload] = "white";
+        },
     }
 
 })
 
-export const {updateBoard, selectCell, confirmSquares} = sudokuSlice.actions;
+export const {updateBoard, selectCell, confirmSquares, flashSquares} = sudokuSlice.actions;
 
 export const getSudokuBoardData = (state: RootState) => state.sudoku.board;
 export const getSudokuSelected = (state: RootState) => state.sudoku.selected;
-export const getFlashColorData = (state: RootState) => state.sudoku.cellBackground;
+export const getFlashColorData = (state: RootState) => state.sudoku.color;
 
 export default sudokuSlice.reducer;

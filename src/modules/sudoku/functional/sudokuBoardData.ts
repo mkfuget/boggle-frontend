@@ -5,7 +5,7 @@ const BOARD_WIDTH = Constants.BOARD_WIDTH;
 const BOARD_SQUARES = Constants.BOARD_SQUARES;
 
 export interface ChangeOutput {
-    type: string,
+    type: ("Success" | "Failure"),
     index: number,
     number: number,
     blockers: number[], 
@@ -280,7 +280,7 @@ export default class BoardData{
 
         this.boardData[index] = number;    
         this.heapify();
-        const out =
+        const out: ChangeOutput =
         {
             type: "Success",
             index: index,
