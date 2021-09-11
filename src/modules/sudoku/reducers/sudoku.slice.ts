@@ -3,10 +3,15 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
 import {BoardObject, HeapEntry } from '../functional/sudokuBoardData'
 
-interface flashInterface{
+interface FlashInterface{
     indices: number[],
     color: string,
 }
+interface CellInterface{
+    index: number,
+    value: number,
+}
+
 const initialBoard:BoardObject = 
 {
     boardData: Array(Constants.BOARD_SQUARES).fill(-1),
@@ -42,6 +47,13 @@ const sudokuSlice = createSlice({
             state.color[lastIndex] = "white";
 
         },
+        addEntry: (state, action: PayloadAction<CellInterface>)=>{
+            state.board.boardData[action.payload.index] = action.payload.value;
+        },
+        deleteEntry: (state, action: PayloadAction<number>)=>{
+            state.board.boardData[action.payload] = -1;
+        },
+
         confirmSquares: (state)=>
         {
             for(let i=0; i<state.board.confirmedSquares.length; i++)
@@ -52,7 +64,7 @@ const sudokuSlice = createSlice({
                 }
             }
         },
-        flashSquares: (state, action: PayloadAction<flashInterface>)=>{
+        flashSquares: (state, action: PayloadAction<FlashInterface>)=>{
             for(let i=0; i<action.payload.indices.length; i++)
             {
                 state.color[action.payload.indices[i]] = action.payload.color;
@@ -65,7 +77,7 @@ const sudokuSlice = createSlice({
 
 })
 
-export const {updateBoard, selectCell, confirmSquares, flashSquares} = sudokuSlice.actions;
+export const {updateBoard, selectCell, confirmSquares, flashSquares, addEntry, deleteEntry} = sudokuSlice.actions;
 
 export const getSudokuBoardData = (state: RootState) => state.sudoku.board;
 export const getSudokuSelected = (state: RootState) => state.sudoku.selected;

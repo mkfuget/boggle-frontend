@@ -11,9 +11,10 @@ export interface ChangeOutput {
     blockers: number[], 
 }
 export interface HeapSolutionIteration {
-        type: string,
-        index: number,
-        number: number,
+    type: ("Placement Successful" | "Placement Failed" | "Out of options for current path"),
+    index: number,
+    boardIndex: number, 
+    number: number,
 }
 export interface HeapEntry {
     numOptions: number
@@ -23,7 +24,7 @@ export interface SolutionSteps {
     index: number,
     guessIndex: number,
     number: number,
-    stepTaken: string,
+    stepTaken: ("Added"|"Removed"),
     puzzleIsSolved: boolean
 
 }
@@ -88,13 +89,27 @@ export default class BoardData{
 
     toDataHash(): BoardObject
     {
+        let boardBlocks = Array(BOARD_SQUARES).fill(0).map(row => Array(BOARD_WIDTH).fill(0));
+        let solveOrder = Array<HeapEntry>(4*BOARD_SQUARES).fill({numOptions: 9, index: 0})
+        for(let i=0; i<BOARD_SQUARES; i++)
+        {
+            boardBlocks[i] = [...this.boardBlocks[i]];
+        }
+        for(let i=0; i<this.boardNumOptions.length; i++)
+        {
+            solveOrder[i] = {
+                numOptions: this.solveOrder[i].numOptions,
+                index: this.solveOrder[i].index,
+            }
+        }    
+
         return {
-           boardData: this.boardData,
-           confirmedSquares: this.confirmedSquares,
-           boardHeapIndex: this.boardHeapIndex,
-           boardBlocks: this.boardBlocks,
-           boardNumOptions: this.boardNumOptions,
-           solveOrder: this.solveOrder,
+           boardData: [...this.boardData],
+           confirmedSquares: [...this.confirmedSquares],
+           boardHeapIndex: [...this.boardHeapIndex],
+           boardBlocks: boardBlocks,
+           boardNumOptions: [...this.boardNumOptions],
+           solveOrder: solveOrder,
            heapSize: this.heapSize,
         }
     }
@@ -104,7 +119,6 @@ export default class BoardData{
         this.boardData = [...boardObject.boardData];
         this.confirmedSquares = [...boardObject.confirmedSquares];
         this.boardHeapIndex  = [...boardObject.boardHeapIndex];
-        this.boardNumOptions = Array(4*BOARD_SQUARES).fill(9);
         this.boardNumOptions = [...boardObject.boardNumOptions];
         for(let i=0; i<BOARD_SQUARES; i++)
         {
@@ -116,9 +130,7 @@ export default class BoardData{
                 numOptions: boardObject.solveOrder[i].numOptions,
                 index: boardObject.solveOrder[i].index,
             }
-            this.boardHeapIndex[i] = i;
         }    
-
         this.heapSize = boardObject.heapSize;
     }
     
@@ -239,9 +251,9 @@ export default class BoardData{
                 {
                     this.updateBoardNumOptions(i, -1);
 
-                    var currentSquareIndex = this.getSquareHeapIndex(i, number);
-                    var currentColIndex = this.getColHeapIndex(i, number);
-                    var currentRowIndex = this.getRowHeapIndex(i, number);
+                    let currentSquareIndex = this.getSquareHeapIndex(i, number);
+                    let currentColIndex = this.getColHeapIndex(i, number);
+                    let currentRowIndex = this.getRowHeapIndex(i, number);
 
                     this.updateBoardNumOptions(currentSquareIndex, -1);
                     this.updateBoardNumOptions(currentColIndex, -1);
@@ -251,12 +263,12 @@ export default class BoardData{
             }
         }
 
-        var addedSquareIndex = this.getSquareHeapIndex(index, number);
-        var addedColIndex = this.getColHeapIndex(index, number);
-        var addedRowIndex = this.getRowHeapIndex(index, number);
+        let addedSquareIndex = this.getSquareHeapIndex(index, number);
+        let addedColIndex = this.getColHeapIndex(index, number);
+        let addedRowIndex = this.getRowHeapIndex(index, number);
 
         //remove one from each number that could be placed in the placed square
-        for(var i=0; i<BOARD_WIDTH; i++)
+        for(let i=0; i<BOARD_WIDTH; i++)
         {
             if(this.boardBlocks[index][i]==0 && i!=number)
             {
@@ -267,7 +279,7 @@ export default class BoardData{
             }
         }
 
-        for(var i=0; i<BOARD_WIDTH; i++)//indicate that there is a blocker for each number in the square that is being placed in
+        for(let i=0; i<BOARD_WIDTH; i++)//indicate that there is a blocker for each number in the square that is being placed in
         {
             this.boardBlocks[index][i]++; 
         }
@@ -367,21 +379,22 @@ export default class BoardData{
         let choices: Choices[] = [];
         let solutionSteps:  SolutionSteps[] = [];
         let guessIndex = 0;
-        while(true)
+        while(solutionSteps.length < 200)
         {
             let nextStep = this.iterateHeapSolution(guessIndex);
             let index = nextStep.index;
+            let boardIndex = nextStep.boardIndex
             let number = nextStep.number;
             let returnType = nextStep.type;
             let addToSolutionSteps: SolutionSteps
             switch(returnType)
             {
                 case 'Placement Successful':
-                    this.addEntry(index, number);
+                    this.addEntry(boardIndex, number);
                     choices.push({index, guessIndex});
                     addToSolutionSteps = 
                     {
-                        index: index,
+                        index: boardIndex,
                         guessIndex: guessIndex,
                         number: number,
                         stepTaken: 'Added',
@@ -401,7 +414,7 @@ export default class BoardData{
                             guessIndex = lastChoice.guessIndex+1;  
                             addToSolutionSteps = 
                             {
-                                index: index,
+                                index: boardIndex,
                                 guessIndex: guessIndex,
                                 number: number,
                                 stepTaken: 'Removed',
@@ -426,14 +439,15 @@ export default class BoardData{
                         return solutionSteps;
                     }
                     index = lastChoice.index;
+                    guessIndex = lastChoice.guessIndex;
                     this.deleteEntry(index);
                     addToSolutionSteps = 
                     {
-                        index: index,
+                        index: this.indexToBoardIndex(index, guessIndex),
                         guessIndex: guessIndex,
                         number: 0,
                         stepTaken: 'Removed',
-                        puzzleIsSolved: true
+                        puzzleIsSolved: false
                     }
 
                     solutionSteps.push(addToSolutionSteps);
@@ -445,61 +459,68 @@ export default class BoardData{
                     break;
             }
         }
+        return solutionSteps;
     }
-    iterateHeapSolution(guessIndex: number): HeapSolutionIteration
+    indexToBoardIndex(index: number, guessIndex: number):number 
     {
-        let index = this.heapTop();
-        let number = guessIndex;
-
+        let boardIndex = index;
         if(index>=3*BOARD_SQUARES)//choosing from the row with the fewest options for a given number
         {
-            number = index%BOARD_WIDTH;
             let rowNumber = Math.floor((index%BOARD_SQUARES)/BOARD_WIDTH);
-            index = rowNumber*BOARD_WIDTH+guessIndex;
+            boardIndex = rowNumber*BOARD_WIDTH+guessIndex;
         }
         else if(index>=2*BOARD_SQUARES)//choosing from the col with the fewest options for a given number
         {
-            number = index%BOARD_WIDTH;
             let colNumber = Math.floor((index%BOARD_SQUARES)/BOARD_WIDTH);
-            index = colNumber + BOARD_WIDTH*guessIndex;
+            boardIndex = colNumber + BOARD_WIDTH*guessIndex;
         } 
         else if(index>=BOARD_SQUARES)//choosing from the square with the fewest options for a given number
         {
-            number = index%BOARD_WIDTH;
             let squareNumber = Math.floor((index%BOARD_SQUARES)/BOARD_WIDTH);
             let squareIndex = SQUARE_WIDTH*(squareNumber%SQUARE_WIDTH) + BOARD_WIDTH*SQUARE_WIDTH*Math.floor(squareNumber/SQUARE_WIDTH);//index corresponding to first entry of that square
             let downIndex = Math.floor(guessIndex/SQUARE_WIDTH);//determines which column the square is in
             let rightIndex = guessIndex%SQUARE_WIDTH;
 
-            index = squareIndex + rightIndex + downIndex*BOARD_WIDTH;
+            boardIndex = squareIndex + rightIndex + downIndex*BOARD_WIDTH;
         }
+        return boardIndex;
 
+    }
+    iterateHeapSolution(guessIndex: number): HeapSolutionIteration
+    {
+        let index = this.heapTop();
+        let number = guessIndex;
+        index>=BOARD_SQUARES ? number=index%BOARD_WIDTH: number = guessIndex;
+        let boardIndex = this.indexToBoardIndex(index, guessIndex);
         if(guessIndex>=BOARD_WIDTH)   
         {
-            let out = 
+            let out: HeapSolutionIteration = 
             {
                 type: 'Out of options for current path',
                 index: index,
+                boardIndex: boardIndex,
                 number: number
             }
             return out;
         }
-        else if(this.boardBlocks[index][number]==0)//placement is allowed
+        else if(this.boardBlocks[boardIndex][number]==0)//placement is allowed
         {
-            let out = 
+            let out: HeapSolutionIteration  = 
             {
                 type: 'Placement Successful',
                 index: index,
+                boardIndex: boardIndex,
                 number: number
             }
             return out;
         }
         else
         {
-            let out = 
+            let out: HeapSolutionIteration  = 
             {
                 type: 'Placement Failed',
                 index: index,
+                boardIndex: boardIndex,
                 number: number
             }
             return out;
@@ -513,6 +534,16 @@ export default class BoardData{
             if(!this.confirmedSquares[i])
             {
                 this.deleteEntry(i);
+            }
+        }
+    }
+    confirmCurrentEntries(): void
+    {
+        for(let i=0; i<BOARD_SQUARES; i++)
+        {
+            if(this.boardData[i] !== -1)
+            {
+                this.confirmedSquares[i] = true;
             }
         }
     }
@@ -672,10 +703,10 @@ export default class BoardData{
 
     heapSwap(parentHeapIndex: number, childHeapIndex: number): void
     {
-        var parentboardIndex = this.solveOrder[parentHeapIndex].index;
-        var childboardIndex = this.solveOrder[childHeapIndex].index;
+        let parentboardIndex = this.solveOrder[parentHeapIndex].index;
+        let childboardIndex = this.solveOrder[childHeapIndex].index;
 
-        var temp = this.solveOrder[parentHeapIndex];
+        let temp = this.solveOrder[parentHeapIndex];
         this.solveOrder[parentHeapIndex] = this.solveOrder[childHeapIndex];
         this.solveOrder[childHeapIndex] = temp;
 
@@ -687,7 +718,7 @@ export default class BoardData{
     heapify(): void
     {
 
-        for(var i=this.heapSize; i>=0; i--)
+        for(let i=this.heapSize - 1; i>=0; i--)
         {
             this.bubbleDown(i);
         }
