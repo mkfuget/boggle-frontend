@@ -31,13 +31,13 @@ export const SudokuSidebarEdit = () => {
             {
                 case "Added":
                     dispatch(addEntry({index: index, value: number}));
-                    dispatch(flashSquares({indices: [index],color: 'green'}));
-                    setTimeout(() => {dispatch(flashSquares({indices: [index],color: 'white'}))}, 250);   
+                    dispatch(flashSquares({indices: [index],color: 'rgba(25, 250, 29, 0.6)'}));
+                    setTimeout(() => {dispatch(flashSquares({indices: [index],color: 'white'}))}, 200);   
                     break;
                 case "Removed":
                     dispatch(deleteEntry(index));
-                    dispatch(flashSquares({indices: [index],color: 'red'}));
-                    setTimeout(() => {dispatch(flashSquares({indices: [index],color: 'white'}))}, 250);   
+                    dispatch(flashSquares({indices: [index],color: 'rgba(255, 38, 18, 0.8)'}));
+                    setTimeout(() => {dispatch(flashSquares({indices: [index],color: 'white'}))}, 200);   
                     break;
                 default:
             }
@@ -46,7 +46,7 @@ export const SudokuSidebarEdit = () => {
             {
                 clearInterval(timer);
             }
-        }, 500);
+        }, 400);
 
         
 

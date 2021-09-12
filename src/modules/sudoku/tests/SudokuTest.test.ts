@@ -24,7 +24,6 @@ const testBoardAlpha = () =>{
     currentBoard.addEntry(74, 5- 1)
     currentBoard.addEntry(75, 9- 1)
     currentBoard.addEntry(79, 8- 1)
-    currentBoard.confirmCurrentEntries();
     return currentBoard;
 }
 describe("test BoardData initialization", () =>
@@ -117,13 +116,40 @@ describe("test heap integration ", () =>
     }),
 )
 
+describe("board numoptions ", () =>
+    it("shows the number of options for entries is correct after additions", () => {
+        let currentBoard = testBoardAlpha();
+        expect(currentBoard.boardNumOptions[0]).toBe(5);
+        expect(currentBoard.boardNumOptions[17]).toBe(3);
+        expect(currentBoard.boardNumOptions[81]).toBe(4);
+
+    }),
+)
+
+describe("board numoptions ", () =>
+    it("shows the number of options for entries is correct after deletions", () => {
+        let currentBoard = testBoardAlpha();
+        currentBoard.addEntry(0, 2);
+        expect(currentBoard.boardNumOptions[0]).toBe(5);
+        expect(currentBoard.boardNumOptions[81]).toBe(4);
+        expect(currentBoard.boardNumOptions[83]).toBe(1);
+        currentBoard.deleteEntry(2);
+        expect(currentBoard.boardNumOptions[0]).toBe(5);
+        expect(currentBoard.boardNumOptions[17]).toBe(3);
+        expect(currentBoard.boardNumOptions[81]).toBe(4);
+
+    }),
+)
+
+/*
 describe("Solve Puzzle ", () =>
     it("shows puzzle solution steps", () => {
         let currentBoard = testBoardAlpha();
+        currentBoard.confirmCurrentEntries();
         console.log(currentBoard.solveOrder)
         console.log(currentBoard.solvePuzzle())
 
 
     }),
 )
-
+*/

@@ -316,7 +316,7 @@ export default class BoardData{
             
             for(let i=0; i<BOARD_SQUARES; i++)
             {
-                if(this.isPlacable(index, number, i, number) && index!=i)
+                if(!this.isPlacable(index, number, i, number) && index!=i)
                 {
                     if(this.boardBlocks[i][number]==1)// we are removing the only blocking square for this index, 
                     {
@@ -379,7 +379,7 @@ export default class BoardData{
         let choices: Choices[] = [];
         let solutionSteps:  SolutionSteps[] = [];
         let guessIndex = 0;
-        while(solutionSteps.length < 200)
+        while(solutionSteps.length < 2000)
         {
             let nextStep = this.iterateHeapSolution(guessIndex);
             let index = nextStep.index;
@@ -410,7 +410,7 @@ export default class BoardData{
                         if(lastChoice!== undefined)
                         {
                             index = lastChoice.index;
-                            this.deleteEntry(index);
+                            this.deleteEntry(this.indexToBoardIndex(index, guessIndex));
                             guessIndex = lastChoice.guessIndex+1;  
                             addToSolutionSteps = 
                             {
@@ -440,7 +440,7 @@ export default class BoardData{
                     }
                     index = lastChoice.index;
                     guessIndex = lastChoice.guessIndex;
-                    this.deleteEntry(index);
+                    this.deleteEntry(this.indexToBoardIndex(index, guessIndex));
                     addToSolutionSteps = 
                     {
                         index: this.indexToBoardIndex(index, guessIndex),
