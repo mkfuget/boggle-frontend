@@ -1,4 +1,5 @@
 import { string } from "prop-types";
+import { randomShuffle } from "../../../utility/UtilityFunctions";
 import * as Constants from '../constants'
 const SQUARE_WIDTH = Constants.SQUARE_WIDTH;
 const BOARD_WIDTH = Constants.BOARD_WIDTH;
@@ -526,7 +527,37 @@ export default class BoardData{
             return out;
         }
     }
+    generateRandomSolution()
+    {
+        let entries = [...SUDOKU_ALPHA_ARRAY];
+        swapRows(entries, 0, 1);
+        swapCols(entries, 1, 2);
+        let swaps = 0;
+        while(swaps < 60)
+        {
+            let swapMode = Math.floor(Math.random() * 2);
+            let setNumber = Math.floor(Math.random() * 3);
+            let rotationNumber = Math.floor(Math.random() * 3);
+            let swap1 = setNumber*SQUARE_WIDTH + rotationNumber;
+            let swap2 = setNumber*SQUARE_WIDTH + (rotationNumber + 1)%SQUARE_WIDTH;
 
+            switch(swapMode)
+            {
+                case 0:
+                    swapRows(entries, swap1, swap2);
+                    break;
+                case 1:
+                    swapCols(entries, swap1, swap2);
+                    break;
+            }
+            swaps++;
+        }
+        const shift = Math.floor(Math.random() * BOARD_WIDTH);
+        for(let i=0; i<BOARD_SQUARES; i++)
+        {
+            this.addEntry(i, (entries[i]+shift)%BOARD_WIDTH);
+        }
+    }
     resetPuzzle(): void
     {
         for(let i =0; i<BOARD_SQUARES; i++)
@@ -722,5 +753,45 @@ export default class BoardData{
         {
             this.bubbleDown(i);
         }
+    }
+}
+
+let SUDOKU_ALPHA_ARRAY = [
+    0, 1, 2, 3, 4, 5, 6, 7, 8,
+    3, 4, 5, 6, 7, 8, 0, 1, 2,
+    6, 7, 8, 0, 1, 2, 3, 4, 5, 
+    1, 2, 3, 4, 5, 6, 7, 8, 0,
+    4, 5, 6, 7, 8, 0, 1, 2, 3, 
+    7, 8, 0, 1, 2, 3, 4, 5, 6, 
+    2, 3, 4, 5, 6, 7, 8, 0, 1,
+    5, 6, 7, 8, 0, 1, 2, 3, 4, 
+    8, 0, 1, 2, 3, 4, 5, 6, 7,
+]
+
+const swapRows = (array: number[], row1: number, row2: number) =>
+{
+    let r1 = row1*BOARD_WIDTH;
+    let r2 = row2*BOARD_WIDTH;
+    for(let i=0; i<BOARD_WIDTH; i++)
+    {
+        let temp = array[r1];
+        array[r1] = array[r2];
+        array[r2] = temp;
+        r1++;
+        r2++;
+    }
+}
+
+const swapCols = (array: number[], col1: number, col2: number) =>
+{
+    let c1 = col1;
+    let c2 = col2;
+    for(let i=0; i<BOARD_WIDTH; i++)
+    {
+        let temp = array[c1];
+        array[c1] = array[c2];
+        array[c2] = temp;
+        c1+=BOARD_WIDTH;
+        c2+=BOARD_WIDTH;
     }
 }

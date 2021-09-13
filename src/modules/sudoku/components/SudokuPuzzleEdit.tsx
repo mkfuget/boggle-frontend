@@ -41,7 +41,7 @@ const testBoardAlpha = () =>{
   
 export const SudokuPuzzleEdit = () => {
 
-    const boardData = testBoardAlpha();
+    const boardData = new BoardData();
     const dispatch = useAppDispatch()
     dispatch(updateBoard(boardData.toDataHash()));
     return (

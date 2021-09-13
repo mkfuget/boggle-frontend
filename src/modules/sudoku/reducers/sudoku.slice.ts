@@ -43,9 +43,11 @@ const sudokuSlice = createSlice({
         selectCell: (state, action: PayloadAction<number>)=>{
             const lastIndex = state.selected;
             state.selected = action.payload;
-            state.color[action.payload] = "rgba(142, 190, 218, 0.5)";            
-            state.color[lastIndex] = "white";
-
+            state.color[action.payload] = "rgba(142, 190, 218, 0.5)";     
+            if(lastIndex !== action.payload) 
+            {
+                state.color[lastIndex] = "white";
+            }      
         },
         addEntry: (state, action: PayloadAction<CellInterface>)=>{
             state.board.boardData[action.payload.index] = action.payload.value;

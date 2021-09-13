@@ -11,8 +11,6 @@ import BoardData from '../functional/sudokuBoardData'
 import { SolutionBuilder } from 'typescript'
 import { addIndex } from '../../boggle/reducers/boggle.slice'
 
-
-
 export const SudokuSidebarEdit = () => {
     const dispatch = useAppDispatch();
     const board = useSelector(getSudokuBoardData);
@@ -23,7 +21,6 @@ export const SudokuSidebarEdit = () => {
         const currentBoard = new BoardData();
         currentBoard.addDataHash(board);
         const solution = currentBoard.solvePuzzle();
-        console.log(solution);
         let timer = setInterval(function(){
             const index = solution[i].index;
             const number = solution[i].number;
@@ -53,7 +50,9 @@ export const SudokuSidebarEdit = () => {
     }
 
     const handleNewPuzzle = (e: React.FormEvent) => {
-    
+        const currentBoard = new BoardData();
+        currentBoard.generateRandomSolution();
+        dispatch(updateBoard(currentBoard));
     }
 
     const handleConfirmSquares = (e: React.FormEvent) => {
@@ -69,8 +68,14 @@ export const SudokuSidebarEdit = () => {
         dispatch(updateBoard(currentBoard));
     }
     
-    const handleExport = (e: React.FormEvent) => {
-
+    const handleUnconfirmSquares = (e: React.FormEvent) => {
+        const currentBoard = new BoardData();
+        currentBoard.addDataHash(board);
+        for(let i=0; i<currentBoard.boardData.length; i++)
+        {
+            currentBoard.confirmedSquares[i] = false;
+        }
+        dispatch(updateBoard(currentBoard));
     }
 
     return (
@@ -102,13 +107,14 @@ export const SudokuSidebarEdit = () => {
             </Button>
             <Button 
                 variant="outline-primary" 
-                onClick = {handleExport}
+                onClick = {handleUnconfirmSquares}
                 className = "boggle module sidebarbutton"
                 
-            >Export Puzzle
+            >Unconfirm Squares
             </Button>
 
         </div>
     )
 }
 
+  

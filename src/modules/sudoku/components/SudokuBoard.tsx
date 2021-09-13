@@ -22,6 +22,7 @@ export const SudokuBoard = () => {
             {
                 let currentBoard = new BoardData();
                 currentBoard.addDataHash(board);
+                currentBoard.deleteEntry(currentSelected);
                 dispatch(updateBoard(currentBoard.toDataHash()));    
             }
             else if(keyPressed === 1 || keyPressed === 2 ||keyPressed === 3 ||keyPressed === 4 ||keyPressed === 5 ||keyPressed === 6 ||keyPressed === 7 ||keyPressed === 8 ||keyPressed === 9)
