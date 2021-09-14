@@ -6,6 +6,7 @@ import {SudokuPuzzle} from './sudoku/components/SudokuPuzzle';
 import ConceptsSideBar from './conceptsSideBar/ConceptsSideBar';
 import "./module.css"
 import { SudokuPuzzleEdit } from './sudoku/components/SudokuPuzzleEdit';
+import { PaintingHousesPuzzle } from './paintinghouses/components/PaintingHousesPuzzle';
 type BoardProps = {
     board: string[][];
     dictionary: string[];
@@ -20,6 +21,7 @@ export const Module = () => {
                     <Route exact path = "/modules/boggle" component = {BogglePuzzle}></Route>
                     <Route exact path = "/modules/sudoku" component = {SudokuPuzzle}></Route>
                     <Route exact path = "/modules/sudoku/edit" component = {SudokuPuzzleEdit}></Route>
+                    <Route exact path = "/modules/paintinghouses" component = {PaintingHousesPuzzle}></Route>
 
                 </Switch>
             </Router>

@@ -1,0 +1,30 @@
+.paintinghousespuzzle {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 36px);
+    grid-template-rows: repeat(10, 36px);
+    height: 40px;
+    column-gap: 4px;
+    row-gap: 4px;
+    margin-bottom: 60px;
+}
+
+
+.paintinghousescosts {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 36px);
+    grid-template-rows: repeat(10, 36px);
+    height: 40px;
+    color: white;
+    border: none;
+    column-gap: 4px;
+    row-gap: 16px;
+  
+}
+
+.paintinghousescosts .cell{
+    color: white;
+    border: none;
+    font-size: 20px;
+}
