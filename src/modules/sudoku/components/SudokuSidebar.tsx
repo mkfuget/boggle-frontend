@@ -6,32 +6,58 @@ import {toggle} from '../../conceptsSideBar/concepts.slice'
 import {useSelector} from 'react-redux'
 
 import {Button} from 'react-bootstrap'
+import { addEntry, deleteEntry, flashSquares, getSudokuBoardData, updateBoard } from '../reducers/sudoku.slice'
+import BoardData from '../functional/sudokuBoardData'
 
 
 
 export const SudokuSidebar = () => {
     const dispatch = useAppDispatch();
-
+    const board = useSelector(getSudokuBoardData);
     
     const handlePuzzleSolve = (e: React.FormEvent) => {
         let i=0;
+        const currentBoard = new BoardData();
+        currentBoard.addDataHash(board);
+        const solution = currentBoard.solvePuzzle();
         let timer = setInterval(function(){
+            const index = solution.steps[i].index;
+            const number = solution.steps[i].number;
+            switch(solution.steps[i].stepTaken)
+            {
+                case "Added":
+                    dispatch(addEntry({index: index, value: number}));
+                    dispatch(flashSquares({indices: [index],color: 'rgba(25, 250, 29, 0.6)'}));
+                    setTimeout(() => {dispatch(flashSquares({indices: [index],color: 'white'}))}, 200);   
+                    break;
+                case "Removed":
+                    dispatch(deleteEntry(index));
+                    dispatch(flashSquares({indices: [index],color: 'rgba(255, 38, 18, 0.8)'}));
+                    setTimeout(() => {dispatch(flashSquares({indices: [index],color: 'white'}))}, 200);   
+                    break;
+                default:
+            }
             i++;
-            if(i===100)
+            if(i>=solution.steps.length)
             {
                 clearInterval(timer);
             }
-        }, 125);
+        }, 400);
 
         
 
     }
 
     const handleNewPuzzle = (e: React.FormEvent) => {
-    
+        dispatch(updateBoard(BoardData.generatePuzzleMatchingParameters(1, 30, 20).toDataHash()));
     }
 
-    const handleWordReset = (e: React.FormEvent) => {
+    const handleResetPuzzle = (e: React.FormEvent) => {
+        const currentBoard = new BoardData();
+        currentBoard.addDataHash(board);
+        currentBoard.resetPuzzle();
+        dispatch(updateBoard(currentBoard.toDataHash()));
+
     }
 
     const handleConceptsSidebarToggle = (e: React.FormEvent) => {
@@ -61,9 +87,9 @@ export const SudokuSidebar = () => {
             </Button>
             <Button 
                 variant="outline-primary" 
-                onClick = {handleWordReset}
+                onClick = {handleResetPuzzle}
                 className = "sudoku module sidebarbutton"
-            >Reset Word
+            >Reset Puzzle
             </Button>
             <Button 
                 variant="outline-primary" 

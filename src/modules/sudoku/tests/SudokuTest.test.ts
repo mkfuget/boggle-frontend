@@ -142,8 +142,7 @@ describe("board numoptions ", () =>
 )
 describe("Generate Random Solution ", () =>
     it("Generate completed finished board", () => {
-        let currentBoard = new BoardData();
-        currentBoard.generateRandomSolution();
+        BoardData.generateRandomSolution();
 
     }),
 )

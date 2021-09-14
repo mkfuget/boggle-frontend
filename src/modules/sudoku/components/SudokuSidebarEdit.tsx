@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch } from '../../../hooks'
 import {toggle} from '../../conceptsSideBar/concepts.slice'
 
@@ -14,17 +14,18 @@ import { addIndex } from '../../boggle/reducers/boggle.slice'
 export const SudokuSidebarEdit = () => {
     const dispatch = useAppDispatch();
     const board = useSelector(getSudokuBoardData);
+    const [branches, setBranches] = useState(0);
+    const [solutions, setSolutions] = useState(0);
 
-    
     const handlePuzzleSolve = (e: React.FormEvent) => {
         let i=0;
         const currentBoard = new BoardData();
         currentBoard.addDataHash(board);
         const solution = currentBoard.solvePuzzle();
         let timer = setInterval(function(){
-            const index = solution[i].index;
-            const number = solution[i].number;
-            switch(solution[i].stepTaken)
+            const index = solution.steps[i].index;
+            const number = solution.steps[i].number;
+            switch(solution.steps[i].stepTaken)
             {
                 case "Added":
                     dispatch(addEntry({index: index, value: number}));
@@ -39,7 +40,7 @@ export const SudokuSidebarEdit = () => {
                 default:
             }
             i++;
-            if(i>=solution.length)
+            if(i>=solution.steps.length)
             {
                 clearInterval(timer);
             }
@@ -50,9 +51,7 @@ export const SudokuSidebarEdit = () => {
     }
 
     const handleNewPuzzle = (e: React.FormEvent) => {
-        const currentBoard = new BoardData();
-        currentBoard.generateRandomSolution();
-        dispatch(updateBoard(currentBoard));
+        dispatch(updateBoard(BoardData.generatePuzzleMatchingParameters(1, 30, 20).toDataHash()));
     }
 
     const handleConfirmSquares = (e: React.FormEvent) => {
@@ -77,6 +76,15 @@ export const SudokuSidebarEdit = () => {
         }
         dispatch(updateBoard(currentBoard));
     }
+
+    const handleCalculateStats = (e: React.FormEvent) => {
+        const currentBoard = new BoardData();
+        currentBoard.addDataHash(board);
+        const solution = currentBoard.solvePuzzle();
+        setBranches(solution.steps.length/(currentBoard.heapSize/4));
+        setSolutions(solution.solutions);
+    }
+
 
     return (
         
@@ -112,6 +120,20 @@ export const SudokuSidebarEdit = () => {
                 
             >Unconfirm Squares
             </Button>
+            <Button 
+                variant="outline-primary" 
+                onClick = {handleCalculateStats}
+                className = "boggle module sidebarbutton"
+                
+            >Calculate Stats
+            </Button>
+
+            <div>
+                branches: {branches}
+            </div>
+            <div>
+                solutions: {solutions}
+            </div>
 
         </div>
     )

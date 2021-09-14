@@ -5,6 +5,7 @@ const SQUARE_WIDTH = Constants.SQUARE_WIDTH;
 const BOARD_WIDTH = Constants.BOARD_WIDTH;
 const BOARD_SQUARES = Constants.BOARD_SQUARES;
 
+
 export interface ChangeOutput {
     type: ("Success" | "Failure"),
     index: number,
@@ -20,6 +21,16 @@ export interface HeapSolutionIteration {
 export interface HeapEntry {
     numOptions: number
     index: number
+}
+
+interface BoardStats {
+    board: BoardData
+    solution: SolutionOutput
+}
+interface SolutionOutput {
+    steps: SolutionSteps[];
+    branches: number;
+    solutions: number;
 }
 export interface SolutionSteps {
     index: number,
@@ -374,12 +385,14 @@ export default class BoardData{
         var heapIndex = this.boardHeapIndex[index];
         this.solveOrder[heapIndex].numOptions = this.boardNumOptions[index];
     }
-    solvePuzzle(): SolutionSteps[]
+    solvePuzzle(endAtFirstSolution = false): SolutionOutput
     {
         this.resetPuzzle();
         let choices: Choices[] = [];
         let solutionSteps:  SolutionSteps[] = [];
         let guessIndex = 0;
+        let branches = 0;
+        let solutions = 0;
         while(solutionSteps.length < 2000)
         {
             let nextStep = this.iterateHeapSolution(guessIndex);
@@ -405,8 +418,17 @@ export default class BoardData{
                     guessIndex = 0;
                     if(this.puzzleIsSolved())
                     {
+                        solutions++;
                         addToSolutionSteps.puzzleIsSolved = true;
                         solutionSteps.push(addToSolutionSteps);
+                        if(endAtFirstSolution)
+                        {
+                            return {
+                                steps:solutionSteps,
+                                branches: branches,
+                                solutions: solutions,
+                            } 
+                        }
                         let lastChoice = choices.pop();
                         if(lastChoice!== undefined)
                         {
@@ -423,7 +445,6 @@ export default class BoardData{
                             }  
                             solutionSteps.push(addToSolutionSteps);
                         }
-    
                     }
                     else
                     {
@@ -434,10 +455,15 @@ export default class BoardData{
                     guessIndex++;
                     break;
                 case 'Out of options for current path':
+                    branches++;
                     let lastChoice = choices.pop();
                     if(lastChoice === undefined)
                     {
-                        return solutionSteps;
+                        return {
+                            steps:solutionSteps,
+                            branches: branches,
+                            solutions: solutions,
+                        }                     
                     }
                     index = lastChoice.index;
                     guessIndex = lastChoice.guessIndex;
@@ -455,12 +481,20 @@ export default class BoardData{
                     guessIndex = lastChoice.guessIndex + 1;
                     if(choices.length === 0)
                     {
-                        return solutionSteps;
+                        return {
+                            steps:solutionSteps,
+                            branches: branches,
+                            solutions: solutions,
+                        }                     
                     }
                     break;
             }
         }
-        return solutionSteps;
+        return {
+            steps:solutionSteps,
+            branches: branches,
+            solutions: solutions,
+        }                     
     }
     indexToBoardIndex(index: number, guessIndex: number):number 
     {
@@ -527,36 +561,117 @@ export default class BoardData{
             return out;
         }
     }
-    generateRandomSolution()
+    //Assumes given empty board and returns a pseudo random solved sudoku puzzle
+    static generateRandomSolution():BoardData
     {
-        let entries = [...SUDOKU_ALPHA_ARRAY];
-        swapRows(entries, 0, 1);
-        swapCols(entries, 1, 2);
-        let swaps = 0;
-        while(swaps < 60)
+        const firstEntries = randomShuffle([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+        let firstCol = [];
+        let firstRow = [];
+        for(let i=0; i<BOARD_WIDTH; i++)
         {
-            let swapMode = Math.floor(Math.random() * 2);
-            let setNumber = Math.floor(Math.random() * 3);
-            let rotationNumber = Math.floor(Math.random() * 3);
-            let swap1 = setNumber*SQUARE_WIDTH + rotationNumber;
-            let swap2 = setNumber*SQUARE_WIDTH + (rotationNumber + 1)%SQUARE_WIDTH;
-
-            switch(swapMode)
+            if(i!==firstEntries[0] && i!==firstEntries[1] && i!==firstEntries[2])
             {
-                case 0:
-                    swapRows(entries, swap1, swap2);
-                    break;
-                case 1:
-                    swapCols(entries, swap1, swap2);
-                    break;
+                firstRow.push(i);
             }
-            swaps++;
+            if(i!==firstEntries[0] && i!==firstEntries[3] && i!==firstEntries[4])
+            {
+                firstCol.push(i);
+            }
+
         }
-        const shift = Math.floor(Math.random() * BOARD_WIDTH);
+        firstCol = randomShuffle(firstCol);
+        firstRow = randomShuffle(firstRow);
+        let currentBoard = new BoardData();
+        currentBoard.addEntry(0, firstEntries[0]);
+        currentBoard.addEntry(1, firstEntries[1]);
+        currentBoard.addEntry(2, firstEntries[2]);
+        currentBoard.addEntry(BOARD_WIDTH, firstEntries[3]);
+        currentBoard.addEntry(2*BOARD_WIDTH, firstEntries[4]);
+
+        for(let i=3; i<BOARD_WIDTH; i++)
+        {
+            currentBoard.addEntry(i, firstRow[i - 3]);
+            currentBoard.addEntry(i*BOARD_WIDTH, firstCol[i - 3])
+        }
+        currentBoard.confirmCurrentEntries();
+        currentBoard.solvePuzzle(true);
+        return currentBoard;
+    }
+    branchLengthPercentage(solutionLength: number): number
+    {
+        return solutionLength/(this.heapSize/4);
+    }
+    static generateNewPuzzle(): BoardStats
+    {
+        let finalBoard = BoardData.generateRandomSolution();
+        const finalBoardSolution = [...finalBoard.boardData];
+        let indexOrder = [];
         for(let i=0; i<BOARD_SQUARES; i++)
         {
-            this.addEntry(i, (entries[i]+shift)%BOARD_WIDTH);
+            indexOrder.push(i);
         }
+        indexOrder = randomShuffle(indexOrder);
+        while(true)
+        {
+            let high = indexOrder.length;
+            let low = 0;
+            let mid = Math.floor((high+low)/2);    
+            while(high > low)
+            {
+                let testBoard = new BoardData();
+                for(let i=0; i<mid; i++)
+                {
+                    let nextIndex = 0;
+                    const number = indexOrder[i]%BOARD_WIDTH;
+                    const rowNumber = Math.floor(indexOrder[i]/BOARD_WIDTH);
+                    for(let j=rowNumber*BOARD_WIDTH; j<rowNumber*BOARD_WIDTH+BOARD_WIDTH; j++)
+                    {
+                        if(finalBoardSolution[j] === number)
+                        {
+                            nextIndex = j;
+                        }
+                    }
+                    testBoard.addEntry(nextIndex, finalBoardSolution[nextIndex]);
+                    testBoard.confirmedSquares[nextIndex] = true;    
+                }
+                let firstSolution = testBoard.solvePuzzle();
+                if(testBoard.branchLengthPercentage(firstSolution.steps.length) <= 2)//too high
+                {
+                    high = mid - 1;
+                    mid = Math.floor((high+low)/2);
+                }
+                else if(firstSolution.solutions > 1)
+                {
+                    low = mid+1;
+                    mid = Math.floor((high+low)/2);
+                }
+                if(high <= low )
+                {
+                    return {
+                        board: testBoard,
+                        solution: firstSolution
+                    }
+                }
+            } 
+        }
+    }
+    static generatePuzzleMatchingParameters(solutionsNumber:number, emptySquares:number, maxTries: number):BoardData
+    {
+        let tries = 0;
+        let outBoard = BoardData.generateNewPuzzle();
+        while(tries < maxTries)
+        {
+            let testBoard = BoardData.generateNewPuzzle();
+            if(testBoard.solution.solutions === solutionsNumber)
+            {
+                if(testBoard.board.heapSize > outBoard.board.heapSize)
+                {
+                    outBoard = testBoard;
+                }
+            }
+            tries++;
+        }
+        return outBoard.board;
     }
     resetPuzzle(): void
     {
@@ -639,8 +754,7 @@ export default class BoardData{
     {
         if(this.heapSize<=0)
         {
-            var out = -1;
-            return out;
+            return -1;
         }
         return this.solveOrder[0].index;
     }

@@ -15,13 +15,12 @@ export const SudokuPuzzle = () => {
 
     const boardData = new BoardData();
     const dispatch = useAppDispatch()
-    dispatch(updateBoard(boardData.toDataHash()));
+    dispatch(updateBoard(BoardData.generatePuzzleMatchingParameters(1, 30, 20).toDataHash()));
     return (
         <div className = "module entry sudoku"
         >
             <SudokuBoard/>
             <SudokuSidebar/>
-
         </div>
     )
 };
