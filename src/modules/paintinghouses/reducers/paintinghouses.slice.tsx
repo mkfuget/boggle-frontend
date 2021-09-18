@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { stringify } from 'querystring';
 import type { RootState } from '../../../store'
-const BOARD_WIDTH = 10;
-type AllowedColors = ("red" | "blue" | "green" | "white");
+export const BOARD_WIDTH = 10;
+export type AllowedColors = ("red" | "blue" | "green" | "white");
+interface PaintHousePayload {
+    color: AllowedColors;
+    index: number;
+}
 interface PaintingHousesState {
     boardColors: AllowedColors[];
     selectedColor: AllowedColors;
@@ -35,11 +40,35 @@ const paintingHousesSlice = createSlice({
         selectColor: (state, action: PayloadAction<AllowedColors>)=>{
             state.selectedColor = action.payload;
         },
+        paintHouse: (state, action: PayloadAction<PaintHousePayload>)=>{
+            const index = action.payload.index;
+            const color = action.payload.color;
+            state.boardColors[index] = color;
+            if(index>0 && state.boardColors[index - 1] === color)
+            {
+                state.boardColors[index - 1] = "white"
+            }
+            if(index<BOARD_WIDTH - 1 && state.boardColors[index + 1] === color)
+            {
+                state.boardColors[index + 1] = "white"
+            }
+
+        },
+        paintAllHouses: (state, action: PayloadAction<AllowedColors[]>)=>{
+            state.boardColors = action.payload;
+        },
+        newPuzzle:(state)=>{
+            state.boardColors = Array(BOARD_WIDTH).fill("white");
+            state.redColorCosts = randomizedInitialCosts();
+            state.greenColorCosts = randomizedInitialCosts();
+            state.blueColorCosts = randomizedInitialCosts();
+
+        }
     }
 
 })
 
-export const {selectColor} = paintingHousesSlice.actions;
+export const {selectColor, paintHouse, paintAllHouses, newPuzzle} = paintingHousesSlice.actions;
 
 export const getPaintingHousesData = (state: RootState) => state.paintinghouses;
 export default paintingHousesSlice.reducer;

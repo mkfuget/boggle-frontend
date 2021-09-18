@@ -3,17 +3,16 @@ import React from 'react'
 import { useState } from 'react'
 import { useAppDispatch } from '../../../hooks'
 import { motion } from "framer-motion"
-import { getPaintingHousesData, paintHouse } from '../reducers/paintinghouses.slice'
+import { AllowedColors, getPaintingHousesData, paintHouse, selectColor } from '../reducers/paintinghouses.slice'
 import { useSelector } from 'react-redux'
 
 interface CellProps {
-    index: number,
-    color: string,
-    value: (number | "")
+    color: AllowedColors,
+    selected: boolean;
 }
 
 
-export const PaintingHousesCell = (({index, color, value}: CellProps) => {
+export const PaintingHousesSelectionCell = (({color, selected}: CellProps) => {
     const dispatch = useAppDispatch();
     const selectedColor = useSelector(getPaintingHousesData).selectedColor;
     let backgroundColor = "";
@@ -37,12 +36,12 @@ export const PaintingHousesCell = (({index, color, value}: CellProps) => {
     let cellClassName = "";
     
     const handleClick = () =>{
-        dispatch(paintHouse({color: selectedColor, index: index}));
+        dispatch(selectColor(color));
     }
     return (
         
         <motion.div 
-            className = "paintinghouses cell"
+            className = {selected?" paintinghouses selected selection cell":"paintinghouses unselected selection cell"}
             onClick = {handleClick}
             animate ={{
                 backgroundColor: backgroundColor,
@@ -51,7 +50,6 @@ export const PaintingHousesCell = (({index, color, value}: CellProps) => {
             transition={{ ease: "easeOut"}}
             initial = {false}
         >
-            {value}
         </motion.div>
     )
 })
