@@ -1,6 +1,6 @@
 {
     "identityPoolName": "accamplifyb7e549fe_identitypool_b7e549fe",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "accampb7e549fe",
     "userPoolName": "accamplifyb7e549fe_userpool_b7e549fe",
     "autoVerifiedAttributes": [

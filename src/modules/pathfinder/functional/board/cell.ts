@@ -1,20 +1,20 @@
-
-const redKeyImage = require('../../images/red_key.png') as string;
-const blueKeyImage = require('../../images/blue_key.png') as string;
-const greenKeyImage = require('../../images/green_key.png') as string;
-const yellowKeyImage = require('../../images/yellow_key.png') as string;
-const redLockImage = require('../../images/red_lock.png') as string;
-const blueLockImage = require('../../images/blue_lock.png') as string;
-const greenLockImage = require('../../images/green_lock.png') as string;
-const yellowLockImage = require('../../images/yellow_lock.png') as string;
-const iceCellImage = require('../../images/ice_cell.png') as string;
-const wallCellImage = require('../../images/wall_cell.png') as string;
-const emptyCellImage = require('../../images/empty_cell.png') as string;
-const startCellImage = require('../../images/start_cell.png') as string;
-const finishCellImage = require('../../images/finish_cell.png') as string;
-
 import Cursor from './cursor'
 import {MovementResult} from './cursor'
+
+const redKeyImage = require('../../assets/images/red_key.png') as string;
+const blueKeyImage = require('../../assets/images/blue_key.png') as string;
+const greenKeyImage = require('../../assets/images/green_key.png') as string;
+const yellowKeyImage = require('../../assets/images/yellow_key.png') as string;
+const redLockImage = require('../../assets/images/red_lock.png') as string;
+const blueLockImage = require('../../assets/images/blue_lock.png') as string;
+const greenLockImage = require('../../assets/images/green_lock.png') as string;
+const yellowLockImage = require('../../assets/images/yellow_lock.png') as string;
+const iceCellImage = require('../../assets/images/ice_cell.png') as string;
+const wallCellImage = require('../../assets/images/wall_cell.png') as string;
+const emptyCellImage = require('../../assets/images/empty_cell.png') as string;
+const startCellImage = require('../../assets/images/start_cell.png') as string;
+const finishCellImage = require('../../assets/images/finish_cell.png') as string;
+
 export abstract class Cell
 {
     xIndex: number;
@@ -34,46 +34,46 @@ export abstract class Cell
         switch(type)
         {
             case "E":
-                return new EmptyCell(xIndex, yIndex, "EmptyCell");
+                return new EmptyCell(xIndex, yIndex, "E");
                 break;
             case "W":
-                return new WallCell(xIndex, yIndex, "WallCell");
+                return new WallCell(xIndex, yIndex, "W");
                 break;
             case "r":
-                return new RedLockCell(xIndex, yIndex, "RedLockCell");
+                return new RedLockCell(xIndex, yIndex, "r");
                 break;
             case "g":
-                return new GreenLockCell(xIndex, yIndex, "GreenLockCell");
+                return new GreenLockCell(xIndex, yIndex, "g");
                 break;
             case "b":
-                return new BlueLockCell(xIndex, yIndex, "BlueLockCell");
+                return new BlueLockCell(xIndex, yIndex, "b");
                 break;
             case "y":
-                return new YellowLockCell(xIndex, yIndex, "YellowLockCell");
+                return new YellowLockCell(xIndex, yIndex, "y");
                 break;
             case "R":
-                return new RedKeyCell(xIndex, yIndex, "RedKeyCell");
+                return new RedKeyCell(xIndex, yIndex, "R");
                 break;
             case "G":
-                return new GreenKeyCell(xIndex, yIndex, "GreenKeyCell");
+                return new GreenKeyCell(xIndex, yIndex, "G");
                 break;
             case "B":
-                return new BlueKeyCell(xIndex, yIndex, "BlueKeyCell");
+                return new BlueKeyCell(xIndex, yIndex, "B");
                 break;
             case "Y":
-                return new YellowKeyCell(xIndex, yIndex, "YellowKeyCell");
+                return new YellowKeyCell(xIndex, yIndex, "Y");
                 break;
             case "I":
-                return new IceCell(xIndex, yIndex, "IceCell");
+                return new IceCell(xIndex, yIndex, "I");
                 break;
             case "S":
-                return new StartCell(xIndex, yIndex, "StartCell");
+                return new StartCell(xIndex, yIndex, "S");
                 break;
             case "F":
-                return new FinishCell(xIndex, yIndex, "FinishCell");
+                return new FinishCell(xIndex, yIndex, "F");
                 break;
         }
-        return new EmptyCell(xIndex, yIndex, "EmptyCell");
+        return new EmptyCell(xIndex, yIndex, "E");
     }
     
 }

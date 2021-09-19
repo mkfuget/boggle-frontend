@@ -1,0 +1,25 @@
+.puzzle
+{
+    display: inline-block;
+}
+.pathfinder.cell {
+    border-radius: 0px;
+    border: 1px solid rgb(0, 0, 0);
+    transition: 0.3s;
+    z-index: 0;
+    cursor: auto; 
+
+}
+
+.pathfinderpuzzle {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);  
+}
+  
+#bogglepuzzle{
+    float: left;
+
+}
+

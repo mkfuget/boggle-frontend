@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/cli": "4.24",
-    "@aws-amplify/ui-react": "^1.2.11",
+    "@aws-amplify/ui-react": "^1.2.16",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
@@ -21,7 +21,7 @@
     "@types/react-redux": "^7.1.16",
     "@types/redux": "^3.6.0",
     "amazon-cognito-identity-js": "^5.1.0",
-    "aws-amplify": "^4.2.5",
+    "aws-amplify": "^4.2.10",
     "aws-lambda": "^1.0.6",
     "body-parser": "^1.19.0",
     "bootstrap": "5.0.2",

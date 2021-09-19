@@ -1,5 +1,5 @@
-import * as cells from "./cell.js"
-import PriorityQueue from "../PriorityQueue.js"
+import * as cells from "./cell"
+import PriorityQueue from "../PriorityQueue"
 
 import Cursor from "./cursor"
 export interface pathToCell {
@@ -38,19 +38,49 @@ class Board {
 
     }
 
-    static initializeBoard(width: number, height: number, entries: string[]): Board
+    static initializeBoard(width: number, height: number, entries: string[][]): Board
     {
         let currentBoard = new Board(width, height);
-        let entriesIndex=0;
         for(let i=0; i<height; i++)
         {
             for(let j=0; j<width; j++)
             {
-                currentBoard.boardCells[i][j] = cells.Cell.stringToCell(entries[entriesIndex], j, i);
+                currentBoard.boardCells[i][j] = cells.Cell.stringToCell(entries[i][j], j, i);
             }
         }
         return currentBoard;
     }
+
+    getBackgroundImages(): string[][]
+    {
+        let out = [];
+        for(let i=0; i<this.height; i++)
+        {
+            let row = [];
+            for(let j=0; j<this.width; j++)
+            {
+                row.push(this.boardCells[i][j].CELL_IMAGE);
+            }
+            out.push(row);
+        }
+        return out;
+    }
+
+    getCellTypes(): string[][]
+    {
+        let out = [];
+        for(let i=0; i<this.height; i++)
+        {
+            let row = [];
+            for(let j=0; j<this.width; j++)
+            {
+                row.push(this.boardCells[i][j].type);
+            }
+            out.push(row);
+        }
+        return out;
+    }
+
 
     solveMaze(cursor: Cursor, solveQueue: PriorityQueue<Cursor>): pathSolution//returns one array of the squares in the path finding algorithm and one for the shortest path solution 
     {
