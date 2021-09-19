@@ -4,6 +4,7 @@ type Module @model {
   description: String!
   link: String!
   pictureLocation: String
+  tags: [String]
 }
 
 type SudokuPuzzle @model {

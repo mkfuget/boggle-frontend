@@ -52,11 +52,23 @@
     border-radius: 1px;
     border-left: none;
     border-right: none;
-
+    min-height: 280px;
 }
 
-.moduleentry.card p{
+
+.moduleentry.card .icon {
+    position: absolute;
+    
+}
+
+.moduleentry.card .content {
+    display: flex;                 
+    flex-direction: row;            
+    flex-wrap: nowrap;             
+    margin-left: 240px;
+
     float: left;
+    
 }
 .moduleentry.card img{
     margin-top: 20px;

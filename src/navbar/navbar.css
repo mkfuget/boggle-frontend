@@ -17,6 +17,7 @@ ul {
 }
 
 #navbar {
+    position:fixed;
     box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.5);
     display: block;
     width: 100%;
@@ -26,6 +27,7 @@ ul {
     background-color: rgb(26, 30, 34);
     color:white;
     list-style: none; 
+    z-index: 999;
 }
 
 #navbar li a {

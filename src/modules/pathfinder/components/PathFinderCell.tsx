@@ -5,7 +5,6 @@ import { useAppDispatch } from '../../../hooks'
 import { motion } from "framer-motion"
 import wall_cell from '../../../assets/images/wall_cell.png'
 const wallCellImage = require('../assets/images/wall_cell.png') as string;
-
 interface CellProps {
     xIndex: number,
     yIndex: number,
