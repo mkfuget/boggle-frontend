@@ -10,14 +10,16 @@ interface cursorData {
     yIndex: number;
     bitMask: number;    
 }
-interface BoardData {
-    entries: string[][];
-    backgroundImages: string[][];
+
+interface lightCellData {
+    xIndex: number;
+    yIndex: number;
+    color: string;
 }
+
 interface PathFinderState {
     board: string[][];
     boardColors: string[][];
-    backgroundImages: string[][];
     cursor: cursorData;
 }
 
@@ -28,7 +30,6 @@ const initialState:PathFinderState =
 {
     board: board.getCellTypes(),
     boardColors: new Array(BOARD_WIDTH).fill("white").map((row: string[]) => Array(BOARD_WIDTH).fill("white")),
-    backgroundImages: board.getBackgroundImages(),
     cursor: {
         xIndex: 0,
         yIndex: 0,
@@ -43,19 +44,20 @@ const pathFinderSlice = createSlice({
         updateCursor: (state, action: PayloadAction<cursorData>)=>{
             state.cursor  = action.payload;
         },
-        addBoard: (state, action: PayloadAction<BoardData>)=>{
-            state.board  = action.payload.entries;
-            state.backgroundImages = action.payload.backgroundImages;
+        addBoard: (state, action: PayloadAction<string[][]>)=>{
+            state.board  = action.payload;
+        },
+        lightCell: (state, action: PayloadAction<lightCellData>)=>{
+            state.boardColors[action.payload.xIndex][action.payload.yIndex] = action.payload.color;
         }
     }
 
 })
 
-export const {updateCursor, addBoard} = pathFinderSlice.actions;
+export const {updateCursor, addBoard, lightCell} = pathFinderSlice.actions;
 
 export const getPathFinderBoard = (state: RootState) => state.pathfinder.board;
 export const getPathFinderBoardColors = (state: RootState) => state.pathfinder.boardColors;
-export const getPathFinderBackgroundImages = (state: RootState) => state.pathfinder.backgroundImages;
 
 export const getPathFinderCursor = (state: RootState) => state.pathfinder.cursor;
 

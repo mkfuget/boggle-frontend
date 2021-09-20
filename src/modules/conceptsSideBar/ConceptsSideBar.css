@@ -1,10 +1,10 @@
 #conceptssidebar {
   background-color: black;
-  position: absolute;
+  position: fixed;
   height: calc(100vh - 50px);
   z-index: 0;
   right: 0;
-  top: 0;
+  top: 50px;
   flex-direction: column;
   border-right: solid 1px #3c4245;
   background-color: rgb(39, 43, 48);

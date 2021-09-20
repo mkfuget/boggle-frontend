@@ -3,19 +3,34 @@
     display: inline-block;
 }
 .pathfinder.cell {
+    display: grid;
     border-radius: 0px;
-    border: 1px solid rgb(0, 0, 0);
+    border: 0px solid rgb(0, 0, 0);
     transition: 0.3s;
     z-index: 0;
     cursor: auto; 
 
 }
 
+.pathfinder.cell img {
+    position: absolute;
+    z-index: 1;
+}
+.pathfinder.cell div {
+    position: relative;
+    border-right: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+    width: 36px;
+    height: 36px;
+    z-index: -1;
+
+}
 .pathfinderpuzzle {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(10, 40px);
-    grid-template-rows: repeat(10, 40px);  
+    grid-template-columns: repeat(10, 36px);
+    grid-template-rows: repeat(10, 36px);  
 }
   
 #bogglepuzzle{
@@ -23,3 +38,29 @@
 
 }
 
+.pathfindercursor{
+    position: absolute;
+    grid-template-columns: repeat(2, 10px);
+    grid-template-rows: repeat(2, 10px);  
+
+    display: grid;
+    z-index: 10;
+}
+
+.cursorquadrant{
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+}
+.red.cursorquadrant {
+    background-color: red;
+}
+.blue.cursorquadrant {
+    background-color: blue;
+}
+.green.cursorquadrant {
+    background-color: green;
+}
+.yellow.cursorquadrant {
+    background-color: yellow;
+}
