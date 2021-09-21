@@ -8,6 +8,7 @@ export type CreateModuleInput = {
   description: string,
   link: string,
   pictureLocation?: string | null,
+  tags?: Array< string | null > | null,
 };
 
 export type ModelModuleConditionInput = {
@@ -15,6 +16,7 @@ export type ModelModuleConditionInput = {
   description?: ModelStringInput | null,
   link?: ModelStringInput | null,
   pictureLocation?: ModelStringInput | null,
+  tags?: ModelStringInput | null,
   and?: Array< ModelModuleConditionInput | null > | null,
   or?: Array< ModelModuleConditionInput | null > | null,
   not?: ModelModuleConditionInput | null,
@@ -67,6 +69,7 @@ export type Module = {
   description: string,
   link: string,
   pictureLocation?: string | null,
+  tags?: Array< string | null > | null,
   createdAt: string,
   updatedAt: string,
 };
@@ -77,6 +80,7 @@ export type UpdateModuleInput = {
   description?: string | null,
   link?: string | null,
   pictureLocation?: string | null,
+  tags?: Array< string | null > | null,
 };
 
 export type DeleteModuleInput = {
@@ -124,12 +128,42 @@ export type DeleteSudokuPuzzleInput = {
   id: string,
 };
 
+export type CreatePathFinderPuzzleInput = {
+  id?: string | null,
+  entries: Array< number | null >,
+};
+
+export type ModelPathFinderPuzzleConditionInput = {
+  entries?: ModelIntInput | null,
+  and?: Array< ModelPathFinderPuzzleConditionInput | null > | null,
+  or?: Array< ModelPathFinderPuzzleConditionInput | null > | null,
+  not?: ModelPathFinderPuzzleConditionInput | null,
+};
+
+export type PathFinderPuzzle = {
+  __typename: "PathFinderPuzzle",
+  id: string,
+  entries: Array< number | null >,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdatePathFinderPuzzleInput = {
+  id: string,
+  entries?: Array< number | null > | null,
+};
+
+export type DeletePathFinderPuzzleInput = {
+  id: string,
+};
+
 export type ModelModuleFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
   description?: ModelStringInput | null,
   link?: ModelStringInput | null,
   pictureLocation?: ModelStringInput | null,
+  tags?: ModelStringInput | null,
   and?: Array< ModelModuleFilterInput | null > | null,
   or?: Array< ModelModuleFilterInput | null > | null,
   not?: ModelModuleFilterInput | null,
@@ -171,6 +205,20 @@ export type ModelSudokuPuzzleConnection = {
   nextToken?: string | null,
 };
 
+export type ModelPathFinderPuzzleFilterInput = {
+  id?: ModelIDInput | null,
+  entries?: ModelIntInput | null,
+  and?: Array< ModelPathFinderPuzzleFilterInput | null > | null,
+  or?: Array< ModelPathFinderPuzzleFilterInput | null > | null,
+  not?: ModelPathFinderPuzzleFilterInput | null,
+};
+
+export type ModelPathFinderPuzzleConnection = {
+  __typename: "ModelPathFinderPuzzleConnection",
+  items?:  Array<PathFinderPuzzle | null > | null,
+  nextToken?: string | null,
+};
+
 export type CreateModuleMutationVariables = {
   input: CreateModuleInput,
   condition?: ModelModuleConditionInput | null,
@@ -184,6 +232,7 @@ export type CreateModuleMutation = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    tags?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -202,6 +251,7 @@ export type UpdateModuleMutation = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    tags?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -220,6 +270,7 @@ export type DeleteModuleMutation = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    tags?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -270,6 +321,51 @@ export type DeleteSudokuPuzzleMutation = {
   } | null,
 };
 
+export type CreatePathFinderPuzzleMutationVariables = {
+  input: CreatePathFinderPuzzleInput,
+  condition?: ModelPathFinderPuzzleConditionInput | null,
+};
+
+export type CreatePathFinderPuzzleMutation = {
+  createPathFinderPuzzle?:  {
+    __typename: "PathFinderPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePathFinderPuzzleMutationVariables = {
+  input: UpdatePathFinderPuzzleInput,
+  condition?: ModelPathFinderPuzzleConditionInput | null,
+};
+
+export type UpdatePathFinderPuzzleMutation = {
+  updatePathFinderPuzzle?:  {
+    __typename: "PathFinderPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePathFinderPuzzleMutationVariables = {
+  input: DeletePathFinderPuzzleInput,
+  condition?: ModelPathFinderPuzzleConditionInput | null,
+};
+
+export type DeletePathFinderPuzzleMutation = {
+  deletePathFinderPuzzle?:  {
+    __typename: "PathFinderPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetModuleQueryVariables = {
   id: string,
 };
@@ -282,6 +378,7 @@ export type GetModuleQuery = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    tags?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -303,6 +400,7 @@ export type ListModulesQuery = {
       description: string,
       link: string,
       pictureLocation?: string | null,
+      tags?: Array< string | null > | null,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -344,6 +442,40 @@ export type ListSudokuPuzzlesQuery = {
   } | null,
 };
 
+export type GetPathFinderPuzzleQueryVariables = {
+  id: string,
+};
+
+export type GetPathFinderPuzzleQuery = {
+  getPathFinderPuzzle?:  {
+    __typename: "PathFinderPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListPathFinderPuzzlesQueryVariables = {
+  filter?: ModelPathFinderPuzzleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPathFinderPuzzlesQuery = {
+  listPathFinderPuzzles?:  {
+    __typename: "ModelPathFinderPuzzleConnection",
+    items?:  Array< {
+      __typename: "PathFinderPuzzle",
+      id: string,
+      entries: Array< number | null >,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateModuleSubscription = {
   onCreateModule?:  {
     __typename: "Module",
@@ -352,6 +484,7 @@ export type OnCreateModuleSubscription = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    tags?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -365,6 +498,7 @@ export type OnUpdateModuleSubscription = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    tags?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -378,6 +512,7 @@ export type OnDeleteModuleSubscription = {
     description: string,
     link: string,
     pictureLocation?: string | null,
+    tags?: Array< string | null > | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -406,6 +541,36 @@ export type OnUpdateSudokuPuzzleSubscription = {
 export type OnDeleteSudokuPuzzleSubscription = {
   onDeleteSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePathFinderPuzzleSubscription = {
+  onCreatePathFinderPuzzle?:  {
+    __typename: "PathFinderPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdatePathFinderPuzzleSubscription = {
+  onUpdatePathFinderPuzzle?:  {
+    __typename: "PathFinderPuzzle",
+    id: string,
+    entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeletePathFinderPuzzleSubscription = {
+  onDeletePathFinderPuzzle?:  {
+    __typename: "PathFinderPuzzle",
     id: string,
     entries: Array< number | null >,
     createdAt: string,

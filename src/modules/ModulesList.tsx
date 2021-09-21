@@ -8,9 +8,10 @@ interface ModuleEntryProps {
     description: string
     link: string
     pictureLocation: string
+    tags: string[]
 }
 
-const ModuleEntry = ({title, description, link, pictureLocation}:ModuleEntryProps) => {
+const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEntryProps) => {
     const [icon, setIcon] = useState("");
     console.log(pictureLocation);
     const fetchModulePhoto = async () => {
@@ -40,9 +41,10 @@ const ModuleEntry = ({title, description, link, pictureLocation}:ModuleEntryProp
                     alt = "icon">
                 </img>
             </div>
-            <h2>{title}</h2>
+            <h2 className = "cardtitle">{title}</h2>
             <div className = "content">
                 <p>{description}</p>
+                <span className = "tags">Tags: {tags !== null ? tags.join(", ") : ""}</span>
             </div> 
 
         </a>
@@ -72,7 +74,7 @@ export const ModulesList = () => {
 
     return (
         <div id = "modulelist">
-            <h2>Explore Coding Modules</h2>
+            <h2 className = "pagetile">Explore Coding Modules</h2>
             {modules.map((element:ModuleEntryProps, index:number) => 
                 {
                     return (
@@ -82,6 +84,7 @@ export const ModulesList = () => {
                             description = {element.description}
                             link = {element.link}
                             pictureLocation = {element.pictureLocation}
+                            tags = {element.tags}
                         />
                     )
                 })

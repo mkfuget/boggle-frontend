@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: rgb(242, 242, 243);
+  background-color: var(--background-gray-color);
   min-height: 100vh;
   margin-bottom: 0px;
 }
@@ -48,4 +48,5 @@
 :root {
   --main-blue-color: rgb(48, 83, 177);
   --soft-blue-color: rgb(142, 190, 218);
+  --background-gray-color: rgba(239,239,239,255);
 }

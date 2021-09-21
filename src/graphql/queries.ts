@@ -10,6 +10,7 @@ export const getModule = /* GraphQL */ `
       description
       link
       pictureLocation
+      tags
       createdAt
       updatedAt
     }
@@ -28,6 +29,7 @@ export const listModules = /* GraphQL */ `
         description
         link
         pictureLocation
+        tags
         createdAt
         updatedAt
       }
@@ -52,6 +54,37 @@ export const listSudokuPuzzles = /* GraphQL */ `
     $nextToken: String
   ) {
     listSudokuPuzzles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        entries
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPathFinderPuzzle = /* GraphQL */ `
+  query GetPathFinderPuzzle($id: ID!) {
+    getPathFinderPuzzle(id: $id) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPathFinderPuzzles = /* GraphQL */ `
+  query ListPathFinderPuzzles(
+    $filter: ModelPathFinderPuzzleFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPathFinderPuzzles(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
       items {
         id
         entries

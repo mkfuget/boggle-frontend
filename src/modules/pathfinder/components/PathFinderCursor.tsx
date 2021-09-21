@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../hooks";
 import { getPathFinderCursor } from "../reducers/pathfinder.slice";
-export const PathFinderCursor = (({xIndex, yIndex, color, type}: CellProps) => {
+export const PathFinderCursor = () => {
     const dispatch = useAppDispatch();
     const cursorData =  useSelector(getPathFinderCursor);
     const xCoord = cursorData.xIndex*36 + 8;
@@ -29,5 +29,5 @@ export const PathFinderCursor = (({xIndex, yIndex, color, type}: CellProps) => {
         </motion.div>
 
     )
-})
+}
 

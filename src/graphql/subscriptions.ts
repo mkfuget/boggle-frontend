@@ -10,6 +10,7 @@ export const onCreateModule = /* GraphQL */ `
       description
       link
       pictureLocation
+      tags
       createdAt
       updatedAt
     }
@@ -23,6 +24,7 @@ export const onUpdateModule = /* GraphQL */ `
       description
       link
       pictureLocation
+      tags
       createdAt
       updatedAt
     }
@@ -36,6 +38,7 @@ export const onDeleteModule = /* GraphQL */ `
       description
       link
       pictureLocation
+      tags
       createdAt
       updatedAt
     }
@@ -64,6 +67,36 @@ export const onUpdateSudokuPuzzle = /* GraphQL */ `
 export const onDeleteSudokuPuzzle = /* GraphQL */ `
   subscription OnDeleteSudokuPuzzle {
     onDeleteSudokuPuzzle {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePathFinderPuzzle = /* GraphQL */ `
+  subscription OnCreatePathFinderPuzzle {
+    onCreatePathFinderPuzzle {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePathFinderPuzzle = /* GraphQL */ `
+  subscription OnUpdatePathFinderPuzzle {
+    onUpdatePathFinderPuzzle {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePathFinderPuzzle = /* GraphQL */ `
+  subscription OnDeletePathFinderPuzzle {
+    onDeletePathFinderPuzzle {
       id
       entries
       createdAt

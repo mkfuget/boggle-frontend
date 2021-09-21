@@ -7,9 +7,21 @@
     float:left;
 
 }
-#modulelist h2 {
+.cardtitle {
     margin-bottom: 40px;
     font-size: 32px;
+}
+
+.pagetile{
+    font-family: times, Times New Roman, times-roman, georgia, serif;
+	color: rgb(0, 0, 0);
+	margin: 0;
+	font-size: 56px;
+	line-height: 44px;
+	letter-spacing: -1px;
+	font-weight: bold;
+    margin-bottom: 40px;
+
 }
 .module.entry {
     float:left;
@@ -38,6 +50,9 @@
     width: 100%;
     margin-top: 4px;
     background-color: white;
+    border: 2px solid var(--main-blue-color);
+    color: var(--main-blue-color);
+    font-weight: bold;
 }
 .module.sidebarbutton:hover {
     background-color: var(--main-blue-color);
@@ -70,6 +85,17 @@
     float: left;
     
 }
+
+.tags {
+    position: absolute;
+    bottom: 10px;
+    font-weight: bold;
+}
+
+.moduleentry .tags {
+    margin-left: 20px;
+}
+
 .moduleentry.card img{
     margin-top: 20px;
     margin-left: 20px;

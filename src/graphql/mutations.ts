@@ -13,6 +13,7 @@ export const createModule = /* GraphQL */ `
       description
       link
       pictureLocation
+      tags
       createdAt
       updatedAt
     }
@@ -29,6 +30,7 @@ export const updateModule = /* GraphQL */ `
       description
       link
       pictureLocation
+      tags
       createdAt
       updatedAt
     }
@@ -45,6 +47,7 @@ export const deleteModule = /* GraphQL */ `
       description
       link
       pictureLocation
+      tags
       createdAt
       updatedAt
     }
@@ -82,6 +85,45 @@ export const deleteSudokuPuzzle = /* GraphQL */ `
     $condition: ModelSudokuPuzzleConditionInput
   ) {
     deleteSudokuPuzzle(input: $input, condition: $condition) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPathFinderPuzzle = /* GraphQL */ `
+  mutation CreatePathFinderPuzzle(
+    $input: CreatePathFinderPuzzleInput!
+    $condition: ModelPathFinderPuzzleConditionInput
+  ) {
+    createPathFinderPuzzle(input: $input, condition: $condition) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePathFinderPuzzle = /* GraphQL */ `
+  mutation UpdatePathFinderPuzzle(
+    $input: UpdatePathFinderPuzzleInput!
+    $condition: ModelPathFinderPuzzleConditionInput
+  ) {
+    updatePathFinderPuzzle(input: $input, condition: $condition) {
+      id
+      entries
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePathFinderPuzzle = /* GraphQL */ `
+  mutation DeletePathFinderPuzzle(
+    $input: DeletePathFinderPuzzleInput!
+    $condition: ModelPathFinderPuzzleConditionInput
+  ) {
+    deletePathFinderPuzzle(input: $input, condition: $condition) {
       id
       entries
       createdAt

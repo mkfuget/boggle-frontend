@@ -11,3 +11,21 @@ type SudokuPuzzle @model {
   id: ID!
   entries: [Int]!
 }
+
+type PathFinderPuzzle @model {
+  id: ID!
+  entries: [Int]!
+}
+
+type ModulePage
+
+type DivEntry {
+  type: DivType!
+  content: String!
+}
+
+enum DivType {
+  paragraph
+  image
+  gif
+}
