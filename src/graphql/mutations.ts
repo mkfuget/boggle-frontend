@@ -131,3 +131,60 @@ export const deletePathFinderPuzzle = /* GraphQL */ `
     }
   }
 `;
+export const createConceptsData = /* GraphQL */ `
+  mutation CreateConceptsData(
+    $input: CreateConceptsDataInput!
+    $condition: ModelConceptsDataConditionInput
+  ) {
+    createConceptsData(input: $input, condition: $condition) {
+      id
+      pages {
+        title
+        content {
+          type
+          content
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateConceptsData = /* GraphQL */ `
+  mutation UpdateConceptsData(
+    $input: UpdateConceptsDataInput!
+    $condition: ModelConceptsDataConditionInput
+  ) {
+    updateConceptsData(input: $input, condition: $condition) {
+      id
+      pages {
+        title
+        content {
+          type
+          content
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteConceptsData = /* GraphQL */ `
+  mutation DeleteConceptsData(
+    $input: DeleteConceptsDataInput!
+    $condition: ModelConceptsDataConditionInput
+  ) {
+    deleteConceptsData(input: $input, condition: $condition) {
+      id
+      pages {
+        title
+        content {
+          type
+          content
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

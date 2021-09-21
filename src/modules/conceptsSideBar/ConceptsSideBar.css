@@ -11,3 +11,18 @@
   box-shadow: -4px -1px 4px rgba(9, 10, 10, 0.3);
 
 }
+
+#conceptssidebar h2 {
+  margin-top: 20px;
+  padding-bottom: 12px;
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+
+#conceptssidebar p {
+  color: white;
+  text-align: left;
+  margin-left: 18px;
+  margin-right: 12px;
+}

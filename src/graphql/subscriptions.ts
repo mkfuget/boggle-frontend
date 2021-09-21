@@ -104,3 +104,51 @@ export const onDeletePathFinderPuzzle = /* GraphQL */ `
     }
   }
 `;
+export const onCreateConceptsData = /* GraphQL */ `
+  subscription OnCreateConceptsData {
+    onCreateConceptsData {
+      id
+      pages {
+        title
+        content {
+          type
+          content
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateConceptsData = /* GraphQL */ `
+  subscription OnUpdateConceptsData {
+    onUpdateConceptsData {
+      id
+      pages {
+        title
+        content {
+          type
+          content
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteConceptsData = /* GraphQL */ `
+  subscription OnDeleteConceptsData {
+    onDeleteConceptsData {
+      id
+      pages {
+        title
+        content {
+          type
+          content
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

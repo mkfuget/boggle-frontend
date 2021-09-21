@@ -17,7 +17,16 @@ type PathFinderPuzzle @model {
   entries: [Int]!
 }
 
-type ModulePage
+type ConceptsData @model{
+  id: ID!
+  pages: [ModulePage]!
+
+}
+
+type ModulePage {
+  title: String!
+  content: [DivEntry]!
+}
 
 type DivEntry {
   type: DivType!

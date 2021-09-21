@@ -95,3 +95,38 @@ export const listPathFinderPuzzles = /* GraphQL */ `
     }
   }
 `;
+export const getConceptsData = /* GraphQL */ `
+  query GetConceptsData($id: ID!) {
+    getConceptsData(id: $id) {
+      id
+      pages {
+        title
+        content {
+          type
+          content
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listConceptsData = /* GraphQL */ `
+  query ListConceptsData(
+    $filter: ModelConceptsDataFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listConceptsData(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        pages {
+          title
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

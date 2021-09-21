@@ -157,6 +157,63 @@ export type DeletePathFinderPuzzleInput = {
   id: string,
 };
 
+export type CreateConceptsDataInput = {
+  id?: string | null,
+  pages: Array< ModulePageInput | null >,
+};
+
+export type ModulePageInput = {
+  title: string,
+  content: Array< DivEntryInput | null >,
+};
+
+export type DivEntryInput = {
+  type: DivType,
+  content: string,
+};
+
+export enum DivType {
+  paragraph = "paragraph",
+  image = "image",
+  gif = "gif",
+}
+
+
+export type ModelConceptsDataConditionInput = {
+  and?: Array< ModelConceptsDataConditionInput | null > | null,
+  or?: Array< ModelConceptsDataConditionInput | null > | null,
+  not?: ModelConceptsDataConditionInput | null,
+};
+
+export type ConceptsData = {
+  __typename: "ConceptsData",
+  id: string,
+  pages:  Array<ModulePage | null >,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type ModulePage = {
+  __typename: "ModulePage",
+  title: string,
+  content:  Array<DivEntry | null >,
+};
+
+export type DivEntry = {
+  __typename: "DivEntry",
+  type: DivType,
+  content: string,
+};
+
+export type UpdateConceptsDataInput = {
+  id: string,
+  pages?: Array< ModulePageInput | null > | null,
+};
+
+export type DeleteConceptsDataInput = {
+  id: string,
+};
+
 export type ModelModuleFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
@@ -216,6 +273,19 @@ export type ModelPathFinderPuzzleFilterInput = {
 export type ModelPathFinderPuzzleConnection = {
   __typename: "ModelPathFinderPuzzleConnection",
   items?:  Array<PathFinderPuzzle | null > | null,
+  nextToken?: string | null,
+};
+
+export type ModelConceptsDataFilterInput = {
+  id?: ModelIDInput | null,
+  and?: Array< ModelConceptsDataFilterInput | null > | null,
+  or?: Array< ModelConceptsDataFilterInput | null > | null,
+  not?: ModelConceptsDataFilterInput | null,
+};
+
+export type ModelConceptsDataConnection = {
+  __typename: "ModelConceptsDataConnection",
+  items?:  Array<ConceptsData | null > | null,
   nextToken?: string | null,
 };
 
@@ -366,6 +436,75 @@ export type DeletePathFinderPuzzleMutation = {
   } | null,
 };
 
+export type CreateConceptsDataMutationVariables = {
+  input: CreateConceptsDataInput,
+  condition?: ModelConceptsDataConditionInput | null,
+};
+
+export type CreateConceptsDataMutation = {
+  createConceptsData?:  {
+    __typename: "ConceptsData",
+    id: string,
+    pages:  Array< {
+      __typename: "ModulePage",
+      title: string,
+      content:  Array< {
+        __typename: "DivEntry",
+        type: DivType,
+        content: string,
+      } | null >,
+    } | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateConceptsDataMutationVariables = {
+  input: UpdateConceptsDataInput,
+  condition?: ModelConceptsDataConditionInput | null,
+};
+
+export type UpdateConceptsDataMutation = {
+  updateConceptsData?:  {
+    __typename: "ConceptsData",
+    id: string,
+    pages:  Array< {
+      __typename: "ModulePage",
+      title: string,
+      content:  Array< {
+        __typename: "DivEntry",
+        type: DivType,
+        content: string,
+      } | null >,
+    } | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteConceptsDataMutationVariables = {
+  input: DeleteConceptsDataInput,
+  condition?: ModelConceptsDataConditionInput | null,
+};
+
+export type DeleteConceptsDataMutation = {
+  deleteConceptsData?:  {
+    __typename: "ConceptsData",
+    id: string,
+    pages:  Array< {
+      __typename: "ModulePage",
+      title: string,
+      content:  Array< {
+        __typename: "DivEntry",
+        type: DivType,
+        content: string,
+      } | null >,
+    } | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetModuleQueryVariables = {
   id: string,
 };
@@ -476,6 +615,51 @@ export type ListPathFinderPuzzlesQuery = {
   } | null,
 };
 
+export type GetConceptsDataQueryVariables = {
+  id: string,
+};
+
+export type GetConceptsDataQuery = {
+  getConceptsData?:  {
+    __typename: "ConceptsData",
+    id: string,
+    pages:  Array< {
+      __typename: "ModulePage",
+      title: string,
+      content:  Array< {
+        __typename: "DivEntry",
+        type: DivType,
+        content: string,
+      } | null >,
+    } | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListConceptsDataQueryVariables = {
+  filter?: ModelConceptsDataFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListConceptsDataQuery = {
+  listConceptsData?:  {
+    __typename: "ModelConceptsDataConnection",
+    items?:  Array< {
+      __typename: "ConceptsData",
+      id: string,
+      pages:  Array< {
+        __typename: "ModulePage",
+        title: string,
+      } | null >,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateModuleSubscription = {
   onCreateModule?:  {
     __typename: "Module",
@@ -573,6 +757,60 @@ export type OnDeletePathFinderPuzzleSubscription = {
     __typename: "PathFinderPuzzle",
     id: string,
     entries: Array< number | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateConceptsDataSubscription = {
+  onCreateConceptsData?:  {
+    __typename: "ConceptsData",
+    id: string,
+    pages:  Array< {
+      __typename: "ModulePage",
+      title: string,
+      content:  Array< {
+        __typename: "DivEntry",
+        type: DivType,
+        content: string,
+      } | null >,
+    } | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateConceptsDataSubscription = {
+  onUpdateConceptsData?:  {
+    __typename: "ConceptsData",
+    id: string,
+    pages:  Array< {
+      __typename: "ModulePage",
+      title: string,
+      content:  Array< {
+        __typename: "DivEntry",
+        type: DivType,
+        content: string,
+      } | null >,
+    } | null >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteConceptsDataSubscription = {
+  onDeleteConceptsData?:  {
+    __typename: "ConceptsData",
+    id: string,
+    pages:  Array< {
+      __typename: "ModulePage",
+      title: string,
+      content:  Array< {
+        __typename: "DivEntry",
+        type: DivType,
+        content: string,
+      } | null >,
+    } | null >,
     createdAt: string,
     updatedAt: string,
   } | null,

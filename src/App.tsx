@@ -11,7 +11,6 @@ import {ModulesList} from './modules/ModulesList';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports'
 import {AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react'
-import Helmet from 'react-helmet';
 
 Amplify.configure(awsconfig);
 
