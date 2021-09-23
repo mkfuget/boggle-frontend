@@ -13,7 +13,12 @@
     },
     "categories": {
       "auth": {
-        "accamplifyb7e549fe": {}
+        "accamplifyb7e549fe": {
+          "facebookAppId": "186530103484785",
+          "googleClientId": "1022486410614-qgsbsse5j4juki2t3jb977druvg97vsa.apps.googleusercontent.com",
+          "amazonAppId": "amzn1.application-oa2-client.caf206c1b9654047b3230f2f38658a98",
+          "appleAppId": "cancel"
+        }
       }
     }
   }

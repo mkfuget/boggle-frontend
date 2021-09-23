@@ -5,26 +5,62 @@ import {getToggle} from './concepts.slice'
 import './ConceptsSideBar.css'
 import { API, graphqlOperation } from 'aws-amplify'
 import { getConceptsData } from '../../graphql/queries'
+import { useParams } from 'react-router-dom'
 interface DivContent {
   type: ("paragraph" | "image" | "gif");
   content: string;
 }
 
+interface PageData {
+  title: string;
+  content: DivContent[];
+}
+
+interface ConceptsData {
+  data: PageData[]
+}
+
 const ConceptsSideBar = () => {
   const sidebarToggle = useSelector(getToggle);
   const [currentPage, setCurrentPage] = useState(0);
-  const [currentPageContent, setCurrentPageContent] = useState([]);
-  const [pagesData, setPagesData] = React.useState([])
-  const [currentPageTitle, setCurrentPageTitle] = React.useState("");
+  const [currentPageContent, setCurrentPageContent] = useState<DivContent>();
+  const moduleName = useParams();
+  const [pagesData, setPagesData] = React.useState<ConceptsData>({
+    data: [{
+      title: "",
+      content: [{
+        type: "paragraph",
+        content: "",
+      }],
+    }]
+  })
+  const [maxPages, setMaxPages] = useState(0);
+
+
   React.useEffect(() => {
     fetchConceptsData();
   }, [])
+
+  const pageUp = () => {
+    const maxPages = pagesData.data.length;
+    if(currentPage < maxPages - 1)
+    {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  const pageDown = () => {
+    if(currentPage > 0)
+    {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
   const fetchConceptsData = async () => {
     try {
-        const conceptsData: any = await API.graphql(graphqlOperation(getConceptsData, { id: "PathFinderConcepts"}));
-        setPagesData(conceptsData.data);
-        setCurrentPageTitle(conceptsData.data.getConceptsData.pages[0].title);
-        setCurrentPageContent(conceptsData.data.getConceptsData.pages[0].content);
+        const conceptsData: any = await API.graphql(graphqlOperation(getConceptsData, { id: moduleName + "Concepts"}));
+        console.log(conceptsData.data.getConceptsData.pages);
+        setPagesData({data: conceptsData.data.getConceptsData.pages});
     } catch (error) {
         console.log(error);
     };
@@ -36,12 +72,25 @@ const ConceptsSideBar = () => {
         width: sidebarToggle ? "360px" : "0px"
     }}
     >
-    <h2 className = "pagetitle">{currentPageTitle}</h2>
-    {currentPageContent.map((row:DivContent) => {
+    <h2 className = "pagetitle">{pagesData.data[currentPage].title}</h2>
+    {pagesData.data[currentPage].content.map((row:DivContent) => {
       return (
         <p>{row.content}</p>
       )
     })}
+    <div className = "footer">
+      <button 
+        className = "last pagebutton"
+        onClick = {pageDown}
+        >-
+        </button>
+        {currentPage + 1}/{pagesData.data.length}
+        <button 
+          className = "next pagebutton"
+          onClick = {pageUp}
+        >+
+        </button>
+    </div>
   </motion.div>
   )
 }

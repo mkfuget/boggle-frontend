@@ -9,7 +9,7 @@
   border-right: solid 1px #3c4245;
   background-color: rgb(39, 43, 48);
   box-shadow: -4px -1px 4px rgba(9, 10, 10, 0.3);
-
+  color: white;
 }
 
 #conceptssidebar h2 {
@@ -25,4 +25,27 @@
   text-align: left;
   margin-left: 18px;
   margin-right: 12px;
+}
+
+.footer {
+  border-top: 2px solid white;
+  position: absolute;
+  text-align: center;
+  bottom: 32px;
+  font-size: 32px;
+  margin-top: 32px;
+  width: 100%;
+
+}
+
+.pagebutton {
+  margin-left: 36px;
+  margin-right: 36px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: white;
 }

@@ -26,7 +26,7 @@ function App() {
                 <Route exact path = "/"></Route>
                 <Route path = "/signup" component = {SignUp}></Route>
                 <Route exact path = "/modules" component = {ModulesList}></Route>
-                <Route path = "/modules" component = {Module}></Route>
+                <Route path = "/modules/:moduleName" component = {Module}></Route>
               </Switch>
             </Router>
           </div>
