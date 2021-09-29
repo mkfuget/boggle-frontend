@@ -50,7 +50,32 @@ export const PathFinderSideBar = () => {
     }
 
     const handleNewPuzzle = (e: React.FormEvent) => {
-    
+        let out = "{\n";
+        out += '  "id": {\n';
+        out += '    "S":\n';    
+        out += '  },\n';
+        out += '  "createdAt": {\n';
+        out += `    "S":"${new Date().toISOString()}"\n`;    
+        out += '  },\n';
+        out += '  "updatedAt": {\n';
+        out += `    "S":"${new Date().toISOString()}"\n`;    
+        out += '  },\n';
+
+        out += '  "entries" : {\n';
+        out += '    "L": [\n';
+        for(let i=0; i<boarddata.length; i++)
+        {
+            for(let j=0; j<boarddata[i].length; j++)
+            {
+                out += '      {\n';
+                out += `        "S": "${boarddata[i][j]}"\n`;
+                out += '      },\n';    
+            }
+        }    
+        out+='    ]\n';
+        out+='  }\n';
+        out+='}\n'
+        console.log(out);
     }
 
     const handleWordReset = (e: React.FormEvent) => {
@@ -80,7 +105,7 @@ export const PathFinderSideBar = () => {
                 variant="outline-primary" 
                 onClick = {handleNewPuzzle}
                 className = "pathfinder module sidebarbutton"
-            >New Puzzle
+            >Export
             </Button>
             <Button 
                 variant="outline-primary" 

@@ -19,12 +19,15 @@ interface PageData {
 interface ConceptsData {
   data: PageData[]
 }
-
+type moduleName = {
+  moduleName: string
+}
 const ConceptsSideBar = () => {
   const sidebarToggle = useSelector(getToggle);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentPageContent, setCurrentPageContent] = useState<DivContent>();
-  const moduleName = useParams();
+  const { moduleName } = useParams<moduleName>();
+  console.log(moduleName)
   const [pagesData, setPagesData] = React.useState<ConceptsData>({
     data: [{
       title: "",
@@ -58,7 +61,8 @@ const ConceptsSideBar = () => {
 
   const fetchConceptsData = async () => {
     try {
-        const conceptsData: any = await API.graphql(graphqlOperation(getConceptsData, { id: moduleName + "Concepts"}));
+      console.log(moduleName)
+        const conceptsData: any = await API.graphql(graphqlOperation(getConceptsData, { id: (moduleName +  "Concepts")}));
         console.log(conceptsData.data.getConceptsData.pages);
         setPagesData({data: conceptsData.data.getConceptsData.pages});
     } catch (error) {

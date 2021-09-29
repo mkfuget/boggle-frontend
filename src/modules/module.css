@@ -7,13 +7,22 @@
     float:left;
 
 }
+
+#modulelist {
+    float:left;
+
+}
+
+.moduleentry.card:last-child {
+    margin-bottom: 240px;
+}
 .cardtitle {
     margin-bottom: 40px;
     font-size: 32px;
 }
 
 .pagetile{
-    font-family: times, Times New Roman, times-roman, georgia, serif;
+	font-family: 'Titillium Web', sans-serif;
 	color: rgb(0, 0, 0);
 	margin: 0;
 	font-size: 56px;
@@ -60,9 +69,8 @@
 }
 .moduleentry.card {
     margin: auto;
-    width: 70%;
+    width: 80%;
     margin-bottom: 4px;
-    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5);
     background-color: rgb(255, 255, 255);
     border-radius: 1px;
     border-left: none;
