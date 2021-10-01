@@ -30,7 +30,6 @@ export const PathFinderCell = (({xIndex, yIndex, color, type}: CellProps) => {
       
     return (
         <div className = "pathfinder cell">
-            <img src = {typeToImage(type)}alt = "background" className = "pathfindercellbackground"></img>
             <motion.div 
                 className = "pathfinder cell"
                 animate ={{
@@ -40,6 +39,7 @@ export const PathFinderCell = (({xIndex, yIndex, color, type}: CellProps) => {
                 initial = {false}
             >
             </motion.div>
+            <img src = {typeToImage(type)}alt = "background" className = "pathfindercellbackground"></img>
 
         </div>
     )

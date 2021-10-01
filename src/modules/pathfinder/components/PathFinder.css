@@ -33,11 +33,6 @@
     grid-template-rows: repeat(10, 36px);  
 }
   
-#bogglepuzzle{
-    float: left;
-
-}
-
 .pathfindercursor{
     position: absolute;
     grid-template-columns: repeat(2, 10px);

@@ -46,6 +46,11 @@ class Board {
             for(let j=0; j<width; j++)
             {
                 currentBoard.boardCells[i][j] = cells.Cell.stringToCell(entries[i][j], j, i);
+                if(entries[i][j] === "S")
+                {
+                    currentBoard.startXIndex = j;
+                    currentBoard.startYIndex = i;
+                }
             }
         }
         return currentBoard;

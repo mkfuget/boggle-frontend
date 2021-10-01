@@ -9,16 +9,16 @@ import { getPathFinderBoard, BOARD_HEIGHT, BOARD_WIDTH, addBoard, updateCursor }
 import Board from '../functional/board/board';
 import Cursor from '../functional/board/cursor';
 const TEST_BOARD = [
-    ["I", "E", "E", "E", "E", "y", "r", "E", "E", "E"], 
-    ["I", "E", "I", "E", "E", "g", "r", "E", "E", "E"], 
-    ["S", "E", "E", "E", "E", "b", "r", "E", "E", "E"], 
-    ["E", "E", "E", "E", "E", "r", "r", "E", "E", "E"], 
-    ["E", "E", "E", "E", "E", "E", "r", "E", "F", "E"], 
+    ["R", "E", "E", "E", "E", "E", "r", "E", "E", "B"], 
+    ["W", "W", "W", "E", "W", "E", "r", "E", "E", "E"], 
+    ["S", "E", "W", "E", "W", "E", "r", "E", "E", "E"], 
+    ["E", "E", "E", "E", "W", "E", "r", "b", "b", "b"], 
     ["E", "E", "E", "E", "E", "E", "r", "E", "E", "E"], 
-    ["I", "E", "E", "E", "E", "E", "r", "E", "E", "E"], 
-    ["I", "E", "E", "E", "E", "E", "r", "E", "E", "E"], 
-    ["W", "E", "E", "E", "E", "E", "r", "E", "E", "E"], 
-    ["W", "R", "E", "E", "E", "E", "r", "E", "E", "E"], 
+    ["W", "W", "W", "W", "E", "E", "r", "E", "F", "E"], 
+    ["E", "E", "E", "E", "E", "E", "r", "E", "E", "E"], 
+    ["E", "W", "W", "E", "E", "E", "r", "E", "E", "E"], 
+    ["E", "E", "W", "E", "E", "E", "r", "E", "E", "E"], 
+    ["E", "R", "W", "E", "E", "E", "r", "E", "E", "E"], 
 
 ]
 type BoardProps = {
