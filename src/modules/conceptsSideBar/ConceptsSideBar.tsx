@@ -6,6 +6,7 @@ import './ConceptsSideBar.css'
 import { API, graphqlOperation } from 'aws-amplify'
 import { getConceptsData } from '../../graphql/queries'
 import { useParams } from 'react-router-dom'
+import Interweave from 'interweave';
 interface DivContent {
   type: ("paragraph" | "image" | "gif");
   content: string;
@@ -79,7 +80,7 @@ const ConceptsSideBar = () => {
     <h2 className = "pagetitle">{pagesData.data[currentPage].title}</h2>
     {pagesData.data[currentPage].content.map((row:DivContent) => {
       return (
-        <p>{row.content}</p>
+        <p><Interweave content={row.content}/></p>
       )
     })}
     <div className = "footer">

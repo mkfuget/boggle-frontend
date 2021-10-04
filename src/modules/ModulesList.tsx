@@ -13,7 +13,9 @@ interface ModuleEntryProps {
 
 const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEntryProps) => {
     const [icon, setIcon] = useState("");
-    console.log(pictureLocation);
+    const [photoLoaded, setPhotoLoaded] = useState(false);
+
+
     const fetchModulePhoto = async () => {
         try {
             const photoData = await Storage.get(pictureLocation, {
@@ -23,6 +25,7 @@ const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEnt
             });
             //@ts-ignore
             setIcon(photoData);
+            setPhotoLoaded(true);
         } catch (error) {
             console.log(error);
         }
@@ -36,10 +39,10 @@ const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEnt
         
         <a className = "moduleentry card" href = {`/modules${link}`}>
             <div className = "icon">
-                <img
+                {photoLoaded ? <img
                     src = {icon} 
                     alt = "icon">
-                </img>
+                </img> : ""}
             </div>
             <h2 className = "cardtitle">{title}</h2>
             <div className = "content">
@@ -54,7 +57,7 @@ const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEnt
 export const ModulesList = () => {
 
     const [modules, setModules] = useState([]); 
-
+    const [loaded, setLoaded] = useState(false);
     useEffect(() => {
         fetchModules();
     }, [])
@@ -64,33 +67,37 @@ export const ModulesList = () => {
             const moduleData = await API.graphql(graphqlOperation(listModules));
             //@ts-ignore
             const moduleList = moduleData.data.listModules.items;
-            console.log(moduleList);
+            setLoaded(true);
             setModules(moduleList);
             
         } catch (error) {
             console.log(error);
         }
     } 
-
-    return (
-        <div id = "modulelist">
-            <h2 className = "pagetile">Explore Coding Modules</h2>
-            {modules.map((element:ModuleEntryProps, index:number) => 
-                {
-                    return (
-                        <ModuleEntry
-                            key = {`module${index}`}
-                            title = {element.title}
-                            description = {element.description}
-                            link = {element.link}
-                            pictureLocation = {element.pictureLocation}
-                            tags = {element.tags}
-                        />
-                    )
-                })
-            }
-        </div>
-    )
+    if(loaded)
+    {
+        return (
+            <div id = "modulelist">
+                <h2 className = "pagetile">Explore Coding Modules</h2>
+                {modules.map((element:ModuleEntryProps, index:number) => 
+                    {
+                        return (
+                            <ModuleEntry
+                                key = {`module${index}`}
+                                title = {element.title}
+                                description = {element.description}
+                                link = {element.link}
+                                pictureLocation = {element.pictureLocation}
+                                tags = {element.tags}
+                            />
+                        )
+                    })
+                }
+            </div>
+            
+        )
+    }
+    return (<div></div>)
 
 }
 
