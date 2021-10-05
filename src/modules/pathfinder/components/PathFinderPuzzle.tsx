@@ -1,13 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {PathFinderBoard} from './PathFinderBoard'
 import { PathFinderSideBar } from './PathFinderSideBar';
 import {useSelector, useDispatch} from 'react-redux'
 import { useAppSelector, useAppDispatch } from '../../../hooks'
 
 import './PathFinder.css'
-import { getPathFinderBoard, BOARD_HEIGHT, BOARD_WIDTH, addBoard, updateCursor } from '../reducers/pathfinder.slice';
+import { getPathFinderBoard, BOARD_HEIGHT, BOARD_WIDTH, addBoard, updateCursor, getPuzzle } from '../reducers/pathfinder.slice';
 import Board from '../functional/board/board';
 import Cursor from '../functional/board/cursor';
+import { API, graphqlOperation } from 'aws-amplify';
+import { getPathFinderPuzzle, listPathFinderPuzzles } from '../../../graphql/queries';
 const TEST_BOARD = [
     ["E", "E", "W", "E", "E", "E", "W", "E", "W", "S"], 
     ["W", "E", "E", "E", "E", "E", "W", "E", "W", "E"], 
@@ -30,15 +32,9 @@ const NUM_PUZZLES = 5;
   
 export const PathFinderPuzzle = () => {
     const dispatch = useDispatch();
-    const board = Board.initializeBoard(BOARD_WIDTH, BOARD_HEIGHT, TEST_BOARD);
-    const cursor = new Cursor(board);
-    
-    dispatch(addBoard(TEST_BOARD));
-    dispatch(updateCursor({
-        xIndex: cursor.xIndex,
-        yIndex: cursor.yIndex,
-        bitMask: cursor.bitMask,
-    }))
+    useEffect(() => {
+        dispatch(getPuzzle(1));
+    }, [])
 
     return (
         <div className = "module" id = "pathfinder">

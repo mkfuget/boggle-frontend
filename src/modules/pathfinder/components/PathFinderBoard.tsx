@@ -28,7 +28,6 @@ export const PathFinderBoard = () => {
             if(keyCode === "KeyW" || keyCode === "ArrowUp")
             {
                 cursor.move(0, -1);
-                console.log("Press W");
             }
             if(keyCode === "KeyA" || keyCode === "ArrowLeft")
             {

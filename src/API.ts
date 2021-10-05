@@ -130,11 +130,11 @@ export type DeleteSudokuPuzzleInput = {
 
 export type CreatePathFinderPuzzleInput = {
   id?: string | null,
-  entries: Array< number | null >,
+  entries: Array< string | null >,
 };
 
 export type ModelPathFinderPuzzleConditionInput = {
-  entries?: ModelIntInput | null,
+  entries?: ModelStringInput | null,
   and?: Array< ModelPathFinderPuzzleConditionInput | null > | null,
   or?: Array< ModelPathFinderPuzzleConditionInput | null > | null,
   not?: ModelPathFinderPuzzleConditionInput | null,
@@ -143,14 +143,14 @@ export type ModelPathFinderPuzzleConditionInput = {
 export type PathFinderPuzzle = {
   __typename: "PathFinderPuzzle",
   id: string,
-  entries: Array< number | null >,
+  entries: Array< string | null >,
   createdAt: string,
   updatedAt: string,
 };
 
 export type UpdatePathFinderPuzzleInput = {
   id: string,
-  entries?: Array< number | null > | null,
+  entries?: Array< string | null > | null,
 };
 
 export type DeletePathFinderPuzzleInput = {
@@ -264,7 +264,7 @@ export type ModelSudokuPuzzleConnection = {
 
 export type ModelPathFinderPuzzleFilterInput = {
   id?: ModelIDInput | null,
-  entries?: ModelIntInput | null,
+  entries?: ModelStringInput | null,
   and?: Array< ModelPathFinderPuzzleFilterInput | null > | null,
   or?: Array< ModelPathFinderPuzzleFilterInput | null > | null,
   not?: ModelPathFinderPuzzleFilterInput | null,
@@ -400,7 +400,7 @@ export type CreatePathFinderPuzzleMutation = {
   createPathFinderPuzzle?:  {
     __typename: "PathFinderPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< string | null >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -415,7 +415,7 @@ export type UpdatePathFinderPuzzleMutation = {
   updatePathFinderPuzzle?:  {
     __typename: "PathFinderPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< string | null >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -430,7 +430,7 @@ export type DeletePathFinderPuzzleMutation = {
   deletePathFinderPuzzle?:  {
     __typename: "PathFinderPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< string | null >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -589,7 +589,7 @@ export type GetPathFinderPuzzleQuery = {
   getPathFinderPuzzle?:  {
     __typename: "PathFinderPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< string | null >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -607,7 +607,7 @@ export type ListPathFinderPuzzlesQuery = {
     items?:  Array< {
       __typename: "PathFinderPuzzle",
       id: string,
-      entries: Array< number | null >,
+      entries: Array< string | null >,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -736,7 +736,7 @@ export type OnCreatePathFinderPuzzleSubscription = {
   onCreatePathFinderPuzzle?:  {
     __typename: "PathFinderPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< string | null >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -746,7 +746,7 @@ export type OnUpdatePathFinderPuzzleSubscription = {
   onUpdatePathFinderPuzzle?:  {
     __typename: "PathFinderPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< string | null >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -756,7 +756,7 @@ export type OnDeletePathFinderPuzzleSubscription = {
   onDeletePathFinderPuzzle?:  {
     __typename: "PathFinderPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< string | null >,
     createdAt: string,
     updatedAt: string,
   } | null,

@@ -14,7 +14,7 @@ type SudokuPuzzle @model {
 
 type PathFinderPuzzle @model {
   id: ID!
-  entries: [Int]!
+  entries: [String]!
 }
 
 type ConceptsData @model{

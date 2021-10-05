@@ -28,7 +28,6 @@ const ConceptsSideBar = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [currentPageContent, setCurrentPageContent] = useState<DivContent>();
   const { moduleName } = useParams<moduleName>();
-  console.log(moduleName)
   const [pagesData, setPagesData] = React.useState<ConceptsData>({
     data: [{
       title: "",
@@ -62,9 +61,7 @@ const ConceptsSideBar = () => {
 
   const fetchConceptsData = async () => {
     try {
-      console.log(moduleName)
         const conceptsData: any = await API.graphql(graphqlOperation(getConceptsData, { id: (moduleName +  "Concepts")}));
-        console.log(conceptsData.data.getConceptsData.pages);
         setPagesData({data: conceptsData.data.getConceptsData.pages});
     } catch (error) {
         console.log(error);
