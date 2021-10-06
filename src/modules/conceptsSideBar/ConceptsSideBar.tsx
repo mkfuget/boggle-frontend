@@ -4,9 +4,10 @@ import {useSelector} from 'react-redux'
 import {getToggle} from './concepts.slice'
 import './ConceptsSideBar.css'
 import { API, graphqlOperation } from 'aws-amplify'
-import { getConceptsData } from '../../graphql/queries'
+import { getConceptsData, listConceptsData } from '../../graphql/queries'
 import { useParams } from 'react-router-dom'
 import Interweave from 'interweave';
+import { GetConceptsDataQuery } from '../../API'
 interface DivContent {
   type: ("paragraph" | "image" | "gif");
   content: string;
@@ -61,7 +62,12 @@ const ConceptsSideBar = () => {
 
   const fetchConceptsData = async () => {
     try {
-        const conceptsData: any = await API.graphql(graphqlOperation(getConceptsData, { id: (moduleName +  "Concepts")}));
+        const conceptsData: any = await (API.graphql({
+          query: getConceptsData,
+          variables: {id: `${moduleName}Concepts`},
+          authMode: "AWS_IAM",
+        })) 
+        console.log(conceptsData);
         setPagesData({data: conceptsData.data.getConceptsData.pages});
     } catch (error) {
         console.log(error);

@@ -33,9 +33,13 @@ const MAX_PUZZLES = 5;
 export const getPuzzle = createAsyncThunk(
     '/pathfinder/getPuzzle',
     async (arg, { getState }) => {
-      const state:any = getState(); // <-- invoke and access state object
+      const state:any = getState();
 
-      const response:any = await API.graphql(graphqlOperation(getPathFinderPuzzle, { id: ("PathFinderPuzzle" + state.pathfinder.currentPuzzle)}));
+      const response:any = await API.graphql({
+          query: getPathFinderPuzzle,
+          variables: { id: ("PathFinderPuzzle" + state.pathfinder.currentPuzzle)},
+          authMode: "AWS_IAM"
+      });
       return response;
     }
   )
@@ -83,14 +87,13 @@ const pathFinderSlice = createSlice({
         builder.addCase(getPuzzle.pending, (state, action) => {
             state.loading = "pending";
             state.currentPuzzle++;
-            if(state.currentPuzzle > 5)
+            if(state.currentPuzzle > MAX_PUZZLES)
             {
                 state.currentPuzzle = 1;
             }
         });
         builder.addCase(getPuzzle.fulfilled, (state, {payload}) => {
             const boarddata = new Array(BOARD_HEIGHT).fill("E").map((row: string[]) => Array(BOARD_WIDTH).fill("E"));
-            console.log(payload);
             for(let i=0; i<BOARD_HEIGHT; i++)
             {
                 for(let j=0; j<BOARD_WIDTH; j++)
