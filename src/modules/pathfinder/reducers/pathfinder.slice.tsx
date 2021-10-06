@@ -32,8 +32,10 @@ const board: Board = Board.initializeBoard(BOARD_HEIGHT, BOARD_WIDTH, new Array(
 const MAX_PUZZLES = 5;
 export const getPuzzle = createAsyncThunk(
     '/pathfinder/getPuzzle',
-    async (puzzleNumber) => {
-      const response:any = await API.graphql(graphqlOperation(getPathFinderPuzzle, { id: ("PathFinderPuzzle")}));
+    async (arg, { getState }) => {
+      const state:any = getState(); // <-- invoke and access state object
+
+      const response:any = await API.graphql(graphqlOperation(getPathFinderPuzzle, { id: ("PathFinderPuzzle" + state.pathfinder.currentPuzzle)}));
       return response;
     }
   )
@@ -56,21 +58,6 @@ const pathFinderSlice = createSlice({
     name: 'pathfinder',
     initialState,
     reducers: {
-        puzzleLoading(state, action) {
-            if(state.loading === "idle")
-            {
-                state.loading = "pending";
-            }
-        },
-        puzzleReceived(state, action) {
-            if(state.loading === "pending")
-            {
-                state.loading = "idle";
-                state.board = action.payload;
-
-            }
-        },
-
         updateCursor: (state, action: PayloadAction<cursorData>)=>{
             state.cursor  = action.payload;
         },
@@ -79,6 +66,17 @@ const pathFinderSlice = createSlice({
         },
         lightCell: (state, action: PayloadAction<lightCellData>)=>{
             state.boardColors[action.payload.xIndex][action.payload.yIndex] = action.payload.color;
+        },
+        resetCursor: (state)=>{
+            const board = Board.initializeBoard(BOARD_WIDTH, BOARD_HEIGHT, state.board);
+            const cursor = new Cursor(board);
+            state.cursor = {
+                xIndex: cursor.xIndex,
+                yIndex: cursor.yIndex,
+                bitMask: cursor.bitMask,
+            }
+            state.boardColors = new Array(BOARD_WIDTH).fill("white").map((row: string[]) => Array(BOARD_WIDTH).fill("white"));
+
         }
     },
     extraReducers: (builder) =>{
@@ -102,13 +100,13 @@ const pathFinderSlice = createSlice({
             }
             const board = Board.initializeBoard(BOARD_WIDTH, BOARD_HEIGHT, boarddata);
             const cursor = new Cursor(board);
-
             state.board = boarddata;
             state.cursor = {
                 xIndex: cursor.xIndex,
                 yIndex: cursor.yIndex,
                 bitMask: cursor.bitMask,
             }
+            state.boardColors = new Array(BOARD_WIDTH).fill("white").map((row: string[]) => Array(BOARD_WIDTH).fill("white"));
             state.loading = "idle";
         });
         builder.addCase(getPuzzle.rejected, (state, {payload}) => {
@@ -120,7 +118,7 @@ const pathFinderSlice = createSlice({
 
 })
 
-export const {puzzleLoading, puzzleReceived, updateCursor, addBoard, lightCell} = pathFinderSlice.actions;
+export const {updateCursor, addBoard, lightCell, resetCursor} = pathFinderSlice.actions;
 
   
 

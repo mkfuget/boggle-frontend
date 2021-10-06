@@ -64,7 +64,10 @@ export const ModulesList = () => {
 
     const fetchModules = async () => {
         try {
-            const moduleData = await API.graphql(graphqlOperation(listModules));
+            const moduleData = await API.graphql({
+                query: listModules,
+                authMode: 'AWS_IAM'
+            });
             //@ts-ignore
             const moduleList = moduleData.data.listModules.items;
             setLoaded(true);

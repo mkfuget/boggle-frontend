@@ -27,13 +27,11 @@ type BoardProps = {
     board: string[][];
     dictionary: string[];
 }
-
-const NUM_PUZZLES = 5;
   
 export const PathFinderPuzzle = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getPuzzle(1));
+        dispatch(getPuzzle());
     }, [])
 
     return (

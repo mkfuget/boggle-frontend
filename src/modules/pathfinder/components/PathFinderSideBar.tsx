@@ -6,9 +6,10 @@ import {toggle} from '../../conceptsSideBar/concepts.slice'
 import {useSelector} from 'react-redux'
 
 import {Button} from 'react-bootstrap'
-import { BOARD_HEIGHT, BOARD_WIDTH, getPathFinderBoard, getPathFinderCursor, lightCell } from '../reducers/pathfinder.slice'
+import { BOARD_HEIGHT, BOARD_WIDTH, getPathFinderBoard, getPathFinderCursor, getPuzzle, lightCell, resetCursor } from '../reducers/pathfinder.slice'
 import Board from '../functional/board/board'
 import Cursor from '../functional/board/cursor'
+import { clear } from 'console'
 
 
 
@@ -27,7 +28,6 @@ export const PathFinderSideBar = () => {
     
     const handlePuzzleSolve = (e: React.FormEvent) => {
         const solution = board.dijsktra(cursor);
-        console.log(solution);
         let i=0;
         let finalPath = false;
         let timer = setInterval(function(){
@@ -41,15 +41,28 @@ export const PathFinderSideBar = () => {
             if(i === solution.searchPath.length )
             {
                 clearInterval(timer);
-                finalPath = true;
-                i=0;
+                let j=0;
+                let timerFinish = setInterval(function(){
+                    const currentEntry = solution.foundPath[j];
+                    dispatch(lightCell({
+                        xIndex: currentEntry.xIndex,
+                        yIndex: currentEntry.yIndex,
+                        color: Cursor.keysUnlockedColor(currentEntry.bitMask),
+                    }));
+                    j++;
+                    if(j===solution.foundPath.length)
+                    {
+                        clearInterval(timerFinish);
+                    }
+                }, 200);
             }
-
         }, 60);
         
     }
-
     const handleNewPuzzle = (e: React.FormEvent) => {
+        dispatch(getPuzzle());
+    }
+    const handleExport = (e: React.FormEvent) => {
         let out = "{\n";
         out += '  "id": {\n';
         out += '    "S":\n';    
@@ -78,8 +91,8 @@ export const PathFinderSideBar = () => {
         console.log(out);
     }
 
-    const handleWordReset = (e: React.FormEvent) => {
-
+    const handlePuzzleReset = (e: React.FormEvent) => {
+        dispatch(resetCursor());
     }
 
     const handleConceptsSidebarToggle = (e: React.FormEvent) => {
@@ -105,13 +118,13 @@ export const PathFinderSideBar = () => {
                 variant="outline-primary" 
                 onClick = {handleNewPuzzle}
                 className = "pathfinder module sidebarbutton"
-            >Export
+            >New Puzzle
             </Button>
             <Button 
                 variant="outline-primary" 
-                onClick = {handleWordReset}
+                onClick = {handlePuzzleReset}
                 className = "pathfinder module sidebarbutton"
-            >Reset Word
+            >Reset Puzzle
             </Button>
             <Button 
                 variant="outline-primary" 
