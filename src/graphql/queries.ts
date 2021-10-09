@@ -37,6 +37,80 @@ export const listModules = /* GraphQL */ `
     }
   }
 `;
+export const getLesson = /* GraphQL */ `
+  query GetLesson($id: ID!) {
+    getLesson(id: $id) {
+      id
+      title
+      content {
+        type
+        content
+      }
+      code
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLessons = /* GraphQL */ `
+  query ListLessons(
+    $filter: ModelLessonFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLessons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        content {
+          type
+          content
+        }
+        code
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getQuiz = /* GraphQL */ `
+  query GetQuiz($id: ID!) {
+    getQuiz(id: $id) {
+      id
+      title
+      questions {
+        question
+        options {
+          description
+          isAnswer
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listQuizzes = /* GraphQL */ `
+  query ListQuizzes(
+    $filter: ModelQuizFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listQuizzes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        title
+        questions {
+          question
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getSudokuPuzzle = /* GraphQL */ `
   query GetSudokuPuzzle($id: ID!) {
     getSudokuPuzzle(id: $id) {

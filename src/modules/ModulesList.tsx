@@ -44,7 +44,7 @@ const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEnt
                     alt = "icon">
                 </img> : ""}
             </div>
-            <h2 className = "cardtitle">{title}</h2>
+            <h2 className = "title">{title}</h2>
             <div className = "content">
                 <p>{description}</p>
                 <span className = "tags">Tags: {tags !== null ? tags.join(", ") : ""}</span>

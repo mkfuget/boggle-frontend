@@ -53,6 +53,120 @@ export const deleteModule = /* GraphQL */ `
     }
   }
 `;
+export const createLesson = /* GraphQL */ `
+  mutation CreateLesson(
+    $input: CreateLessonInput!
+    $condition: ModelLessonConditionInput
+  ) {
+    createLesson(input: $input, condition: $condition) {
+      id
+      title
+      content {
+        type
+        content
+      }
+      code
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLesson = /* GraphQL */ `
+  mutation UpdateLesson(
+    $input: UpdateLessonInput!
+    $condition: ModelLessonConditionInput
+  ) {
+    updateLesson(input: $input, condition: $condition) {
+      id
+      title
+      content {
+        type
+        content
+      }
+      code
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLesson = /* GraphQL */ `
+  mutation DeleteLesson(
+    $input: DeleteLessonInput!
+    $condition: ModelLessonConditionInput
+  ) {
+    deleteLesson(input: $input, condition: $condition) {
+      id
+      title
+      content {
+        type
+        content
+      }
+      code
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createQuiz = /* GraphQL */ `
+  mutation CreateQuiz(
+    $input: CreateQuizInput!
+    $condition: ModelQuizConditionInput
+  ) {
+    createQuiz(input: $input, condition: $condition) {
+      id
+      title
+      questions {
+        question
+        options {
+          description
+          isAnswer
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateQuiz = /* GraphQL */ `
+  mutation UpdateQuiz(
+    $input: UpdateQuizInput!
+    $condition: ModelQuizConditionInput
+  ) {
+    updateQuiz(input: $input, condition: $condition) {
+      id
+      title
+      questions {
+        question
+        options {
+          description
+          isAnswer
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteQuiz = /* GraphQL */ `
+  mutation DeleteQuiz(
+    $input: DeleteQuizInput!
+    $condition: ModelQuizConditionInput
+  ) {
+    deleteQuiz(input: $input, condition: $condition) {
+      id
+      title
+      questions {
+        question
+        options {
+          description
+          isAnswer
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createSudokuPuzzle = /* GraphQL */ `
   mutation CreateSudokuPuzzle(
     $input: CreateSudokuPuzzleInput!

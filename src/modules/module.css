@@ -14,13 +14,6 @@
     float:left;
 
 }
-.moduleentry.card:last-child {
-    margin-bottom: 240px;
-}
-.cardtitle {
-    margin-bottom: 40px;
-    font-size: 32px;
-}
 
 .pagetile{
 	font-family: 'Titillium Web', sans-serif;

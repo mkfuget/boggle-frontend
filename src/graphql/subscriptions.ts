@@ -44,6 +44,102 @@ export const onDeleteModule = /* GraphQL */ `
     }
   }
 `;
+export const onCreateLesson = /* GraphQL */ `
+  subscription OnCreateLesson {
+    onCreateLesson {
+      id
+      title
+      content {
+        type
+        content
+      }
+      code
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLesson = /* GraphQL */ `
+  subscription OnUpdateLesson {
+    onUpdateLesson {
+      id
+      title
+      content {
+        type
+        content
+      }
+      code
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLesson = /* GraphQL */ `
+  subscription OnDeleteLesson {
+    onDeleteLesson {
+      id
+      title
+      content {
+        type
+        content
+      }
+      code
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateQuiz = /* GraphQL */ `
+  subscription OnCreateQuiz {
+    onCreateQuiz {
+      id
+      title
+      questions {
+        question
+        options {
+          description
+          isAnswer
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateQuiz = /* GraphQL */ `
+  subscription OnUpdateQuiz {
+    onUpdateQuiz {
+      id
+      title
+      questions {
+        question
+        options {
+          description
+          isAnswer
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteQuiz = /* GraphQL */ `
+  subscription OnDeleteQuiz {
+    onDeleteQuiz {
+      id
+      title
+      questions {
+        question
+        options {
+          description
+          isAnswer
+        }
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateSudokuPuzzle = /* GraphQL */ `
   subscription OnCreateSudokuPuzzle {
     onCreateSudokuPuzzle {

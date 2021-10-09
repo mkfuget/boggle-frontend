@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './cards.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
 import {Module} from './modules/Module'
