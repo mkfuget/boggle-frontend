@@ -7,6 +7,28 @@ type Module @model {
   tags: [String]
 }
 
+type Lesson @model{
+  title: String!
+  content: [divEntry]!
+  code: [String]
+}
+
+type Quiz @model{
+  title: String!
+  questions: [quizQuestion]!
+}
+
+type quizQuestion {
+  question: String!
+  options: [quizOption]!
+}
+
+type quizOption {
+  description: String!
+  isAnswer: boolean!
+}
+
+
 type SudokuPuzzle @model {
   id: ID!
   entries: [Int]!
@@ -22,6 +44,8 @@ type ConceptsData @model{
   pages: [ModulePage]!
 
 }
+
+type 
 
 type ModulePage {
   title: String!
