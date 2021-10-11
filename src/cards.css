@@ -4,7 +4,9 @@
     font-size: 32px;
 }
 
-
-.card:last-child {
+.list .card {
+    margin-bottom: 4px;
+}
+.list .card:last-child {
     margin-bottom: 240px;
 }

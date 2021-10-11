@@ -80,7 +80,7 @@ export const ModulesList = () => {
     if(loaded)
     {
         return (
-            <div id = "modulelist">
+            <div className = "module list">
                 <h2 className = "pagetile">Explore Coding Modules</h2>
                 {modules.map((element:ModuleEntryProps, index:number) => 
                     {
