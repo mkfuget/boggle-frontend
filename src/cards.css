@@ -5,7 +5,7 @@
 }
 
 .list .card {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 .list .card:last-child {
     margin-bottom: 240px;
