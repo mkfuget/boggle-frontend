@@ -25,10 +25,10 @@ export const Navbar = () => {
             </li>
             <li id = "companytitle">APPLIED CODING CONCEPTS</li>
             <li><a href="/modules">Modules</a></li>
-            <li><a href="/">Learn</a></li>
-            <li><a href="/quizes">Quizes</a></li>
-            <li><a href="/challenges">Challenges</a></li>
-            <li className = "rightnavbar"><button id = "signoutbutton" onClick = {signOut}>Sign Out</button></li>
+            {/*<li><a href="/">Learn</a></li>*/}
+            {/*<li><a href="/quizes">Quizes</a></li>*/}
+            {/*<li><a href="/challenges">Challenges</a></li>*/}
+            {/*<li className = "rightnavbar"><button id = "signoutbutton" onClick = {signOut}>Sign Out</button></li>*/}
         </ul>
     </div>
 )
