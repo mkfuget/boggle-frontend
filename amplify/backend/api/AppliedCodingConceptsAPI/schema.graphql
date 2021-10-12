@@ -59,4 +59,5 @@ enum DivType {
   paragraph
   image
   gif
+  figure
 }

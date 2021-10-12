@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import { motion } from "framer-motion"
 import {useSelector} from 'react-redux'
 import {getToggle} from './concepts.slice'
@@ -67,7 +67,6 @@ const ConceptsSideBar = () => {
           variables: {id: `${moduleName}Concepts`},
           authMode: "AWS_IAM",
         })) 
-        console.log(conceptsData);
         setPagesData({data: conceptsData.data.getConceptsData.pages});
     } catch (error) {
         console.log(error);

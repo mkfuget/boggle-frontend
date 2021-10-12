@@ -28,6 +28,9 @@ function App() {
                 <Route path = "/signup" component = {SignUp}></Route>
                 <Route exact path = "/modules" component = {ModulesList}></Route>
                 <Route path = "/modules/:moduleName" component = {Module}></Route>
+                <Route exact path = "/lessons" component = {ModulesList}></Route>
+                <Route path = "/lessons/:lessonName" component = {Module}></Route>
+
               </Switch>
             </Router>
           </div>
