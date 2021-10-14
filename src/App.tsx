@@ -12,6 +12,9 @@ import {ModulesList} from './modules/ModulesList';
 import Amplify from 'aws-amplify';
 import awsconfig from './aws-exports'
 import {withAuthenticator } from '@aws-amplify/ui-react'
+import { LessonsList } from './lessons/LessonsList';
+import Lesson from './lessons/Lesson';
+import { LessonParser } from './lessons/LessonParser';
 
 Amplify.configure(awsconfig);
 
@@ -28,8 +31,9 @@ function App() {
                 <Route path = "/signup" component = {SignUp}></Route>
                 <Route exact path = "/modules" component = {ModulesList}></Route>
                 <Route path = "/modules/:moduleName" component = {Module}></Route>
-                <Route exact path = "/lessons" component = {ModulesList}></Route>
-                <Route path = "/lessons/:lessonName" component = {Module}></Route>
+                <Route exact path = "/lessons" component = {LessonsList}></Route>
+                <Route path = "/lessons/:lessonName" component = {Lesson}></Route>
+                <Route path = "/lessonparser" component = {LessonParser}></Route>
 
               </Switch>
             </Router>

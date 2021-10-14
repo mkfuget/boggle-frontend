@@ -77,6 +77,10 @@
     
 }
 
+.moduleentry.card .title {
+    margin-top: 8px;
+
+}
 .moduleentry.card .content {
     display: flex;                 
     flex-direction: column;            

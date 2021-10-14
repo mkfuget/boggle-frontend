@@ -88,7 +88,6 @@ export const PathFinderSideBar = () => {
         out+='    ]\n';
         out+='  }\n';
         out+='}\n'
-        console.log(out);
     }
 
     const handlePuzzleReset = (e: React.FormEvent) => {
@@ -103,10 +102,10 @@ export const PathFinderSideBar = () => {
         
         <div className = "pathfinder modulesidebar">
             <div className = "pathfinder modulesidebartitle">
-                Boggle
+                Path Finder
             </div>
             <div className = "pathfinder modulesidebardescription">
-                Words can be connected up, down, left, right, or diagonally. Re-click on a letter to return the string to that point. See if you can find all the words. 
+                Unlock keys to get through corresponding colored blocks and try to make your way to the finish. 
             </div>
             <Button 
                 variant="outline-primary" 

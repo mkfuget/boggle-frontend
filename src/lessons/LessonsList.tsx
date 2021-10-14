@@ -7,35 +7,34 @@ interface LessonEntryProps {
     title: string
     description: string
     link: string
+    id: string
 }
 
-const LessonEntry = ({title, description, link}:LessonEntryProps) => {
+const LessonEntry = ({title, description, link, id}:LessonEntryProps) => {
     return (
-        <a className = "moduleentry card" href = {`/lessons${link}`}>
-            <h2 className = "cardtitle">{title}</h2>
-            <div className = "content">
-                <p>{description}</p>
-            </div> 
+        <a className = "lessonentry card" href = {`/lessons/${id}`}>
+            <h2 className = "title">{title}</h2>
         </a>
     )
 }
 
-export const ModulesList = () => {
+export const LessonsList = () => {
 
     const [lessons, setLessons] = useState([]); 
     const [loaded, setLoaded] = useState(false);
     useEffect(() => {
-        fetchModules();
+        fetchLessons();
     }, [])
 
-    const fetchModules = async () => {
+    const fetchLessons = async () => {
         try {
             const LessonData = await API.graphql({
                 query: listLessons,
                 authMode: 'AWS_IAM'
             });
+            console.log(LessonData);
             //@ts-ignore
-            const lessonList = LessonData.data.listModules.items;
+            const lessonList = LessonData.data.listLessons.items;
             setLoaded(true);
             setLessons(lessonList);
             
@@ -52,7 +51,8 @@ export const ModulesList = () => {
                     {
                         return (
                             <LessonEntry
-                                key = {`module${index}`}
+                                key = {element.id}
+                                id = {element.id}
                                 title = {element.title}
                                 description = {element.description}
                                 link = {element.link}

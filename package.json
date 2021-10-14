@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
     "framer-motion": "^4.1.17",
+    "fs": "^0.0.1-security",
     "interweave": "^12.8.0",
     "less": "^4.1.1",
     "random-words": "^1.1.1",

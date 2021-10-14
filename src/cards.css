@@ -1,11 +1,28 @@
 
-.card .title {
-    margin-bottom: 40px;
-    font-size: 32px;
+.list .card .title {
+    font-size: 36px;
+    text-decoration: none;
+    color: black;
+}
+.list a.card {
+    text-decoration: none;
+
 }
 
 .list .card {
     margin-bottom: 8px;
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1px;
+    border-left: none;
+    border-right: none;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.list .card:hover {
+    background-color: rgb(206, 206, 206);
+
 }
 .list .card:last-child {
     margin-bottom: 240px;
