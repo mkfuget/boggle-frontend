@@ -1,6 +1,8 @@
 import { GraphQLResult } from '@aws-amplify/api'
 import { graphqlOperation, API, Storage} from 'aws-amplify'
+import { TAGS } from 'interweave'
 import React, { useEffect, useState } from 'react'
+import { ListModulesQuery } from '../API'
 import { listModules } from '../graphql/queries'
 
 interface ModuleEntryProps {
@@ -14,7 +16,6 @@ interface ModuleEntryProps {
 const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEntryProps) => {
     const [icon, setIcon] = useState("");
     const [photoLoaded, setPhotoLoaded] = useState(false);
-
 
     const fetchModulePhoto = async () => {
         try {
@@ -56,8 +57,7 @@ const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEnt
 
 export const ModulesList = () => {
 
-    const [modules, setModules] = useState([]); 
-    const [loaded, setLoaded] = useState(false);
+    const [modules, setModules] = useState< ListModulesQuery | undefined>(undefined); 
     useEffect(() => {
         fetchModules();
     }, [])
@@ -67,40 +67,46 @@ export const ModulesList = () => {
             const moduleData = await API.graphql({
                 query: listModules,
                 authMode: 'AWS_IAM'
-            });
-            //@ts-ignore
-            const moduleList = moduleData.data.listModules.items;
-            setLoaded(true);
-            setModules(moduleList);
-            
+            }) as { data: ListModulesQuery};
+            setModules(moduleData.data);
         } catch (error) {
             console.log(error);
         }
     } 
-    if(loaded)
+    if(modules?.listModules?.items)
     {
         return (
             <div className = "module list">
                 <h2 className = "pagetile">Explore Coding Modules</h2>
-                {modules.map((element:ModuleEntryProps, index:number) => 
+                {modules?.listModules?.items.map((element, index) => 
                     {
-                        return (
-                            <ModuleEntry
-                                key = {`module${index}`}
-                                title = {element.title}
-                                description = {element.description}
-                                link = {element.link}
-                                pictureLocation = {element.pictureLocation}
-                                tags = {element.tags}
-                            />
-                        )
+                        if(element)
+                        {
+                            return (
+                                <ModuleEntry
+                                    key = {`module${index}`}
+                                    title = {element.title}
+                                    description = {element.description}
+                                    link = {element.link}
+                                    pictureLocation = {element.pictureLocation}
+                                    tags = {element.tags}
+                                />
+                            )
+                        }
+                        else
+                        {
+                            return <div></div>;
+                        }
                     })
                 }
             </div>
-            
         )
     }
-    return (<div></div>)
+    else
+    {
+        return (<div></div>)
+    }
 
 }
+
 

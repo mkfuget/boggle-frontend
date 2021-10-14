@@ -1,18 +1,17 @@
 import { GraphQLResult } from '@aws-amplify/api'
 import { graphqlOperation, API, Storage} from 'aws-amplify'
 import React, { useEffect, useState } from 'react'
+import { ListLessonsQuery } from '../API'
 import { listLessons, listModules } from '../graphql/queries'
-
+import "./lesson.css"
 interface LessonEntryProps {
     title: string
-    description: string
     link: string
-    id: string
 }
 
-const LessonEntry = ({title, description, link, id}:LessonEntryProps) => {
+const LessonEntry = ({title, link}:LessonEntryProps) => {
     return (
-        <a className = "lessonentry card" href = {`/lessons/${id}`}>
+        <a className = "lessonentry card" href = {`/lessons/${link}`}>
             <h2 className = "title">{title}</h2>
         </a>
     )
@@ -20,8 +19,7 @@ const LessonEntry = ({title, description, link, id}:LessonEntryProps) => {
 
 export const LessonsList = () => {
 
-    const [lessons, setLessons] = useState([]); 
-    const [loaded, setLoaded] = useState(false);
+    const [lessons, setLessons] = useState<ListLessonsQuery | undefined>(undefined); 
     useEffect(() => {
         fetchLessons();
     }, [])
@@ -31,33 +29,34 @@ export const LessonsList = () => {
             const LessonData = await API.graphql({
                 query: listLessons,
                 authMode: 'AWS_IAM'
-            });
-            console.log(LessonData);
-            //@ts-ignore
-            const lessonList = LessonData.data.listLessons.items;
-            setLoaded(true);
-            setLessons(lessonList);
+            }) as { data: ListLessonsQuery};
+            setLessons(LessonData.data);
             
         } catch (error) {
             console.log(error);
         }
     } 
-    if(loaded)
+    if(lessons?.listLessons?.items)
     {
         return (
-            <div className = "Lesson list">
-                <h2 className = "pagetile">Explore Codinc Concepts</h2>
-                {lessons.map((element:LessonEntryProps, index:number) => 
+            <div className = "lesson list">
+                <h2 className = "pagetile">Explore Coding Concepts</h2>
+                {lessons?.listLessons?.items.map((element, index) => 
                     {
-                        return (
-                            <LessonEntry
-                                key = {element.id}
-                                id = {element.id}
-                                title = {element.title}
-                                description = {element.description}
-                                link = {element.link}
-                            />
-                        )
+                        if(element)
+                        {
+                            return (
+                                <LessonEntry
+                                    key = {element.id}
+                                    title = {element.title}
+                                    link = {element.id}
+                                />
+                            )
+                        }
+                        else
+                        {
+                            return <div></div>
+                        }
                     })
                 }
             </div>

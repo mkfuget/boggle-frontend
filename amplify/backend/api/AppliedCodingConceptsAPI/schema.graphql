@@ -3,14 +3,14 @@ type Module @model {
   title: String!
   description: String!
   link: String!
-  pictureLocation: String
-  tags: [String]
+  pictureLocation: String!
+  tags: [String!]!
 }
 
 type Lesson @model{
   title: String!
   content: [DivEntry]!
-  code: [String]
+  code: [String!]!
 }
 
 type Quiz @model{
@@ -31,7 +31,7 @@ type quizOption {
 
 type SudokuPuzzle @model {
   id: ID!
-  entries: [Int]!
+  entries: [Int!]!
 }
 
 type PathFinderPuzzle @model {
@@ -41,13 +41,13 @@ type PathFinderPuzzle @model {
 
 type ConceptsData @model{
   id: ID!
-  pages: [ModulePage]!
+  pages: [ModulePage!]!
 
 }
 
 type ModulePage {
   title: String!
-  content: [DivEntry]!
+  content: [DivEntry!]!
 }
 
 type DivEntry {

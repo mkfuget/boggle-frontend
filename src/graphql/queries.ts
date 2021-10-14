@@ -103,6 +103,10 @@ export const listQuizzes = /* GraphQL */ `
         title
         questions {
           question
+          options {
+            description
+            isAnswer
+          }
         }
         createdAt
         updatedAt
@@ -196,6 +200,10 @@ export const listConceptsData = /* GraphQL */ `
         id
         pages {
           title
+          content {
+            type
+            content
+          }
         }
         createdAt
         updatedAt

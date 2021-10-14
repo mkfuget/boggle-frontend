@@ -7,8 +7,8 @@ export type CreateModuleInput = {
   title: string,
   description: string,
   link: string,
-  pictureLocation?: string | null,
-  tags?: Array< string | null > | null,
+  pictureLocation: string,
+  tags: Array< string >,
 };
 
 export type ModelModuleConditionInput = {
@@ -68,8 +68,8 @@ export type Module = {
   title: string,
   description: string,
   link: string,
-  pictureLocation?: string | null,
-  tags?: Array< string | null > | null,
+  pictureLocation: string,
+  tags: Array< string >,
   createdAt: string,
   updatedAt: string,
 };
@@ -80,7 +80,7 @@ export type UpdateModuleInput = {
   description?: string | null,
   link?: string | null,
   pictureLocation?: string | null,
-  tags?: Array< string | null > | null,
+  tags?: Array< string > | null,
 };
 
 export type DeleteModuleInput = {
@@ -91,7 +91,7 @@ export type CreateLessonInput = {
   id?: string | null,
   title: string,
   content: Array< DivEntryInput | null >,
-  code?: Array< string | null > | null,
+  code: Array< string >,
 };
 
 export type DivEntryInput = {
@@ -103,6 +103,7 @@ export enum DivType {
   paragraph = "paragraph",
   image = "image",
   gif = "gif",
+  figure = "figure",
 }
 
 
@@ -119,7 +120,7 @@ export type Lesson = {
   id: string,
   title: string,
   content:  Array<DivEntry | null >,
-  code?: Array< string | null > | null,
+  code: Array< string >,
   createdAt: string,
   updatedAt: string,
 };
@@ -133,7 +134,7 @@ export type DivEntry = {
 export type UpdateLessonInput = {
   title?: string | null,
   content?: Array< DivEntryInput | null > | null,
-  code?: Array< string | null > | null,
+  code?: Array< string > | null,
 };
 
 export type DeleteLessonInput = {
@@ -195,7 +196,7 @@ export type DeleteQuizInput = {
 
 export type CreateSudokuPuzzleInput = {
   id?: string | null,
-  entries: Array< number | null >,
+  entries: Array< number >,
 };
 
 export type ModelSudokuPuzzleConditionInput = {
@@ -220,14 +221,14 @@ export type ModelIntInput = {
 export type SudokuPuzzle = {
   __typename: "SudokuPuzzle",
   id: string,
-  entries: Array< number | null >,
+  entries: Array< number >,
   createdAt: string,
   updatedAt: string,
 };
 
 export type UpdateSudokuPuzzleInput = {
   id: string,
-  entries?: Array< number | null > | null,
+  entries?: Array< number > | null,
 };
 
 export type DeleteSudokuPuzzleInput = {
@@ -265,12 +266,12 @@ export type DeletePathFinderPuzzleInput = {
 
 export type CreateConceptsDataInput = {
   id?: string | null,
-  pages: Array< ModulePageInput | null >,
+  pages: Array< ModulePageInput >,
 };
 
 export type ModulePageInput = {
   title: string,
-  content: Array< DivEntryInput | null >,
+  content: Array< DivEntryInput >,
 };
 
 export type ModelConceptsDataConditionInput = {
@@ -282,7 +283,7 @@ export type ModelConceptsDataConditionInput = {
 export type ConceptsData = {
   __typename: "ConceptsData",
   id: string,
-  pages:  Array<ModulePage | null >,
+  pages:  Array<ModulePage >,
   createdAt: string,
   updatedAt: string,
 };
@@ -290,12 +291,12 @@ export type ConceptsData = {
 export type ModulePage = {
   __typename: "ModulePage",
   title: string,
-  content:  Array<DivEntry | null >,
+  content:  Array<DivEntry >,
 };
 
 export type UpdateConceptsDataInput = {
   id: string,
-  pages?: Array< ModulePageInput | null > | null,
+  pages?: Array< ModulePageInput > | null,
 };
 
 export type DeleteConceptsDataInput = {
@@ -416,8 +417,8 @@ export type CreateModuleMutation = {
     title: string,
     description: string,
     link: string,
-    pictureLocation?: string | null,
-    tags?: Array< string | null > | null,
+    pictureLocation: string,
+    tags: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -435,8 +436,8 @@ export type UpdateModuleMutation = {
     title: string,
     description: string,
     link: string,
-    pictureLocation?: string | null,
-    tags?: Array< string | null > | null,
+    pictureLocation: string,
+    tags: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -454,8 +455,8 @@ export type DeleteModuleMutation = {
     title: string,
     description: string,
     link: string,
-    pictureLocation?: string | null,
-    tags?: Array< string | null > | null,
+    pictureLocation: string,
+    tags: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -476,7 +477,7 @@ export type CreateLessonMutation = {
       type: DivType,
       content: string,
     } | null >,
-    code?: Array< string | null > | null,
+    code: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -497,7 +498,7 @@ export type UpdateLessonMutation = {
       type: DivType,
       content: string,
     } | null >,
-    code?: Array< string | null > | null,
+    code: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -518,7 +519,7 @@ export type DeleteLessonMutation = {
       type: DivType,
       content: string,
     } | null >,
-    code?: Array< string | null > | null,
+    code: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -605,7 +606,7 @@ export type CreateSudokuPuzzleMutation = {
   createSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< number >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -620,7 +621,7 @@ export type UpdateSudokuPuzzleMutation = {
   updateSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< number >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -635,7 +636,7 @@ export type DeleteSudokuPuzzleMutation = {
   deleteSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< number >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -702,8 +703,8 @@ export type CreateConceptsDataMutation = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -725,8 +726,8 @@ export type UpdateConceptsDataMutation = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -748,8 +749,8 @@ export type DeleteConceptsDataMutation = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -766,8 +767,8 @@ export type GetModuleQuery = {
     title: string,
     description: string,
     link: string,
-    pictureLocation?: string | null,
-    tags?: Array< string | null > | null,
+    pictureLocation: string,
+    tags: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -788,8 +789,8 @@ export type ListModulesQuery = {
       title: string,
       description: string,
       link: string,
-      pictureLocation?: string | null,
-      tags?: Array< string | null > | null,
+      pictureLocation: string,
+      tags: Array< string >,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -811,7 +812,7 @@ export type GetLessonQuery = {
       type: DivType,
       content: string,
     } | null >,
-    code?: Array< string | null > | null,
+    code: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -835,7 +836,7 @@ export type ListLessonsQuery = {
         type: DivType,
         content: string,
       } | null >,
-      code?: Array< string | null > | null,
+      code: Array< string >,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -882,6 +883,11 @@ export type ListQuizzesQuery = {
       questions:  Array< {
         __typename: "quizQuestion",
         question: string,
+        options:  Array< {
+          __typename: "quizOption",
+          description: string,
+          isAnswer: boolean,
+        } | null >,
       } | null >,
       createdAt: string,
       updatedAt: string,
@@ -898,7 +904,7 @@ export type GetSudokuPuzzleQuery = {
   getSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< number >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -916,7 +922,7 @@ export type ListSudokuPuzzlesQuery = {
     items?:  Array< {
       __typename: "SudokuPuzzle",
       id: string,
-      entries: Array< number | null >,
+      entries: Array< number >,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -973,8 +979,8 @@ export type GetConceptsDataQuery = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -995,7 +1001,12 @@ export type ListConceptsDataQuery = {
       pages:  Array< {
         __typename: "ModulePage",
         title: string,
-      } | null >,
+        content:  Array< {
+          __typename: "DivEntry",
+          type: DivType,
+          content: string,
+        } >,
+      } >,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -1010,8 +1021,8 @@ export type OnCreateModuleSubscription = {
     title: string,
     description: string,
     link: string,
-    pictureLocation?: string | null,
-    tags?: Array< string | null > | null,
+    pictureLocation: string,
+    tags: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1024,8 +1035,8 @@ export type OnUpdateModuleSubscription = {
     title: string,
     description: string,
     link: string,
-    pictureLocation?: string | null,
-    tags?: Array< string | null > | null,
+    pictureLocation: string,
+    tags: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1038,8 +1049,8 @@ export type OnDeleteModuleSubscription = {
     title: string,
     description: string,
     link: string,
-    pictureLocation?: string | null,
-    tags?: Array< string | null > | null,
+    pictureLocation: string,
+    tags: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1055,7 +1066,7 @@ export type OnCreateLessonSubscription = {
       type: DivType,
       content: string,
     } | null >,
-    code?: Array< string | null > | null,
+    code: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1071,7 +1082,7 @@ export type OnUpdateLessonSubscription = {
       type: DivType,
       content: string,
     } | null >,
-    code?: Array< string | null > | null,
+    code: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1087,7 +1098,7 @@ export type OnDeleteLessonSubscription = {
       type: DivType,
       content: string,
     } | null >,
-    code?: Array< string | null > | null,
+    code: Array< string >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1154,7 +1165,7 @@ export type OnCreateSudokuPuzzleSubscription = {
   onCreateSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< number >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1164,7 +1175,7 @@ export type OnUpdateSudokuPuzzleSubscription = {
   onUpdateSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< number >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1174,7 +1185,7 @@ export type OnDeleteSudokuPuzzleSubscription = {
   onDeleteSudokuPuzzle?:  {
     __typename: "SudokuPuzzle",
     id: string,
-    entries: Array< number | null >,
+    entries: Array< number >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1221,8 +1232,8 @@ export type OnCreateConceptsDataSubscription = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1239,8 +1250,8 @@ export type OnUpdateConceptsDataSubscription = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1257,8 +1268,8 @@ export type OnDeleteConceptsDataSubscription = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,

@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 import Interweave from 'interweave';
 import { GetConceptsDataQuery } from '../../API'
 interface DivContent {
-  type: ("paragraph" | "image" | "gif");
+  type: ("paragraph" | "image" | "gif" |"figure");
   content: string;
 }
 
