@@ -3,7 +3,6 @@
     margin-left: 40px;
     margin-top: 20px;
     margin-bottom: 20px;
-
 }
 .lesson .pagetitle {
     margin-bottom: 60px;
@@ -19,7 +18,12 @@
     margin-bottom: 240px;
     overflow: hidden;
 }
-
+.lessonentry.card p.description {
+    text-align:left;
+    color: black;
+    margin-left: 40px;
+    font-size: 18px;
+}
 .lesson .content .code{
     background-color: white;
     border: 2px solid var(--background-gray-color);

@@ -4,6 +4,11 @@ export const DYNAMMIC_PROGRAMMING_LESSON_TEXT =
 "dynamicprogramming" +
 "::ID_END" +
 
+"::TITLE_START" +
+"Dynamic Programming" +
+"::TITLE_END" +
+
+
 "::DESCRIPTION_START" +
 "Algorithmic strategy for solving problems by sequentially solving subsets of the problem and using them to improve the efficiency of the solution" +
 "::DESCRIPTION_END" +

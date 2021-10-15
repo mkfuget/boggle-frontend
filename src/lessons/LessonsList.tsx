@@ -7,12 +7,14 @@ import "./lesson.css"
 interface LessonEntryProps {
     title: string
     link: string
+    description: string
 }
 
-const LessonEntry = ({title, link}:LessonEntryProps) => {
+const LessonEntry = ({title, link, description}:LessonEntryProps) => {
     return (
         <a className = "lessonentry card" href = {`/lessons/${link}`}>
             <h2 className = "title">{title}</h2>
+            <p className = "description">{description}</p>
         </a>
     )
 }
@@ -49,6 +51,7 @@ export const LessonsList = () => {
                                 <LessonEntry
                                     key = {element.id}
                                     title = {element.title}
+                                    description = {element.description}
                                     link = {element.id}
                                 />
                             )

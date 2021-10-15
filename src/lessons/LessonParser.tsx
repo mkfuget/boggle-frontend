@@ -42,19 +42,19 @@ const parseCode = (text: string): string[] =>{
 }
 
 const parseTitle  = (text:string): string =>{
-    let regexType = /(?<=::TITLE_START).*?(?=::TITLE_FINISH)/
+    let regexType = /(?<=::TITLE_START).*?(?=::TITLE_END)/
     let codeMatch = text.match(regexType); 
     return codeMatch !== null ? codeMatch[0] : "";
 }
 
 const parseId  = (text:string): string =>{
-    let regexType = /(?<=::ID_START).*?(?=::ID_FINISH)/
+    let regexType = /(?<=::ID_START).*?(?=::ID_END)/
     let codeMatch = text.match(regexType); 
     return codeMatch !== null ? codeMatch[0] : "";
 }
 
 const parseDescription  = (text:string): string =>{
-    let regexType = /(?<=::DESCRIPTION_START).*?(?=::DESCRIPTION_FINISH)/
+    let regexType = /(?<=::DESCRIPTION_START).*?(?=::DESCRIPTION_END)/
     let codeMatch = text.match(regexType); 
     return codeMatch !== null ? codeMatch[0] : "";
 }
@@ -68,13 +68,13 @@ const parse = (text:string):string => {
     let description = parseDescription(PARSE_TEXT);
 
     let out = "{\n";
-    out += '  "id": {"\n';
+    out += '  "id": {\n';
     out += `    "S":"${id}"\n`;    
     out += '  },\n';
-    out += '  "title": {"\n';
+    out += '  "title": {\n';
     out += `    "S":"${title}"\n`;    
     out += '  },\n';
-    out += '  "title": {"\n';
+    out += '  "description": {\n';
     out += `    "S":"${description}"\n`;    
     out += '  },\n';
     out += '  "createdAt": {\n';
@@ -82,9 +82,6 @@ const parse = (text:string):string => {
     out += '  },\n';
     out += '  "updatedAt": {\n';
     out += `    "S":"${new Date().toISOString()}"\n`;    
-    out += '  },\n';
-    out += '  "title": {\n';
-    out += `    "S":"Dynamic Programming"\n`;    
     out += '  },\n';
 
     out += '  "content" : {\n';

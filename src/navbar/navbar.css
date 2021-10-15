@@ -48,6 +48,7 @@ ul {
     color:white;
     list-style: none; 
     z-index: 999;
+    overflow:hidden;
 }
 
 #navbar li a {
