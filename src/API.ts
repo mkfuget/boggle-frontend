@@ -90,8 +90,9 @@ export type DeleteModuleInput = {
 export type CreateLessonInput = {
   id?: string | null,
   title: string,
-  content: Array< DivEntryInput | null >,
+  content: Array< DivEntryInput >,
   code: Array< string >,
+  description: string,
 };
 
 export type DivEntryInput = {
@@ -110,6 +111,7 @@ export enum DivType {
 export type ModelLessonConditionInput = {
   title?: ModelStringInput | null,
   code?: ModelStringInput | null,
+  description?: ModelStringInput | null,
   and?: Array< ModelLessonConditionInput | null > | null,
   or?: Array< ModelLessonConditionInput | null > | null,
   not?: ModelLessonConditionInput | null,
@@ -119,8 +121,9 @@ export type Lesson = {
   __typename: "Lesson",
   id: string,
   title: string,
-  content:  Array<DivEntry | null >,
+  content:  Array<DivEntry >,
   code: Array< string >,
+  description: string,
   createdAt: string,
   updatedAt: string,
 };
@@ -133,8 +136,9 @@ export type DivEntry = {
 
 export type UpdateLessonInput = {
   title?: string | null,
-  content?: Array< DivEntryInput | null > | null,
+  content?: Array< DivEntryInput > | null,
   code?: Array< string > | null,
+  description?: string | null,
 };
 
 export type DeleteLessonInput = {
@@ -144,12 +148,12 @@ export type DeleteLessonInput = {
 export type CreateQuizInput = {
   id?: string | null,
   title: string,
-  questions: Array< QuizQuestionInput | null >,
+  questions: Array< QuizQuestionInput >,
 };
 
 export type QuizQuestionInput = {
   question: string,
-  options: Array< QuizOptionInput | null >,
+  options: Array< QuizOptionInput >,
 };
 
 export type QuizOptionInput = {
@@ -168,7 +172,7 @@ export type Quiz = {
   __typename: "Quiz",
   id: string,
   title: string,
-  questions:  Array<quizQuestion | null >,
+  questions:  Array<quizQuestion >,
   createdAt: string,
   updatedAt: string,
 };
@@ -176,7 +180,7 @@ export type Quiz = {
 export type quizQuestion = {
   __typename: "quizQuestion",
   question: string,
-  options:  Array<quizOption | null >,
+  options:  Array<quizOption >,
 };
 
 export type quizOption = {
@@ -187,7 +191,7 @@ export type quizOption = {
 
 export type UpdateQuizInput = {
   title?: string | null,
-  questions?: Array< QuizQuestionInput | null > | null,
+  questions?: Array< QuizQuestionInput > | null,
 };
 
 export type DeleteQuizInput = {
@@ -340,6 +344,7 @@ export type ModelModuleConnection = {
 export type ModelLessonFilterInput = {
   title?: ModelStringInput | null,
   code?: ModelStringInput | null,
+  description?: ModelStringInput | null,
   and?: Array< ModelLessonFilterInput | null > | null,
   or?: Array< ModelLessonFilterInput | null > | null,
   not?: ModelLessonFilterInput | null,
@@ -476,8 +481,9 @@ export type CreateLessonMutation = {
       __typename: "DivEntry",
       type: DivType,
       content: string,
-    } | null >,
+    } >,
     code: Array< string >,
+    description: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -497,8 +503,9 @@ export type UpdateLessonMutation = {
       __typename: "DivEntry",
       type: DivType,
       content: string,
-    } | null >,
+    } >,
     code: Array< string >,
+    description: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -518,8 +525,9 @@ export type DeleteLessonMutation = {
       __typename: "DivEntry",
       type: DivType,
       content: string,
-    } | null >,
+    } >,
     code: Array< string >,
+    description: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -542,8 +550,8 @@ export type CreateQuizMutation = {
         __typename: "quizOption",
         description: string,
         isAnswer: boolean,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -566,8 +574,8 @@ export type UpdateQuizMutation = {
         __typename: "quizOption",
         description: string,
         isAnswer: boolean,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -590,8 +598,8 @@ export type DeleteQuizMutation = {
         __typename: "quizOption",
         description: string,
         isAnswer: boolean,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -811,8 +819,9 @@ export type GetLessonQuery = {
       __typename: "DivEntry",
       type: DivType,
       content: string,
-    } | null >,
+    } >,
     code: Array< string >,
+    description: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -835,8 +844,9 @@ export type ListLessonsQuery = {
         __typename: "DivEntry",
         type: DivType,
         content: string,
-      } | null >,
+      } >,
       code: Array< string >,
+      description: string,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -860,8 +870,8 @@ export type GetQuizQuery = {
         __typename: "quizOption",
         description: string,
         isAnswer: boolean,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -887,8 +897,8 @@ export type ListQuizzesQuery = {
           __typename: "quizOption",
           description: string,
           isAnswer: boolean,
-        } | null >,
-      } | null >,
+        } >,
+      } >,
       createdAt: string,
       updatedAt: string,
     } | null > | null,
@@ -1065,8 +1075,9 @@ export type OnCreateLessonSubscription = {
       __typename: "DivEntry",
       type: DivType,
       content: string,
-    } | null >,
+    } >,
     code: Array< string >,
+    description: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1081,8 +1092,9 @@ export type OnUpdateLessonSubscription = {
       __typename: "DivEntry",
       type: DivType,
       content: string,
-    } | null >,
+    } >,
     code: Array< string >,
+    description: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1097,8 +1109,9 @@ export type OnDeleteLessonSubscription = {
       __typename: "DivEntry",
       type: DivType,
       content: string,
-    } | null >,
+    } >,
     code: Array< string >,
+    description: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1116,8 +1129,8 @@ export type OnCreateQuizSubscription = {
         __typename: "quizOption",
         description: string,
         isAnswer: boolean,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1135,8 +1148,8 @@ export type OnUpdateQuizSubscription = {
         __typename: "quizOption",
         description: string,
         isAnswer: boolean,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1154,8 +1167,8 @@ export type OnDeleteQuizSubscription = {
         __typename: "quizOption",
         description: string,
         isAnswer: boolean,
-      } | null >,
-    } | null >,
+      } >,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,

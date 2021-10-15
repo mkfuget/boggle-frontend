@@ -9,18 +9,19 @@ type Module @model {
 
 type Lesson @model{
   title: String!
-  content: [DivEntry]!
+  content: [DivEntry!]!
   code: [String!]!
+  description: String!
 }
 
 type Quiz @model{
   title: String!
-  questions: [quizQuestion]!
+  questions: [quizQuestion!]!
 }
 
 type quizQuestion {
   question: String!
-  options: [quizOption]!
+  options: [quizOption!]!
 }
 
 type quizOption {

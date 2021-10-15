@@ -40,12 +40,42 @@ const parseCode = (text: string): string[] =>{
 
     return codeOut.split("::END_LINE");
 }
+
+const parseTitle  = (text:string): string =>{
+    let regexType = /(?<=::TITLE_START).*?(?=::TITLE_FINISH)/
+    let codeMatch = text.match(regexType); 
+    return codeMatch !== null ? codeMatch[0] : "";
+}
+
+const parseId  = (text:string): string =>{
+    let regexType = /(?<=::ID_START).*?(?=::ID_FINISH)/
+    let codeMatch = text.match(regexType); 
+    return codeMatch !== null ? codeMatch[0] : "";
+}
+
+const parseDescription  = (text:string): string =>{
+    let regexType = /(?<=::DESCRIPTION_START).*?(?=::DESCRIPTION_FINISH)/
+    let codeMatch = text.match(regexType); 
+    return codeMatch !== null ? codeMatch[0] : "";
+}
+
+
 const parse = (text:string):string => {
     let content = getDivEntries(PARSE_TEXT);
     let code = parseCode(PARSE_TEXT);
+    let title = parseTitle(PARSE_TEXT);
+    let id = parseId(PARSE_TEXT);
+    let description = parseDescription(PARSE_TEXT);
+
     let out = "{\n";
-    out += '  "id": "DynamicProgramming"\n';
-    out += '    "S":\n';    
+    out += '  "id": {"\n';
+    out += `    "S":"${id}"\n`;    
+    out += '  },\n';
+    out += '  "title": {"\n';
+    out += `    "S":"${title}"\n`;    
+    out += '  },\n';
+    out += '  "title": {"\n';
+    out += `    "S":"${description}"\n`;    
     out += '  },\n';
     out += '  "createdAt": {\n';
     out += `    "S":"${new Date().toISOString()}"\n`;    

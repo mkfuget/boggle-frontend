@@ -39,7 +39,15 @@ const Lesson = () =>
         return (
             <div className = "lesson">
                 <h2 className = "pagetitle">{lesson?.getLesson?.title}</h2>
-                <div className = "content"></div>
+
+                <div className = "content">
+                    <DivEntryList list = {lesson?.getLesson?.content}/>
+                    <div className = "code">
+                        {lesson?.getLesson?.code.map((element, index) => {
+                           return (<div className = "entry">{`${index} ${element}`}</div>)
+                        })}
+                    </div>
+                </div>
             </div>
         )    
     }

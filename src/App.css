@@ -1,8 +1,8 @@
 .App {
   text-align: center;
   background-color: var(--background-gray-color);
-  font-family: 'Hahmlet', serif;
-  font-size: 18px;
+  font-family: "urw-din",sans-serif;;
+  font-size: 16px;
   font-weight: 500;
   min-height: 100vh;
   margin-bottom: 0px;
@@ -43,6 +43,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+  height: 40%;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 #contentwrapper {

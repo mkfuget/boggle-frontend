@@ -5,3 +5,50 @@
     margin-bottom: 20px;
 
 }
+.lesson .pagetitle {
+    margin-bottom: 60px;
+}
+.lesson .content {
+    font-size: 18px;
+    background-color: white;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    padding-top: 20px;
+    margin-bottom: 240px;
+    overflow: hidden;
+}
+
+.lesson .content .code{
+    background-color: white;
+    border: 2px solid var(--background-gray-color);
+    font-family:  Consolas,"Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+    padding-left: 8px;
+    color: rgb(88, 88, 88);
+    width: 95%;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 32px;
+    border-radius: 12px;
+    white-space: break-spaces;
+    overflow: visible;
+}
+
+.lesson .content .code .entry{
+    margin-bottom: -4px;
+}
+.lesson .content p{
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.lesson .content .figure{
+    margin-bottom: 20px;
+    font-style: italic;
+    font-weight: bold;
+
+
+}

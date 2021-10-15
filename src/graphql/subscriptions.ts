@@ -54,6 +54,7 @@ export const onCreateLesson = /* GraphQL */ `
         content
       }
       code
+      description
       createdAt
       updatedAt
     }
@@ -69,6 +70,7 @@ export const onUpdateLesson = /* GraphQL */ `
         content
       }
       code
+      description
       createdAt
       updatedAt
     }
@@ -84,6 +86,7 @@ export const onDeleteLesson = /* GraphQL */ `
         content
       }
       code
+      description
       createdAt
       updatedAt
     }

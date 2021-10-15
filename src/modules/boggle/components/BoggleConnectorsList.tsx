@@ -36,7 +36,7 @@ const Connector = ({segment}:ConnectorProps) =>
 {
     const deltaX = segment.startPoint.xIndex - segment.endPoint.xIndex;
     const deltaY = segment.startPoint.yIndex - segment.endPoint.yIndex;
-    const cellSepartion = 40;
+    const cellSepartion = 44;
     let className:string;
     if(deltaX !== 0 && deltaY !== 0)
     {

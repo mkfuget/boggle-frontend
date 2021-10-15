@@ -47,6 +47,7 @@ export const getLesson = /* GraphQL */ `
         content
       }
       code
+      description
       createdAt
       updatedAt
     }
@@ -67,6 +68,7 @@ export const listLessons = /* GraphQL */ `
           content
         }
         code
+        description
         createdAt
         updatedAt
       }
