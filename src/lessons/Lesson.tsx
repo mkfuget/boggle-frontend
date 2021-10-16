@@ -44,7 +44,10 @@ const Lesson = () =>
                     <DivEntryList list = {lesson?.getLesson?.content}/>
                     <div className = "code">
                         {lesson?.getLesson?.code.map((element, index) => {
-                           return (<div className = "entry">{`${index} ${element}`}</div>)
+                           return (<>
+                               <div className = "index">{index + 1}</div> 
+                               <div className = "codeline">{element}</div> 
+                            </>)
                         })}
                     </div>
                 </div>

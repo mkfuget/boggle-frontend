@@ -1,8 +1,8 @@
+import { BREADTH_FIRST_SEARCH_LESSON_TEXT } from './data/BreadthFirstSearch';
 import { DEPTH_FIRST_SEARCH_LESSON_TEXT } from './data/DepthFirstSearch';
 import { DYNAMMIC_PROGRAMMING_LESSON_TEXT } from './data/DynammicProgramming';
-console.log(DYNAMMIC_PROGRAMMING_LESSON_TEXT)
 
-const PARSE_TEXT = DEPTH_FIRST_SEARCH_LESSON_TEXT;
+const PARSE_TEXT = BREADTH_FIRST_SEARCH_LESSON_TEXT;
 
 interface divEntry {
     content: string;
