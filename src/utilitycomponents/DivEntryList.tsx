@@ -1,5 +1,6 @@
 import React from 'react'
 import Interweave from 'interweave';
+import { S3PictureCapture } from './S3PictureCapture';
 interface DivEntryList {
     list: DivEntryProps[];
 }
@@ -18,6 +19,10 @@ const DivEntry = ({type, content}:DivEntryProps) => {
         case "figure":
             return (
                 <div className = "figure"><Interweave content={content}/></div>
+            )
+        case "image": 
+            return (
+                <S3PictureCapture pictureLocation = {content}/>
             )
         default:
             return <div></div>

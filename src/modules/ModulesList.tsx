@@ -4,6 +4,7 @@ import { TAGS } from 'interweave'
 import React, { useEffect, useState } from 'react'
 import { ListModulesQuery } from '../API'
 import { listModules } from '../graphql/queries'
+import { S3PictureCapture } from '../utilitycomponents/S3PictureCapture'
 
 interface ModuleEntryProps {
     title: string
@@ -14,43 +15,19 @@ interface ModuleEntryProps {
 }
 
 const ModuleEntry = ({title, description, link, pictureLocation, tags}:ModuleEntryProps) => {
-    const [icon, setIcon] = useState("");
-    const [photoLoaded, setPhotoLoaded] = useState(false);
-
-    const fetchModulePhoto = async () => {
-        try {
-            const photoData = await Storage.get(pictureLocation, {
-                level: 'public',
-                bucket: 'module-photos-storage211656-dev',
-                region: 'us-west-2',
-            });
-            //@ts-ignore
-            setIcon(photoData);
-            setPhotoLoaded(true);
-        } catch (error) {
-            console.log(error);
-        }
-    } 
-
-    useEffect(()=>{
-        fetchModulePhoto();
-    }, [])
 
     return (
-        
         <a className = "moduleentry card" href = {`/modules${link}`}>
             <div className = "icon">
-                {photoLoaded ? <img
-                    src = {icon} 
-                    alt = "icon">
-                </img> : ""}
+                <S3PictureCapture 
+                    pictureLocation = {pictureLocation}
+                />
             </div>
             <h2 className = "title">{title}</h2>
             <div className = "content">
                 <p>{description}</p>
                 <span className = "tags">Tags: {tags !== null ? tags.join(", ") : ""}</span>
             </div> 
-
         </a>
     )
 }
