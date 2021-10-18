@@ -81,8 +81,13 @@ export const getQuiz = /* GraphQL */ `
     getQuiz(id: $id) {
       id
       title
+      description
+      difficulty
       questions {
-        question
+        question {
+          type
+          content
+        }
         options {
           description
           isAnswer
@@ -103,8 +108,13 @@ export const listQuizzes = /* GraphQL */ `
       items {
         id
         title
+        description
+        difficulty
         questions {
-          question
+          question {
+            type
+            content
+          }
           options {
             description
             isAnswer

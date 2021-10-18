@@ -1,0 +1,15 @@
+::ID_START
+generaldatastructures1
+::ID_END
+
+::TITLE_START
+General Data Structures 1
+::TITLE_END
+
+::DESCRIPTION_START
+General purpose quiz for testing your knowledge in all things data structures
+::DESCRIPTION_END
+
+::DIFFICULTY_START
+MEDIUM
+::DIFFICULTY_END

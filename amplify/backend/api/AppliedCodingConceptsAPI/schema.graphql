@@ -16,11 +16,13 @@ type Lesson @model{
 
 type Quiz @model{
   title: String!
+  description: String!
+  difficulty: String!
   questions: [quizQuestion!]!
 }
 
 type quizQuestion {
-  question: String!
+  question: [DivEntry!]!
   options: [quizOption!]!
 }
 

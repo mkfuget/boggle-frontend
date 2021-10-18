@@ -97,8 +97,13 @@ export const onCreateQuiz = /* GraphQL */ `
     onCreateQuiz {
       id
       title
+      description
+      difficulty
       questions {
-        question
+        question {
+          type
+          content
+        }
         options {
           description
           isAnswer
@@ -114,8 +119,13 @@ export const onUpdateQuiz = /* GraphQL */ `
     onUpdateQuiz {
       id
       title
+      description
+      difficulty
       questions {
-        question
+        question {
+          type
+          content
+        }
         options {
           description
           isAnswer
@@ -131,8 +141,13 @@ export const onDeleteQuiz = /* GraphQL */ `
     onDeleteQuiz {
       id
       title
+      description
+      difficulty
       questions {
-        question
+        question {
+          type
+          content
+        }
         options {
           description
           isAnswer

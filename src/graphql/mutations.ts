@@ -118,8 +118,13 @@ export const createQuiz = /* GraphQL */ `
     createQuiz(input: $input, condition: $condition) {
       id
       title
+      description
+      difficulty
       questions {
-        question
+        question {
+          type
+          content
+        }
         options {
           description
           isAnswer
@@ -138,8 +143,13 @@ export const updateQuiz = /* GraphQL */ `
     updateQuiz(input: $input, condition: $condition) {
       id
       title
+      description
+      difficulty
       questions {
-        question
+        question {
+          type
+          content
+        }
         options {
           description
           isAnswer
@@ -158,8 +168,13 @@ export const deleteQuiz = /* GraphQL */ `
     deleteQuiz(input: $input, condition: $condition) {
       id
       title
+      description
+      difficulty
       questions {
-        question
+        question {
+          type
+          content
+        }
         options {
           description
           isAnswer
