@@ -88,10 +88,8 @@ export const getQuiz = /* GraphQL */ `
           type
           content
         }
-        options {
-          description
-          isAnswer
-        }
+        options
+        answer
       }
       createdAt
       updatedAt
@@ -115,10 +113,8 @@ export const listQuizzes = /* GraphQL */ `
             type
             content
           }
-          options {
-            description
-            isAnswer
-          }
+          options
+          answer
         }
         createdAt
         updatedAt

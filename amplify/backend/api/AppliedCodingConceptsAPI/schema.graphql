@@ -19,18 +19,14 @@ type Quiz @model{
   description: String!
   difficulty: String!
   questions: [quizQuestion!]!
+  tags: [Sting!]!
 }
 
 type quizQuestion {
   question: [DivEntry!]!
-  options: [quizOption!]!
+  options: [String]!
+  answer: Int!
 }
-
-type quizOption {
-  description: String!
-  isAnswer: Boolean!
-}
-
 
 type SudokuPuzzle @model {
   id: ID!

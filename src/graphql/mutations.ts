@@ -125,10 +125,8 @@ export const createQuiz = /* GraphQL */ `
           type
           content
         }
-        options {
-          description
-          isAnswer
-        }
+        options
+        answer
       }
       createdAt
       updatedAt
@@ -150,10 +148,8 @@ export const updateQuiz = /* GraphQL */ `
           type
           content
         }
-        options {
-          description
-          isAnswer
-        }
+        options
+        answer
       }
       createdAt
       updatedAt
@@ -175,10 +171,8 @@ export const deleteQuiz = /* GraphQL */ `
           type
           content
         }
-        options {
-          description
-          isAnswer
-        }
+        options
+        answer
       }
       createdAt
       updatedAt

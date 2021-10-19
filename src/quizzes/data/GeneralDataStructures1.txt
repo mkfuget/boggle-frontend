@@ -1,5 +1,257 @@
-::ID_START
-generaldatastructures1
+{
+    "id: {
+        "S": "generaldatastructures1"
+    },
+    "title: {
+        "S": "General Data Structures 1"
+    },
+    "description: {
+        "S": "General purpose quiz for testing your knowledge in all things data structures"
+    },
+    "difficulty: {
+        "S": "MEDIUM"
+    },
+    tags: {
+        "L" : [
+            {
+                "S": "Data Structures"
+            },
+            {
+                "Big O complexity"
+            }
+        ],
+    }
+    questions: {
+        "L" : [
+            {
+                "M": {
+                    question: {
+                        "L" : [
+                            {
+                                "M" : {
+                                    "type" : {
+                                        "S": paragraph"
+                                    },
+                                    "content" {
+                                        "S": "What is the time complexity for converting an array to a binary heap?"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        "L" : [
+                            {
+                                "S": "O(log n)"
+                            },
+                            {
+                                "S": "O(n)"
+                            },
+                            {
+                                "S": "O(n log n)"
+                            },
+                            {
+                                "S": "O(n<sup>2</sup>)"
+                            },
+                        ]
+                    },
+                    answer: {
+                        "N": 0
+                    }
+                }
+            },
+            {
+                "M": {
+                    question: {
+                        "L" : [
+                            {
+                                "M" : {
+                                    "type" : {
+                                        "S": paragraph"
+                                    },
+                                    "content" {
+                                        "S": "Which data structure can most efficiently store, retreive, update and delete any entry?"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        "L" : [
+                            {
+                                "S": "Priority Queue"
+                            },
+                            {
+                                "S": "Stack"
+                            },
+                            {
+                                "S": "Binary Search Tree"
+                            },
+                            {
+                                "S": "Hash Set"
+                            },
+                        ]
+                    },
+                    answer: {
+                        "N": 3
+                    }
+                }
+            },
+            {
+                "M": {
+                    question: {
+                        "L" : [
+                            {
+                                "M" : {
+                                    "type" : {
+                                        "S": paragraph"
+                                    },
+                                    "content" {
+                                        "S": "What is the order in which elements get removed from stacks?"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        "L" : [
+                            {
+                                "S": "LIFO (last in first out)"
+                            },
+                            {
+                                "S": "FIFO (First in first out)"
+                            },
+                            {
+                                "S": "Highest priority element is removed first"
+                            },
+                            {
+                                "S": "Highest value is removed first"
+                            },
+                        ]
+                    },
+                    answer: {
+                        "N": 0
+                    }
+                }
+            },
+            {
+                "M": {
+                    question: {
+                        "L" : [
+                            {
+                                "M" : {
+                                    "type" : {
+                                        "S": paragraph"
+                                    },
+                                    "content" {
+                                        "S": "What is the average time complexity for finding an element in a binary search tree?"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        "L" : [
+                            {
+                                "S": "O(1)"
+                            },
+                            {
+                                "S": "O(log n)"
+                            },
+                            {
+                                "S": "O(n)"
+                            },
+                            {
+                                "S": "O(n log n)"
+                            },
+                        ]
+                    },
+                    answer: {
+                        "N": 1
+                    }
+                }
+            },
+                        {
+                "M": {
+                    question: {
+                        "L" : [
+                            {
+                                "M" : {
+                                    "type" : {
+                                        "S": paragraph"
+                                    },
+                                    "content" {
+                                        "S": "What is the removal order for elements in a queue data structure?"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        "L" : [
+                            {
+                                "S": "LIFO (last in first out)"
+                            },
+                            {
+                                "S": "FIFO (First in first out)"
+                            },
+                            {
+                                "S": "Highest priority element is removed first"
+                            },
+                            {
+                                "S": "Highest value is removed first"
+                            },
+                        ]
+                    },
+                    answer: {
+                        "N": 1
+                    }
+                }
+            },
+            {
+                "M": {
+                    question: {
+                        "L" : [
+                            {
+                                "M" : {
+                                    "type" : {
+                                        "S": paragraph"
+                                    },
+                                    "content" {
+                                        "S": "What is the time complexity for converting an array to a binary heap?"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    options: {
+                        "L" : [
+                            {
+                                "S": "O(log n)"
+                            },
+                            {
+                                "S": "O(n)"
+                            },
+                            {
+                                "S": "O(n log n)"
+                            },
+                            {
+                                "S": "O(n<sup>2</sup>)"
+                            },
+                        ]
+                    },
+                    answer: {
+                        "N": 0
+                    }
+                }
+            },
+
+
+
+        ]
+    }
+
+
 ::ID_END
 
 ::TITLE_START
@@ -13,3 +265,15 @@ General purpose quiz for testing your knowledge in all things data structures
 ::DIFFICULTY_START
 MEDIUM
 ::DIFFICULTY_END
+
+::QUESTIONS_START
+::QUESTION_START
+::DIVENTRY_START
+::DIVENTRY_TYPE_START
+paragraph
+::DIVENTRY_TYPE_END
+::DIVENTRY_CONTENT_START
+What is the time complexity of converting an array into a binary heap?
+::DIVENTRY_CONTENT_END
+::DIVENTRY_END
+

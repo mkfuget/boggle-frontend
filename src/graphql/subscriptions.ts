@@ -104,10 +104,8 @@ export const onCreateQuiz = /* GraphQL */ `
           type
           content
         }
-        options {
-          description
-          isAnswer
-        }
+        options
+        answer
       }
       createdAt
       updatedAt
@@ -126,10 +124,8 @@ export const onUpdateQuiz = /* GraphQL */ `
           type
           content
         }
-        options {
-          description
-          isAnswer
-        }
+        options
+        answer
       }
       createdAt
       updatedAt
@@ -148,10 +144,8 @@ export const onDeleteQuiz = /* GraphQL */ `
           type
           content
         }
-        options {
-          description
-          isAnswer
-        }
+        options
+        answer
       }
       createdAt
       updatedAt

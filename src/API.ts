@@ -155,12 +155,8 @@ export type CreateQuizInput = {
 
 export type QuizQuestionInput = {
   question: Array< DivEntryInput >,
-  options: Array< QuizOptionInput >,
-};
-
-export type QuizOptionInput = {
-  description: string,
-  isAnswer: boolean,
+  options: Array< string | null >,
+  answer: number,
 };
 
 export type ModelQuizConditionInput = {
@@ -186,13 +182,8 @@ export type Quiz = {
 export type quizQuestion = {
   __typename: "quizQuestion",
   question:  Array<DivEntry >,
-  options:  Array<quizOption >,
-};
-
-export type quizOption = {
-  __typename: "quizOption",
-  description: string,
-  isAnswer: boolean,
+  options: Array< string | null >,
+  answer: number,
 };
 
 export type UpdateQuizInput = {
@@ -562,11 +553,8 @@ export type CreateQuizMutation = {
         type: DivType,
         content: string,
       } >,
-      options:  Array< {
-        __typename: "quizOption",
-        description: string,
-        isAnswer: boolean,
-      } >,
+      options: Array< string | null >,
+      answer: number,
     } >,
     createdAt: string,
     updatedAt: string,
@@ -592,11 +580,8 @@ export type UpdateQuizMutation = {
         type: DivType,
         content: string,
       } >,
-      options:  Array< {
-        __typename: "quizOption",
-        description: string,
-        isAnswer: boolean,
-      } >,
+      options: Array< string | null >,
+      answer: number,
     } >,
     createdAt: string,
     updatedAt: string,
@@ -622,11 +607,8 @@ export type DeleteQuizMutation = {
         type: DivType,
         content: string,
       } >,
-      options:  Array< {
-        __typename: "quizOption",
-        description: string,
-        isAnswer: boolean,
-      } >,
+      options: Array< string | null >,
+      answer: number,
     } >,
     createdAt: string,
     updatedAt: string,
@@ -900,11 +882,8 @@ export type GetQuizQuery = {
         type: DivType,
         content: string,
       } >,
-      options:  Array< {
-        __typename: "quizOption",
-        description: string,
-        isAnswer: boolean,
-      } >,
+      options: Array< string | null >,
+      answer: number,
     } >,
     createdAt: string,
     updatedAt: string,
@@ -933,11 +912,8 @@ export type ListQuizzesQuery = {
           type: DivType,
           content: string,
         } >,
-        options:  Array< {
-          __typename: "quizOption",
-          description: string,
-          isAnswer: boolean,
-        } >,
+        options: Array< string | null >,
+        answer: number,
       } >,
       createdAt: string,
       updatedAt: string,
@@ -1171,11 +1147,8 @@ export type OnCreateQuizSubscription = {
         type: DivType,
         content: string,
       } >,
-      options:  Array< {
-        __typename: "quizOption",
-        description: string,
-        isAnswer: boolean,
-      } >,
+      options: Array< string | null >,
+      answer: number,
     } >,
     createdAt: string,
     updatedAt: string,
@@ -1196,11 +1169,8 @@ export type OnUpdateQuizSubscription = {
         type: DivType,
         content: string,
       } >,
-      options:  Array< {
-        __typename: "quizOption",
-        description: string,
-        isAnswer: boolean,
-      } >,
+      options: Array< string | null >,
+      answer: number,
     } >,
     createdAt: string,
     updatedAt: string,
@@ -1221,11 +1191,8 @@ export type OnDeleteQuizSubscription = {
         type: DivType,
         content: string,
       } >,
-      options:  Array< {
-        __typename: "quizOption",
-        description: string,
-        isAnswer: boolean,
-      } >,
+      options: Array< string | null >,
+      answer: number,
     } >,
     createdAt: string,
     updatedAt: string,
