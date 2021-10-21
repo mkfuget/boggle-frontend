@@ -11,6 +11,12 @@
     "difficulty: {
         "S": "MEDIUM"
     },
+    "createdAt: {
+        "S": "2021-10-21T06:14:25.329Z"
+    },
+    "updatedAt: {
+        "S": "2021-10-21T06:14:25.329Z"
+    },
     tags: {
         "L" : [
             {
@@ -251,29 +257,4 @@
         ]
     }
 
-
-::ID_END
-
-::TITLE_START
-General Data Structures 1
-::TITLE_END
-
-::DESCRIPTION_START
-General purpose quiz for testing your knowledge in all things data structures
-::DESCRIPTION_END
-
-::DIFFICULTY_START
-MEDIUM
-::DIFFICULTY_END
-
-::QUESTIONS_START
-::QUESTION_START
-::DIVENTRY_START
-::DIVENTRY_TYPE_START
-paragraph
-::DIVENTRY_TYPE_END
-::DIVENTRY_CONTENT_START
-What is the time complexity of converting an array into a binary heap?
-::DIVENTRY_CONTENT_END
-::DIVENTRY_END
 

@@ -15,6 +15,7 @@ import {withAuthenticator } from '@aws-amplify/ui-react'
 import { LessonsList } from './lessons/LessonsList';
 import Lesson from './lessons/Lesson';
 import { LessonParser } from './lessons/LessonParser';
+import { QuizzesList } from './quizzes/QuizzesList';
 
 Amplify.configure(awsconfig);
 
@@ -33,8 +34,7 @@ function App() {
                 <Route path = "/modules/:moduleName" component = {Module}></Route>
                 <Route exact path = "/lessons" component = {LessonsList}></Route>
                 <Route path = "/lessons/:lessonName" component = {Lesson}></Route>
-                <Route path = "/lessonparser" component = {LessonParser}></Route>
-
+                <Route exact path = "/quizzes" component = {QuizzesList}></Route>
               </Switch>
             </Router>
           </div>
