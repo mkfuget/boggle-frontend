@@ -15,6 +15,7 @@ const LessonEntry = ({title, link, description}:LessonEntryProps) => {
         <a className = "lessonentry card" href = {`/lessons/${link}`}>
             <h2 className = "title">{title}</h2>
             <p className = "description">{description}</p>
+            
         </a>
     )
 }

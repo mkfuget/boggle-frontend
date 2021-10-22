@@ -13,11 +13,15 @@ interface QuizzesEntryProps {
 
 }
 
-const QuizEntry = ({title, link, description}:QuizzesEntryProps) => {
+const QuizEntry = ({title, link, description, difficulty, numQuestions}:QuizzesEntryProps) => {
     return (
         <a className = "quizentry card" href = {`/quizzes/${link}`}>
             <h2 className = "title">{title}</h2>
             <p className = "description">{description}</p>
+            <div className = "description">Difficulty: {difficulty}</div>
+            <div className = "questionscount">Questions: {numQuestions}</div>
+
+
         </a>
     )
 }
